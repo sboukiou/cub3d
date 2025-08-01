@@ -16,7 +16,7 @@
 typedef struct e_textures
 {
 	T_SO,
-	t_WE,
+	T_WE,
 	T_EA,
 	T_NO,
 }				t_textures;
