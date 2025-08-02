@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enums.h                                            :+:      :+:    :+:   */
+/*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 04:09:48 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 18:00:14 by hmouis           ###   ########.fr       */
+/*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
+/*   Updated: 2025/08/02 17:16:24 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef MACROS_H
+#define MACROS_H
 
-#include "./macros.h"
-#include "./include.h"
+#define FAILURE 1
+#define SUCCESS 0
 
-typedef enum e_type
-{
-	T_SO,
-	T_WE,
-	T_EA,
-	T_NO,
-	C_floor,
-	C_CEILING,
-	P_NO,
-	P_SO,
-	P_EA,
-	P_WE,
-}				t_type;
-
+# define UNUSED(X) (void)(X);
+# define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X);\
+	exit(EXIT_FAILURE);
 
 #endif

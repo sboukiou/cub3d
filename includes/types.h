@@ -3,20 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 04:04:34 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/01 04:10:38 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/08/02 18:00:14 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 #define TYPES_H
 
-
 # define COLORS_SIZE 3
+#include "./enums.h"
+#include "./macros.h"
+#include "./include.h"
 
-typedef struct s_info
+typedef struct s_map
+{
+	bool player;
+	bool so;
+	bool no;
+	bool ea;
+	bool we;
+	bool f;
+	bool c;
+	int i;
+	int map_index;
+}				t_map;
+
+typedef struct s_element
+{
+	char *content;
+	t_type type;
+	struct s_element *next;
+}				t_element;
+
+typedef struct s_map_info
+{
+	t_element	*element;
+	int 		floor[COLORS_SIZE];
+	int 		ceiling[COLORS_SIZE];
+	char 		**map;
+}				t_map_info;
+
+typedef struct s_nfo
 {
 	char	*north_textures_file;
 	char	*south_textures_file;
