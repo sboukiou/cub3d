@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 16:19:20 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/08/02 16:23:17 by hmouis           ###   ########.fr       */
+/*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
+/*   Updated: 2025/08/02 18:15:11 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./includes/cub.h"
 
-size_t	ft_strlen(const char *str)
+int	main(int ac, char **av)
 {
-	size_t	length;
+	t_map_info	*map_info;
+	t_info	*info;
 
-	length = 0;
-	if (str == NULL)
-		return (0);
-	while (str[length])
-		length++;
-	return (length);
+	
+	map_info = NULL;
+	info = NULL;
+	if (ac != 2)
+		return (FAILURE);
+	if (pars_map(av, &map_info, &info) == -1)
+		return (FAILURE);
+	return (SUCCESS);
 }

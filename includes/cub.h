@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 16:19:20 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/08/02 16:23:17 by hmouis           ###   ########.fr       */
+/*   Created: 2025/08/01 06:17:09 by hmouis            #+#    #+#             */
+/*   Updated: 2025/08/02 17:30:38 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CUB_H
+#define CUB_H
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	length;
+#include "./types.h"
+#include "./macros.h"
+#include "./include.h"
 
-	length = 0;
-	if (str == NULL)
-		return (0);
-	while (str[length])
-		length++;
-	return (length);
-}
+int	pars_map(char **av, t_map_info **info, t_info **final_info);
+
+#endif

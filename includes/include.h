@@ -6,9 +6,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <math.h>
-
-# define UNUSED(X) (void)(X);
-# define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X);\
-	exit(EXIT_FAILURE);
+#include <stdbool.h>
 
 #endif /* INCLUDES_H */

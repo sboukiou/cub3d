@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 16:19:20 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/08/02 16:23:17 by hmouis           ###   ########.fr       */
+/*   Created: 2024/12/04 16:03:32 by hmouis            #+#    #+#             */
+/*   Updated: 2025/08/01 18:32:26 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	length;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-	length = 0;
-	if (str == NULL)
-		return (0);
-	while (str[length])
-		length++;
-	return (length);
-}
+# include <stdlib.h>
+# include "./libft.h"
+# include <unistd.h>
+# include <fcntl.h>
+
+char	*ft_strchr_gnl(char *s, char c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*get_next_line(int fd);
+char	*ft_strcpy_nl(char *line, char *str);
+
+#endif
