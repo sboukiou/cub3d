@@ -1,35 +1,40 @@
 # Makefile to compile the project
 # and produce the executable file -> cub3D
 
-NAME=$(BINDIR)/cub3d
 
-SRC= parser/fill_map.c parser/parse_map.c parser/parse_colors.c \
-	parser/parse_lines.c parser/parse_utils.c parser/track_textures.c\
-	main.c parser/creat_node.c
+CC=cc
+RM=rm -rf
+CFLAGS=-Wall -Werror -Wextra -Ilib/mlx_linux -c
+LFLAGS=-lX11 -lXext -lm -lz -L./lib/mlx_linux -lmlx
+NAME=bin/cub3d
+TEST_OUT_NAME=bin/test
+BUILD_DIR=build
+BIN_DIR=bin
+MK=mkdir -p
 
-BINDIR= bin/
-CC= cc 
-CFLAGS= -Wall -Wextra -Werror 
-LIBFT_DIR = lib/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+SOURCE_FILES=$(wildcard *.c)
+TESTS_SOURCE_FILES=$(wildcard tests/*.c)
+TESTS_OBJ_FILES=$(TESTS_SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
 
-OBJS= $(SRC:.c=.o)
+all: $(NAME)
 
-all: $(LIBFT) $(NAME)
+$(BUILD_DIR)/%.o : %.c
+	$(MK) $(BUILD_DIR)/tests
+	$(CC) $(CFLAGS) $< -o $@
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(TEST_OUT_NAME): $(TESTS_OBJ_FILES)
+	$(MK) $(BIN_DIR)
+	$(CC) $(TESTS_OBJ_FILES)  $(LFLAGS) -o $(TEST_OUT_NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS)  $^ -o $@ $(LIBFT)
+test: $(TEST_OUT_NAME)
 
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIBFT_DIR)
+	$(RM) $(BUILD_DIR)
+	$(RM) $(BIN_DIR)
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) fclean -C $(LIBFT_DIR)
-
+	$(RM) $(NAME) $(TEST_OUT_NAME)
 
 re: fclean all
+
+.PHONY: all test clean fclean re
