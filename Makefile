@@ -30,10 +30,9 @@ test: $(TEST_OUT_NAME)
 
 clean:
 	$(RM) $(BUILD_DIR)
-	$(RM) $(BIN_DIR)
 
 fclean: clean
-	$(RM) $(NAME) $(TEST_OUT_NAME)
+	$(RM) $(BIN_DIR)
 
 re: fclean all
 
