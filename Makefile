@@ -5,22 +5,34 @@
 CC=cc
 RM=rm -rf
 CFLAGS=-Wall -Werror -Wextra -Ilib/mlx_linux -c
-LFLAGS=-lX11 -lXext -lm -lz -L./lib/mlx_linux -lmlx
+LFLAGS=-lX11 -lXext -lm -lz -L./build -lmlx -L./build -lft
 NAME=bin/cub3d
 TEST_OUT_NAME=bin/test
 BUILD_DIR=build
 BIN_DIR=bin
 MK=mkdir -p
-
-SOURCE_FILES=$(wildcard *.c)
-TESTS_SOURCE_FILES=$(wildcard tests/*.c)
-TESTS_OBJ_FILES=$(TESTS_SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
+LIBMLX=lib/mlx_linux/libmlx.a
+LIBFT=lib/libft/libft.a
 
 all: $(NAME)
 
+$(LIBFT):
+	$(MK) $(BUILD_DIR)
+	make -C ./lib/libft/
+
+SOURCE_FILES=$(wildcard src/parser/*.c src/main.c)
+OBJ_FILES=$(SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
+TESTS_SOURCE_FILES=$(wildcard tests/*.c)
+TESTS_OBJ_FILES=$(TESTS_SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
+
+$(NAME): $(LIBFT) $(OBJ_FILES)
+	$(MK) $(BIN_DIR)
+	$(CC) $(BUILD_DIR)/*.o  $(LFLAGS) -o $(NAME)
+
+
 $(BUILD_DIR)/%.o : %.c
-	$(MK) $(BUILD_DIR)/tests
-	$(CC) $(CFLAGS) $< -o $@
+	$(MK) $(BUILD_DIR)
+	$(CC) $(CFLAGS) $< -o $(BUILD_DIR)/$(notdir $@)
 
 $(TEST_OUT_NAME): $(TESTS_OBJ_FILES)
 	$(MK) $(BIN_DIR)
