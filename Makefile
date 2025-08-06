@@ -6,7 +6,7 @@ CC=cc
 RM=rm -rf
 CFLAGS=-Wall -Werror -Wextra -Ilib/mlx_linux -c
 LFLAGS=-lX11 -lXext -lm -lz -L./build -lmlx -L./build -lft
-NAME=bin/cub3d
+NAME=bin/cub3D
 TEST_OUT_NAME=bin/test
 BUILD_DIR=build
 BIN_DIR=bin
@@ -20,7 +20,7 @@ $(LIBFT):
 	$(MK) $(BUILD_DIR)
 	make -C ./lib/libft/
 
-SOURCE_FILES=$(wildcard src/parser/*.c src/main.c)
+SOURCE_FILES=$(wildcard src/parser/*.c src/*.c)
 OBJ_FILES=$(SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
 TESTS_SOURCE_FILES=$(wildcard tests/*.c)
 TESTS_OBJ_FILES=$(TESTS_SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
