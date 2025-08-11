@@ -17,6 +17,6 @@
 #include "./macros.h"
 #include "./include.h"
 
-int	pars_map(char **av, t_map_info **info, t_info **final_info);
+int	parse_map(char **av, t_map_info **info, t_info **final_info);
 
 #endif

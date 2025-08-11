@@ -54,9 +54,33 @@ typedef struct s_nfo
 	char	*east_textures_file;
 	int		floor_colors[COLORS_SIZE];
 	int		ceiling_colors[COLORS_SIZE];
-	char	**map;
+	int		**map;
 	int		player_x;
 	int		player_y;
+	int	map_width;
+	int	map_height;
 }	t_info;
+
+typedef struct s_mlx_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		llen;
+	int		endian;
+}	t_mlx_img;
+
+typedef struct s_mlx
+{
+	void		*display;
+	void		*window;
+	t_mlx_img	img;
+}	t_mlx;
+
+typedef struct s_prog
+{
+	t_mlx	*mlx;
+	t_info	*info;
+}	t_prog;
 
 #endif

@@ -21,13 +21,14 @@
 # define FAIL -1
 # define ESCAPE 65307
 /*Defining Window demensions*/
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 480
+# define WIN_WIDTH 640
 /*Defining Colors*/
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
 # define GREEN 0x00FF00
 # define BLUE 0xFF00FF
+# define PINK 0xFF8DA1
 # define DEFAULT_Z 0x99CCFF
 # define DEFAULT 0x00CC66
 /*Defining Macros for events*/

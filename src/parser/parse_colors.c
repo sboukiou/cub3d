@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/textures.h"
+#include "../../includes/textures.h"
 
 void	fill_map_structure(t_map *map)
 {
