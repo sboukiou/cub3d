@@ -20,7 +20,7 @@ $(LIBFT):
 	$(MK) $(BUILD_DIR)
 	make -C ./lib/libft/
 
-SOURCE_FILES=$(wildcard src/parser/*.c src/*.c)
+SOURCE_FILES=$(wildcard  src/*.c)
 OBJ_FILES=$(SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)
 TESTS_SOURCE_FILES=$(wildcard tests/*.c)
 TESTS_OBJ_FILES=$(TESTS_SOURCE_FILES:%.c=$(BUILD_DIR)/%.o)

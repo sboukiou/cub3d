@@ -20,3 +20,9 @@ published in 1992.**
 ***You could try the original game here:
 [Wolfenstein3D](http://users.atw.hu/wolf3d)***
 
+## Project Structure and planning
+
+### Raycasting:
+:bulb:**Here are some good resources to check on it:\
+:blue_book:[Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html)\
+:blue_book:[Raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)**
