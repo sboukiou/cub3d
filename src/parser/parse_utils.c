@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/utils.h"
+#include "../../includes/utils.h"
 
 void	char_join(char **path, char c)
 {

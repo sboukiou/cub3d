@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parse_map.h"
+#include "../../includes/parse_map.h"
 
 bool file_name(char *str)
 {

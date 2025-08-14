@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/types.h"
+#include "../../includes/types.h"
 
 t_element	*creat_node(t_type type, char *content)
 {

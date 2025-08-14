@@ -7,5 +7,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include <stdbool.h>
+#include <X11/keysym.h>
+
 
 #endif /* INCLUDES_H */

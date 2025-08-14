@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parse_map.h"
+#include "../../includes/parse_map.h"
 
 int	first_line(char *line, int flag)
 {

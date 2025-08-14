@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parse_map.h"
+#include "../../includes/parse_map.h"
 
 int	pars_line(char *line, int flag, t_map *map, char **arr)
 {
@@ -166,7 +166,7 @@ void	fill_struct_info(t_map_info *info, t_info **final_info)
 	get_player_position((*final_info)->map, &(*final_info)->player_x, &(*final_info)->player_y);
 }
 
-int	pars_map(char **av, t_map_info **info, t_info **final_info)
+int	parse_map(char **av, t_map_info **info, t_info **final_info)
 {
 	char	**map;
 	t_map map_info;

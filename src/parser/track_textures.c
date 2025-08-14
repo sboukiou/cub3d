@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/textures.h"
+#include "../../includes/textures.h"
 
 
 int	track_textures(char *line, int *flag, t_map *map_info, t_element **element)
