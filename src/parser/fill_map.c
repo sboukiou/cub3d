@@ -21,6 +21,8 @@ bool file_name(char *str)
 	name = ft_strchr(str, '.');
 	if (name == NULL)
 		return (false);
+	while (name && ft_strchr(name + 1, '.'))
+		name = ft_strchr(name + 1, '.');	
 	if (ft_strcmp(name, ".cub"))
 		return (false);
 	return (true);
