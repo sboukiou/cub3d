@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	info = NULL;
 	if (ac != 2)
 		return (FAILURE);
-	if (pars_map(av, &map_info, &info) == -1)
+	if (parse_map(av, &map_info, &info) == -1)
 		return (FAILURE);
 	return (SUCCESS);
 }
