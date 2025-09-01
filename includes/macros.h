@@ -6,13 +6,14 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 17:16:24 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/01 08:54:12 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 #define MACROS_H
 
+# define COLORS_SIZE 3
 # define SUCCESS 0
 #define FAILURE 1
 # define MAP_SIZE 1024
