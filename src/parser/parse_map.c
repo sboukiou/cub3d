@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 18:07:10 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/01 09:51:37 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,30 @@ void	get_player_position(char **map, int *player_x, int *player_y)
 	}
 }
 
+char **fill_final_map(char **map)
+{
+	int		i;
+	char	**new_map;
+
+	new_map = NULL;
+	i = 0;
+	while (map[i])
+		i++;
+	new_map = malloc(sizeof(char *) * (i + 1));
+	if (new_map == NULL)
+		return (NULL);
+	i = 0;
+	while (map[i])
+	{
+		new_map[i] = ft_strdup(map[i]);
+		if (new_map[i] == NULL)
+			return (NULL);
+		i++;
+	}
+	new_map[i] = NULL;
+	return (new_map);
+}
+
 void	fill_struct_info(t_map_info *info, t_info **final_info)
 {
 	int	i;
@@ -162,8 +186,23 @@ void	fill_struct_info(t_map_info *info, t_info **final_info)
 	i = -1;
 	while (++i < 3)
 		(*final_info)->floor_colors[i] = info->floor[i];
-	(*final_info)->map = info->map;
+	(*final_info)->map = fill_final_map(info->map);
 	get_player_position((*final_info)->map, &(*final_info)->player_x, &(*final_info)->player_y);
+}
+
+int get_width(char **map)
+{
+	int		i;
+	int		max;
+
+	max = 0;
+	i = -1;
+	while (map[++i])
+	{
+		if (max < (int )ft_strlen(map[i]))
+			max = (int )ft_strlen(map[i]);
+	}
+	return (max);
 }
 
 int	parse_map(char **av, t_map_info **info, t_info **final_info)
@@ -173,15 +212,19 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 
 	fill_map_structure(&map_info);
 	if (file_name(av[1]) == false)
-		return (printf("ERROR\ninvalide name\n"), -1);
+		return (printf("ERROR\ninvalide name\n"), FAILURE);
 	if (fill_map(&map, av[1]) == -1)
-		return (-1);
+		return (FAILURE);
 	if (is_valid_map(map, info, &map_info) == FAILURE)
-		return (-1);
+		return (FAILURE);
 	if (pars_element((*info)->element, info) == FAILURE)
-		return (-1);
+		return (FAILURE);
 	(*info)->map = fill_map_arr(map, map_info.map_index);
 	*final_info = malloc(sizeof(t_info));
-	fill_struct_info(*info, final_info); 
-	return (1);
+	fill_struct_info(*info, final_info);
+	(*final_info)->map_height = 0;
+	while ((*final_info)->map[(*final_info)->map_height])
+		(*final_info)->map_height++;	
+	(*final_info)->map_width = get_width((*final_info)->map);
+	return (SUCCESS);
 }

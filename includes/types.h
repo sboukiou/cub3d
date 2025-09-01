@@ -6,14 +6,13 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 04:04:34 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 18:00:14 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/01 09:21:37 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 #define TYPES_H
 
-# define COLORS_SIZE 3
 #include "./enums.h"
 #include "./macros.h"
 #include "./include.h"
@@ -54,11 +53,11 @@ typedef struct s_nfo
 	char	*east_textures_file;
 	int		floor_colors[COLORS_SIZE];
 	int		ceiling_colors[COLORS_SIZE];
-	char		**map;
+	char	**map;
 	int		player_x;
 	int		player_y;
-	int	map_width;
-	int	map_height;
+	int		map_width;
+	int		map_height;
 }	t_info;
 
 typedef struct s_mlx_img
