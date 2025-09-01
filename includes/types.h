@@ -54,7 +54,7 @@ typedef struct s_nfo
 	char	*east_textures_file;
 	int		floor_colors[COLORS_SIZE];
 	int		ceiling_colors[COLORS_SIZE];
-	int		**map;
+	char		**map;
 	int		player_x;
 	int		player_y;
 	int	map_width;
