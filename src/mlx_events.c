@@ -24,20 +24,20 @@ int	handle_key(int key_code, t_prog *prog)
 		mlx_destroy_image(mlx->display, mlx->img.img);
 		mlx_destroy_window(mlx->display, mlx->window);
 		mlx_destroy_display(mlx->display);
-		for (int i = 0; i < info->map_height; i++)
-			free(info->map[i]);
+		/*for (int i = 0; i < info->map_height; i++)*/ // Why its causig segv, isn't it allocated
+		/*	free(info->map[i]);*/
 		free(info->map);
 		free(mlx->display);
 		exit(0);
 	}
-	if (key_code == XK_k && info->player_y > 0)
-		info->player_y -= 1;
-	if (key_code == XK_h && info->player_x > 0)
-		info->player_x -= 1;
-	if (key_code == XK_j && info->player_y < WIN_HEIGHT)
-		info->player_y += 1;
-	if (key_code == XK_l && info->player_x < WIN_WIDTH)
-		info->player_x += 1;
+	if (key_code == XK_k && info->player_y - 5 > 0)
+		info->player_y -= 5;
+	if (key_code == XK_h && info->player_x - 5 > 0)
+		info->player_x -= 5;
+	if (key_code == XK_j && info->player_y + 5 < WIN_HEIGHT)
+		info->player_y += 5;
+	if (key_code == XK_l && info->player_x + 5 < WIN_WIDTH)
+		info->player_x += 5;
 
 	mlx_destroy_image(mlx->display, mlx->img.img);
 	mlx->img.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
