@@ -17,6 +17,9 @@
 #include "./macros.h"
 #include "./include.h"
 
+/**
+ * Map info structures
+ */
 typedef struct s_map
 {
 	bool player;
@@ -60,6 +63,9 @@ typedef struct s_nfo
 	int		map_height;
 }	t_info;
 
+/**
+ * Mlx-Image and attributes code structures
+ */
 typedef struct s_mlx_img
 {
 	void	*img;
@@ -76,6 +82,10 @@ typedef struct s_mlx
 	t_mlx_img	img;
 }	t_mlx;
 
+/**
+ * Full Program strcture, holding data for
+ * both the map and the mlx information.
+ */
 typedef struct s_prog
 {
 	t_mlx	*mlx;
