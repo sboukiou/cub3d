@@ -12,7 +12,6 @@
 
 #include "../../includes/textures.h"
 
-
 int	track_textures(char *line, int *flag, t_map *map_info, t_element **element)
 {
 	if (north_texture(line, flag, map_info, element) == SUCCESS)
