@@ -11,17 +11,37 @@
 /* ************************************************************************** */
 
 #include "./includes/cub.h"
+#include "includes/mlx_create.h"
+#include "includes/mlx_draw.h"
+#include "includes/mlx_game_simulation.h"
+#include "lib/mlx_linux/mlx.h"
 
 int	main(int ac, char **av)
 {
 	t_map_info	*parse;
 	t_info	*info;
+	t_mlx	mlx;
+	t_prog	prog;
 
 	
 	parse = NULL;
 	info = NULL;
 	if (ac != 2)
 		return (printf("ERROR\nmissing file\n"), FAILURE);
+
+	/*Parsing the map info*/
+	if (parse_map(av, &parse, &info) == FAILURE)
+		return (FAILURE);
+	printf("[Parsing done successfully !]\n");
+
+	/*Initializing the display, window and image attributes*/
+	mlx_init_display(&mlx);
+	printf("[Display is initialized successfully !]\n");
+
+	/*Starting the game simulation*/
+	prog.mlx = &mlx;
+	prog.info = info;
+	mlx_simulate_game(&prog);
 	if (parse_map(av, &parse, &info) == FAILURE)
 		return (FAILURE);
 	
