@@ -19,12 +19,3 @@ int mlx_init_display(t_mlx *mlx)
 		return (FAILURE);
 	return (SUCCESS);
 }
-
-void	buffered_mlx_pixel_put(t_mlx_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->llen + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
