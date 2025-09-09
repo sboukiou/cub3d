@@ -40,7 +40,8 @@ int	check_position(char c, t_map *map)
 		if (!map->player)
 			map->player = true;
 		else
-			return (ft_putstr_fd("ERROR\nmultiple position of player\n", 2), FAILURE);
+			return (ft_putstr_fd("ERROR\nmultiple position of player\n", 2),
+				FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -63,7 +64,8 @@ int	valid_element(char **map, t_map *map_info, int *i, t_element **element)
 	flag = 0;
 	while (map[*i])
 	{
-		if (track_textures(map[*i], &flag, map_info, element) == SUCCESS && flag != 2)
+		if (track_textures(map[*i], &flag, map_info, element) == SUCCESS
+			&& flag != 2)
 		{
 			if (flag)
 				return (printf("ERROR\ninvalide element\n"), FAILURE);

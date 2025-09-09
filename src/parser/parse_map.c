@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/01 09:51:37 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/09 11:48:09 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,58 +66,6 @@ int	is_valid_map(char **map, t_map_info **info, t_map *map_info)
 	return (SUCCESS);
 }
 
-int	pars_element(t_element *element, t_map_info **info)
-{
-	int	fd;
-
-	fd = 0;
-	while (element)
-	{
-		if (element->type == C_CEILING)
-		{
-			if (pars_floor_colors(info, element->content) == FAILURE)
-				return (FAILURE);
-		}
-		else if (element->type == C_floor)
-		{
-			if (pars_ceiling_colors(info, element->content) == FAILURE)
-				return (FAILURE);
-		}
-		else
-		{
-			fd = open(element->content, O_RDONLY);
-			if (fd < 0)
-				return (printf("ERROR\nthis texture isn't available '%s'\n",
-						element->content), FAILURE);
-			close(fd);
-		}
-		element = element->next;
-	}
-	return (SUCCESS);
-}
-
-char **fill_map_arr(char **map, int j)
-{
-	int i;
-	char **arr;
-
-	i = j;
-	while (map[i])
-		i++;
-	arr = malloc(sizeof(char *) * (i + 1));
-	if (!arr)
-		return (NULL);
-	i = 0;
-	while (map[j])
-	{
-		arr[i] = ft_strdup(map[j]);
-		j++;
-		i++;
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
 void	get_player_position(char **map, int *player_x, int *player_y)
 {
 	int	i;
@@ -140,67 +88,17 @@ void	get_player_position(char **map, int *player_x, int *player_y)
 	}
 }
 
-char **fill_final_map(char **map)
-{
-	int		i;
-	char	**new_map;
-
-	new_map = NULL;
-	i = 0;
-	while (map[i])
-		i++;
-	new_map = malloc(sizeof(char *) * (i + 1));
-	if (new_map == NULL)
-		return (NULL);
-	i = 0;
-	while (map[i])
-	{
-		new_map[i] = ft_strdup(map[i]);
-		if (new_map[i] == NULL)
-			return (NULL);
-		i++;
-	}
-	new_map[i] = NULL;
-	return (new_map);
-}
-
-void	fill_struct_info(t_map_info *info, t_info **final_info)
+int	get_width(char **map)
 {
 	int	i;
-
-	i = -1;
-	while (info->element)
-	{
-		if (info->element->type == T_EA)
-			(*final_info)->east_textures_file = ft_strdup(info->element->content);
-		else if (info->element->type == T_WE)
-			(*final_info)->west_textures_file = ft_strdup(info->element->content);
-		else if (info->element->type == T_SO)
-			(*final_info)->south_textures_file = ft_strdup(info->element->content);
-		else if (info->element->type == T_NO)
-			(*final_info)->north_textures_file = ft_strdup(info->element->content);
-		info->element = info->element->next;
-	}
-	while (++i < 3)
-		(*final_info)->ceiling_colors[i] = info->ceiling[i];
-	i = -1;
-	while (++i < 3)
-		(*final_info)->floor_colors[i] = info->floor[i];
-	(*final_info)->map = fill_final_map(info->map);
-	get_player_position((*final_info)->map, &(*final_info)->player_x, &(*final_info)->player_y);
-}
-
-int get_width(char **map)
-{
-	int		i;
-	int		max;
+	int	max;
 
 	max = 0;
 	i = -1;
 	while (map[++i])
 	{
-		if (max < (int )ft_strlen(map[i]))
-			max = (int )ft_strlen(map[i]);
+		if (max < (int)ft_strlen(map[i]))
+			max = (int)ft_strlen(map[i]);
 	}
 	return (max);
 }
@@ -208,7 +106,7 @@ int get_width(char **map)
 int	parse_map(char **av, t_map_info **info, t_info **final_info)
 {
 	char	**map;
-	t_map map_info;
+	t_map	map_info;
 
 	fill_map_structure(&map_info);
 	if (file_name(av[1]) == false)
@@ -224,7 +122,7 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 	fill_struct_info(*info, final_info);
 	(*final_info)->map_height = 0;
 	while ((*final_info)->map[(*final_info)->map_height])
-		(*final_info)->map_height++;	
+		(*final_info)->map_height++;
 	(*final_info)->map_width = get_width((*final_info)->map);
 	return (SUCCESS);
 }
