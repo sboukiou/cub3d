@@ -22,26 +22,30 @@ int	handle_key(int key_code, t_prog *prog)
 	{
 		printf("ESC clicked !!\n");
 		mlx_destroy_image(mlx->display, mlx->img.img);
+		mlx_destroy_image(mlx->display, mlx->player_image);
+		mlx_destroy_image(mlx->display, mlx->floor_image);
+		mlx_destroy_image(mlx->display, mlx->wall_image);
 		mlx_destroy_window(mlx->display, mlx->window);
 		mlx_destroy_display(mlx->display);
-		/*for (int i = 0; i < info->map_height; i++)*/ // Why its causig segv, isn't it allocated
-		/*	free(info->map[i]);*/
 		free(info->map);
 		free(mlx->display);
 		exit(0);
 	}
-	if (key_code == XK_k && info->player_y - 5 > 0)
-		info->player_y -= 5;
-	if (key_code == XK_h && info->player_x - 5 > 0)
-		info->player_x -= 5;
-	if (key_code == XK_j && info->player_y + 5 < WIN_HEIGHT)
-		info->player_y += 5;
-	if (key_code == XK_l && info->player_x + 5 < WIN_WIDTH)
-		info->player_x += 5;
+	if (key_code == XK_Up && info->map[info->player_y - 1][info->player_x]
+			&& info->map[info->player_y - 1][info->player_x] != '1')
+		info->player_y -= 1;
+	if (key_code == XK_Left && info->map[info->player_y][info->player_x - 1]
+			&& info->map[info->player_y][info->player_x - 1] != '1')
+		info->player_x -= 1;
+	if (key_code == XK_Down && info->map[info->player_y + 1][info->player_x]
+			&& info->map[info->player_y + 1][info->player_x] != '1')
+		info->player_y += 1;
+	if (key_code == XK_Right && info->map[info->player_y][info->player_x + 1]
+			&& info->map[info->player_y][info->player_x + 1] != '1')
+		info->player_x += 1;
 
-	mlx_destroy_image(mlx->display, mlx->img.img);
-	mlx->img.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
 	mlx_draw_map(mlx, info);
+	mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);
 	return (0);
 }
 

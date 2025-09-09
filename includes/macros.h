@@ -17,13 +17,14 @@
 # define SUCCESS 0
 #define FAILURE 1
 # define MAP_SIZE 1024
+# define SIZE_SCALE 21
 # define TRUE 1
 # define FALSE 0
 # define FAIL -1
 # define ESCAPE 65307
 /*Defining Window demensions*/
-# define WIN_HEIGHT 480
-# define WIN_WIDTH 640
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 /*Defining Colors*/
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
