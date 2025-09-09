@@ -28,10 +28,9 @@ int	main(int ac, char **av)
 	info = NULL;
 	if (ac != 2)
 		return (printf("ERROR\nmissing file\n"), FAILURE);
-<<<<<<< HEAD
 
 	/*Parsing the map info*/
-	if (parse_map(av, &map_info, &info) == FAILURE)
+	if (parse_map(av, &parse, &info) == FAILURE)
 		return (FAILURE);
 	printf("[Parsing done successfully !]\n");
 
@@ -43,10 +42,8 @@ int	main(int ac, char **av)
 	prog.mlx = &mlx;
 	prog.info = info;
 	mlx_simulate_game(&prog);
-=======
 	if (parse_map(av, &parse, &info) == FAILURE)
 		return (FAILURE);
 	
->>>>>>> dcc9e3e47551a3229bf949060d30aa73843f189f
 	return (SUCCESS);
 }
