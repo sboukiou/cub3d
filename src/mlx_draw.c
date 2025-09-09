@@ -38,13 +38,13 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 
 	info->map_width *= SIZE_SCALE;
 	info->map_height *= SIZE_SCALE;
-	mlx->player_image = mlx_xpm_file_to_image(mlx->display, "/home/sboukiou/Downloads/MLX_IMAGES/Castle/Castle_Player.xpm",
+	mlx->player_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Player.xpm",
 		&info->map_width, &info->map_height);
 	if (mlx->player_image == NULL)
 		printf("Failed to load image of the player\n") , exit(0);
-	mlx->wall_image = mlx_xpm_file_to_image(mlx->display, "/home/sboukiou/Downloads/MLX_IMAGES/Castle/Castle_Wall.xpm",
+	mlx->wall_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Wall.xpm",
 			&info->map_width, &info->map_height);
-	mlx->floor_image = mlx_xpm_file_to_image(mlx->display, "/home/sboukiou/Downloads/MLX_IMAGES/Castle/Castle_Floor.xpm",
+	mlx->floor_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Floor.xpm",
 			&info->map_width, &info->map_height);
 	int x = 0;
 	int y = 0;
