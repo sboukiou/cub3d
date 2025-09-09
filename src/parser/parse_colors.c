@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:53:50 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 18:00:14 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/09 11:43:06 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,31 +111,6 @@ int	pars_floor_colors(t_map_info **info, char *str)
 	{
 		(*info)->floor[i] = ft_atoi_color(arr[i]);
 		if ((*info)->floor[i] == -1)
-			return (FAILURE);
-		i++;
-	}
-	return (SUCCESS);
-}
-int	pars_ceiling_colors(t_map_info **info, char *str)
-{
-	int		i;
-	char	**arr;
-
-	i = 0;
-	arr = NULL;
-	if (count_comma(str) == FAILURE)
-		return (FAILURE);
-	arr = ft_split(str, ',');
-	i = 0;
-	while (arr[i])
-		i++;
-	if (i != 3)
-		return (printf("ERROR\nmore or less than range : '3'"), FAILURE);
-	i = 0;
-	while (arr[i])
-	{
-		(*info)->ceiling[i] = ft_atoi_color(arr[i]);
-		if ((*info)->ceiling[i] == -1)
 			return (FAILURE);
 		i++;
 	}

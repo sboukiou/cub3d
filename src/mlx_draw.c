@@ -29,33 +29,12 @@ void draw_player(int pos_x, int pos_y, t_mlx_img *img, t_info *info)
 					buffered_mlx_pixel_put(img, i, j, RED);
 }
 
-void draw_walls(t_info *info, t_mlx_img *img)
-{
-	int	scale_x;
-	int	scale_y;
-
-	scale_x = (WIN_WIDTH / info->map_width) * info->player_x;
-	scale_y = (WIN_HEIGHT / info->map_width) * info->player_y;
-
-		for (int j = scale_y; j < scale_y + 23; j++)
-			for (int i = scale_x; i < scale_x + 23; i ++)
-			{
-				if (i < WIN_WIDTH && j < WIN_HEIGHT)
-				{
-					/*if (color == 0)*/
-					/*	buffered_mlx_pixel_put(img, i, j, WHITE);*/
-					/*else*/
-						buffered_mlx_pixel_put(img, i, j, PINK);
-				}
-			}
-
-}
-
 
 int mlx_draw_map(t_mlx *mlx, t_info *info)
 {
 	if (info == NULL || mlx == NULL)
 		return (FAILURE);
+
 
 	info->map_width *= SIZE_SCALE;
 	info->map_height *= SIZE_SCALE;
@@ -88,8 +67,5 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 		}
 		y++;
 	}
-	
-
-
 	return (SUCCESS);
 }

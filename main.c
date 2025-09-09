@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/01 09:52:29 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/08 10:48:03 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 
 int	main(int ac, char **av)
 {
-	t_map_info	*map_info;
+	t_map_info	*parse;
 	t_info	*info;
 	t_mlx	mlx;
 	t_prog	prog;
 
 	
-	map_info = NULL;
+	parse = NULL;
 	info = NULL;
 	if (ac != 2)
 		return (printf("ERROR\nmissing file\n"), FAILURE);
+<<<<<<< HEAD
 
 	/*Parsing the map info*/
 	if (parse_map(av, &map_info, &info) == FAILURE)
@@ -42,5 +43,10 @@ int	main(int ac, char **av)
 	prog.mlx = &mlx;
 	prog.info = info;
 	mlx_simulate_game(&prog);
+=======
+	if (parse_map(av, &parse, &info) == FAILURE)
+		return (FAILURE);
+	
+>>>>>>> dcc9e3e47551a3229bf949060d30aa73843f189f
 	return (SUCCESS);
 }
