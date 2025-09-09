@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:36 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 16:31:15 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/09 11:43:25 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,4 @@ int	is_empty(char *line)
 		return (SUCCESS);
 	}
 	return (FAILURE);
-}
-
-int	ft_atoi_color(char *str)
-{
-	int	i;
-	int	result;
-
-	result = 0;
-	i = 0;
-	while (str[i] && ft_isdigit(str[i]))
-	{
-		result = result * 10 + str[i] - 48;
-		if (result > 255)
-			return (printf("ERROR\n'%d' not in range [0, 255]\n", result), -1);
-		i++;
-	}
-	if (str[i])
-		return (printf("ERROR\nnot a digit '%c'\n", str[i]), -1);
-	else if (result >= 0 && result <= 255)
-		return (result);
-	else
-		return (printf("ERROR\n'%d' not in range [0, 255]\n", result), -1);
 }

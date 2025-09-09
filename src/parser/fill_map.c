@@ -12,9 +12,9 @@
 
 #include "../../includes/parse_map.h"
 
-bool file_name(char *str)
+bool	file_name(char *str)
 {
-	char *name;
+	char	*name;
 
 	if (str == NULL)
 		return (false);
@@ -22,7 +22,7 @@ bool file_name(char *str)
 	if (name == NULL)
 		return (false);
 	while (name && ft_strchr(name + 1, '.'))
-		name = ft_strchr(name + 1, '.');	
+		name = ft_strchr(name + 1, '.');
 	if (ft_strcmp(name, ".cub"))
 		return (false);
 	return (true);
@@ -31,7 +31,7 @@ bool file_name(char *str)
 int	count_lines(int *fd, char *file_name)
 {
 	int		len;
-	char *line;
+	char	*line;
 
 	*fd = open(file_name, O_RDONLY);
 	if (*fd < 0)
@@ -94,7 +94,8 @@ int	pars_0(char *line, char **arr, int flag, int i)
 		printf("'0' and 'plyaer position' in line %d\n", flag + 1);
 		return (FAILURE);
 	}
-	if (line[i - 1] == ' ' || line[i + 1] == ' ' || arr[flag - 1][i] == ' ' || arr[flag + 1][i] == ' ')
+	if (line[i - 1] == ' ' || line[i + 1] == ' ' || arr[flag - 1][i] == ' '
+		|| arr[flag + 1][i] == ' ')
 	{
 		printf("ERROR\nthe letter '0' must be surrounded by '1', ");
 		printf("'0' and 'plyaer position' in line %d\n", flag);
