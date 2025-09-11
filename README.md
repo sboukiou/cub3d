@@ -1,28 +1,92 @@
-# Cub3d 
+# Cub3d
 
-**:bulb:The goal is to create a game similar
-To the Wolfenstein3D game created by
-John Carmack and John Romero and
-published in 1992.**
 ![Cub3d layout](./assets/Cub3d_layout.png)
 
-## Moves:
-    -> WASD to move, QE or Left/Right directional keys to rotate camera
-    -> I to toggle Interface, O to toggle crosshair, L to toggle shadows
-    -> ESC to quit
-    -> Textures or colors for each sides (North, South, West, East) and Sky/Floor
-    -> Shadows based on the distance
-    -> Crosshair
-    -> 3 different sprites
-    -> Minimap
-    -> Collectable items
+---
 
-***You could try the original game here:
-[Wolfenstein3D](http://users.atw.hu/wolf3d)***
+## 🚀 Overview
 
-## Project Structure and planning
+Cub3d is a 42 school project where you build a basic 3D renderer using raycasting, similar to the technology behind early first-person games. The objective is to learn graphics programming, game mechanics, and collaborative development.
 
-### Raycasting:
-:bulb:**Here are some good resources to check on it:\
-:blue_book:[Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html)\
-:blue_book:[Raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)**
+---
+
+## 🎮 Controls
+
+- **W / Up Arrow:** Move forward
+- **S / Down Arrow:** Move backward
+- **A:** Strafe left
+- **D:** Strafe right
+- **Q / Left Arrow:** Rotate camera left
+- **E / Right Arrow:** Rotate camera right
+- **I:** Toggle interface
+- **O:** Toggle crosshair
+- **L:** Toggle shadows
+- **ESC:** Quit the game
+
+---
+
+## 🗺️ Features
+
+- Textures/colors for walls (North, South, West, East) and sky/floor
+- Shadows based on distance
+- Crosshair display
+- Three different sprite types (bonus)
+- Minimap overlay (bonus)
+- Collectable items (bonus)
+- Raycasting for 3D rendering
+- 2D debug map view (optional)
+- Player collision detection
+- Responsive player movement & camera rotation
+
+---
+
+## 📚 Resources
+
+- [Lode's Computer Graphics Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html)
+- [Permadi's Raycasting Tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)
+- [Wolfenstein3D online](http://users.atw.hu/wolf3d)
+- [MiniLibX documentation](https://harm-smits.github.io/42docs/libs/minilibx)
+
+---
+
+## 🏗️ Project Structure
+
+```
+cub3d/
+├── assets/         # Images, diagrams
+├── bin/            # Executable's location
+├── build/          # Object files, libraries components.
+├── includes/       # Header files
+├── lib/            # Libraries (MiniLibX && Libft)
+├── maps/           # Example maps
+├── textures/       # Textures & sprites
+├── src/            # Source code
+├── main.c          # Entry point of the program.
+├── Makefile
+└── README.md
+```
+---
+
+## ⚡ Build & Run Instructions
+
+### Prerequisites
+- GCC, Make
+- MiniLibX (included in `lib/` or install via package manager)
+- Linux (recommended) or macOS (with XQuartz)
+
+### Build
+```bash
+make all
+```
+
+### Run
+```bash
+./bin/Cub3D [map_file]
+```
+
+---
+
+## 👥 Team & Contribution
+
+- **[Hodaifa Mouis](https://github.com/hmouis/)**
+- **[BOUKIOUD Said](https://github.com/sboukiou/)**

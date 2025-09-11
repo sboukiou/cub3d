@@ -2,7 +2,6 @@
 #include "../includes/macros.h"
 /* #include "../includes/include.h" */
 #include "../includes/types.h"
-#include "../lib/libft/libft.h"
 #include "../includes/mlx_create.h"
 
 
@@ -38,13 +37,13 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 
 	info->map_width *= SIZE_SCALE;
 	info->map_height *= SIZE_SCALE;
-	mlx->player_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Player.xpm",
+	mlx->player_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Player_Big.xpm",
 		&info->map_width, &info->map_height);
 	if (mlx->player_image == NULL)
 		printf("Failed to load image of the player\n") , exit(0);
-	mlx->wall_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Wall.xpm",
+	mlx->wall_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Wall_Big.xpm",
 			&info->map_width, &info->map_height);
-	mlx->floor_image = mlx_xpm_file_to_image(mlx->display, "./minimap_textures/Castle/Castle_Floor.xpm",
+	mlx->floor_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Floor_Big.xpm",
 			&info->map_width, &info->map_height);
 	int x = 0;
 	int y = 0;
@@ -58,7 +57,7 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 				mlx_put_image_to_window(mlx->display, mlx->window, mlx->wall_image, x * SIZE_SCALE, y * SIZE_SCALE);
 			else if (map[y][x] == '0')
 				mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, x * SIZE_SCALE, y * SIZE_SCALE);
-			else if (map[y][x] == 'S')
+			else if (map[y][x] == 'N')
 				mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, x * SIZE_SCALE, y * SIZE_SCALE);
 			else if (x != info->player_x || y != info->player_y)
 				mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, x * SIZE_SCALE, y * SIZE_SCALE);

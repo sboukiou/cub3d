@@ -45,6 +45,7 @@ int	handle_key(int key_code, t_prog *prog)
 		info->player_x += 1;
 
 	mlx_draw_map(mlx, info);
+	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
 	mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);
 	return (0);
 }
