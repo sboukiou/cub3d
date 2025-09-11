@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 11:48:09 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/11 12:03:01 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	pars_line(char *line, int flag, t_map *map, char **arr)
 			if (pars_0(line, arr, map->i, i) == FAILURE)
 				return (FAILURE);
 		}
-		else if (ft_strchr(" 1NSEW", line[i]))
+		else if (ft_strchr(" 1NSEWD", line[i]))
 		{
 			if (check_position(line[i], map) == FAILURE)
 				return (FAILURE);
