@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 06:28:38 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 12:02:18 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/12 16:31:00 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "./include.h"
 
 
+t_door      *creat_doors(char **map, int *n_d);
 void        get_player_position(char **map, int *player_x, int *player_y);
 bool        file_name(char *str);
 void        fill_struct_info(t_map_info *info, t_info **final_info); 

@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 11:47:56 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 12:14:46 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/12 16:30:21 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,57 @@ char	**fill_map_arr(char **map, int j)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+t_door *fill_doors(t_door *door, char **map)
+{
+	int x;
+	int y;
+	int n_doors;
+		
+	y = 0;
+	n_doors = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'D')
+			{
+				door[n_doors].x = x;
+				door[n_doors].y = y;
+				door[n_doors].is_open = false;
+				n_doors++;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (door);
+}
+
+t_door *creat_doors(char **map, int *n_d)
+{
+	int x;
+	int y;
+	int n_doors;
+	t_door *doors;
+
+	y = 0;
+	n_doors = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'D')
+				n_doors++;
+			x++;
+		}
+		y++;
+	}
+	*n_d = n_doors;
+	doors =  malloc(sizeof(t_door) * n_doors);
+	doors = fill_doors(doors, map);
+	return (doors);
 }
