@@ -3,6 +3,7 @@
 
 #include "./types.h"
 
-int mlx_draw_map(t_mlx *mlx, t_info *info);
+int mlx_draw_minimap(t_mlx *mlx, t_info *info);
+bool	mlx_draw_field(t_mlx *mlx, t_info *info);
 
 #endif
