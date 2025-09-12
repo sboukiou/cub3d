@@ -10,12 +10,12 @@ int mlx_init_display(t_mlx *mlx)
 	mlx->window = mlx_new_window(mlx->display, WIN_WIDTH, WIN_HEIGHT, "Playground");
 	if (mlx->window == NULL)
 		return (FAILURE);
-	mlx->img.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
-	if (mlx->img.img == NULL)
+	mlx->draw_image.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
+	if (mlx->draw_image.img == NULL)
 		return (FAILURE);
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img,
-		&mlx->img.bpp, &mlx->img.llen, &mlx->img.endian);
-	if (mlx->img.addr == NULL)
+	mlx->draw_image.addr = mlx_get_data_addr(mlx->draw_image.img,
+		&mlx->draw_image.bpp, &mlx->draw_image.llen, &mlx->draw_image.endian);
+	if (mlx->draw_image.addr == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }

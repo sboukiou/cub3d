@@ -2,34 +2,18 @@
 #include "../includes/macros.h"
 /* #include "../includes/include.h" */
 #include "../includes/types.h"
-#include "../includes/mlx_create.h"
 
-
-void	buffered_mlx_pixel_put(t_mlx_img *img, int x, int y, int color)
+static	void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
+	t_mlx_img *img;
 
+	img = &mlx->draw_image;
 	dst = img->addr + (y * img->llen + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned char *)dst = color;
 }
 
-
-void draw_player(int pos_x, int pos_y, t_mlx_img *img, t_info *info)
-{
-	int	scale_x;
-	int	scale_y;
-
-	scale_x = (WIN_WIDTH / info->map_width) * pos_x;
-	scale_y = (WIN_HEIGHT / info->map_width) * pos_y;
-
-		for (int j = scale_y; j < scale_y + 23; j ++)
-			for (int i = scale_x; i < scale_x + 23; i ++)
-				if (i < WIN_WIDTH && j < WIN_HEIGHT)
-					buffered_mlx_pixel_put(img, i, j, RED);
-}
-
-
-int mlx_draw_map(t_mlx *mlx, t_info *info)
+int mlx_draw_minimap(t_mlx *mlx, t_info *info)
 {
 	if (info == NULL || mlx == NULL)
 		return (FAILURE);
@@ -37,10 +21,9 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 
 	info->map_width *= SIZE_SCALE;
 	info->map_height *= SIZE_SCALE;
+
 	mlx->player_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Player_Big.xpm",
 		&info->map_width, &info->map_height);
-	if (mlx->player_image == NULL)
-		printf("Failed to load image of the player\n") , exit(0);
 	mlx->wall_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Wall_Big.xpm",
 			&info->map_width, &info->map_height);
 	mlx->floor_image = mlx_xpm_file_to_image(mlx->display, "./textures/minimap/Castle/Castle_Floor_Big.xpm",
@@ -67,4 +50,19 @@ int mlx_draw_map(t_mlx *mlx, t_info *info)
 		y++;
 	}
 	return (SUCCESS);
+}
+
+
+bool	mlx_draw_field(t_mlx *mlx, t_info *info)
+{
+	mlx->draw_image.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
+	if (mlx->draw_image.img == NULL)
+		return (printf("Filed to create field image\n"), false);
+	if (mlx == NULL || info == NULL)
+		return (false);
+	return (true);
+	for (int i = 0; i < WIN_HEIGHT; i++)
+		for (int j  = 0; j < WIN_WIDTH; j++)
+			put_pixel(mlx, j, i, WHITE);
+	mlx_put_image_to_window(mlx->display, mlx->window, mlx->draw_image.img, 0, 0);
 }
