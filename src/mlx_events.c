@@ -21,10 +21,14 @@ int	handle_key(int key_code, t_prog *prog)
 	if (key_code == ESCAPE)
 	{
 		printf("ESC clicked !!\n");
-		mlx_destroy_image(mlx->display, mlx->draw_image.img);
-		mlx_destroy_image(mlx->display, mlx->player_image);
-		mlx_destroy_image(mlx->display, mlx->floor_image);
-		mlx_destroy_image(mlx->display, mlx->wall_image);
+		if (mlx->draw_image.img)
+			mlx_destroy_image(mlx->display, mlx->draw_image.img);
+		if (mlx->player_image)
+			mlx_destroy_image(mlx->display, mlx->player_image);
+		if (mlx->floor_image)
+			mlx_destroy_image(mlx->display, mlx->floor_image);
+		if (mlx->wall_image)
+			mlx_destroy_image(mlx->display, mlx->wall_image);
 		mlx_destroy_window(mlx->display, mlx->window);
 		mlx_destroy_display(mlx->display);
 		free(info->map);

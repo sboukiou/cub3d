@@ -17,5 +17,8 @@ int mlx_init_display(t_mlx *mlx)
 		&mlx->draw_image.bpp, &mlx->draw_image.llen, &mlx->draw_image.endian);
 	if (mlx->draw_image.addr == NULL)
 		return (FAILURE);
+	mlx->player_image = NULL;
+	mlx->wall_image = NULL;
+	mlx->floor_image = NULL;
 	return (SUCCESS);
 }
