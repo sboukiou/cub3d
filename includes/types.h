@@ -70,6 +70,9 @@ typedef struct s_nfo
 	int		map_height;
 	t_door	*door;
 	int		n_doors;
+	double	dir_x;
+	double	dir_y;
+	double	angle;
 }	t_info;
 
 /**

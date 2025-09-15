@@ -91,10 +91,14 @@ int	handle_key(int key_code, t_prog *prog)
 	if (key_code == ESCAPE)
 	{
 		printf("ESC clicked !!\n");
-		mlx_destroy_image(mlx->display, mlx->draw_image.img);
-		mlx_destroy_image(mlx->display, mlx->player_image);
-		mlx_destroy_image(mlx->display, mlx->floor_image);
-		mlx_destroy_image(mlx->display, mlx->wall_image);
+		if (mlx->draw_image.img)
+			mlx_destroy_image(mlx->display, mlx->draw_image.img);
+		if (mlx->player_image)
+			mlx_destroy_image(mlx->display, mlx->player_image);
+		if (mlx->floor_image)
+			mlx_destroy_image(mlx->display, mlx->floor_image);
+		if (mlx->wall_image)
+			mlx_destroy_image(mlx->display, mlx->wall_image);
 		mlx_destroy_window(mlx->display, mlx->window);
 		mlx_destroy_display(mlx->display);
 		free(info->map);
@@ -115,10 +119,18 @@ int	handle_key(int key_code, t_prog *prog)
 		info->player_x += 1;
 	if (key_code == KEY_E)
 		open_door(info->map, &info->door, info->player_x, info->player_y, info->n_doors);
-	
 	mlx_draw_minimap(mlx, info);
+	if (key_code == XK_Left)
+		info->angle -= ROT_SPEED;
+	else if (key_code == XK_Right)
+		info->angle += ROT_SPEED;
+	info->dir_x = cos(info->angle);
+	info->dir_y = sin(info->angle);
+
+	/*mlx_draw_minimap(mlx, info);*/
+	mlx_draw_field(mlx, info);
 	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
-	mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);
+	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
 	return (0);
 }
 
