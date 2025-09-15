@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 04:04:34 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/12 16:29:14 by hmouis           ###   ########.fr       */
+/*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
+/*   Updated: 2025/09/15 16:51:02 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_nfo
 	int		map_height;
 	t_door	*door;
 	int		n_doors;
+	double	dir_x;
+	double	dir_y;
+	double	angle;
 }	t_info;
 
 /**
