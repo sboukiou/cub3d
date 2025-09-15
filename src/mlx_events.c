@@ -119,8 +119,6 @@ int	handle_key(int key_code, t_prog *prog)
 		info->player_x += 1;
 	if (key_code == KEY_E)
 		open_door(info->map, &info->door, info->player_x, info->player_y, info->n_doors);
-	
-	mlx_draw_minimap(mlx, info);
 	if (key_code == XK_Left)
 		info->angle -= ROT_SPEED;
 	else if (key_code == XK_Right)
