@@ -61,6 +61,9 @@ typedef struct s_nfo
 	int		player_y;
 	int		map_width;
 	int		map_height;
+	double	dir_x;
+	double	dir_y;
+	double	angle;
 }	t_info;
 
 /**

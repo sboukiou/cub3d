@@ -32,6 +32,9 @@ int	main(int ac, char **av)
 	/*Parsing the map info*/
 	if (parse_map(av, &parse, &info) == FAILURE)
 		return (FAILURE);
+	info->dir_y = -1;
+	info->dir_x = 0;
+	info->angle = 3 * PI /2;
 	printf("[Parsing done successfully !]\n");
 
 	/*Initializing the display, window and image attributes*/

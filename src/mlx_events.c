@@ -47,6 +47,12 @@ int	handle_key(int key_code, t_prog *prog)
 	if (key_code == XK_d && info->map[info->player_y][info->player_x + 1]
 			&& info->map[info->player_y][info->player_x + 1] != '1')
 		info->player_x += 1;
+	if (key_code == XK_Left)
+		info->angle -= ROT_SPEED;
+	else if (key_code == XK_Right)
+		info->angle += ROT_SPEED;
+	info->dir_x = cos(info->angle);
+	info->dir_y = sin(info->angle);
 
 	/*mlx_draw_minimap(mlx, info);*/
 	mlx_draw_field(mlx, info);
