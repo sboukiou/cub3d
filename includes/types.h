@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 04:04:34 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/01 09:21:37 by hmouis           ###   ########.fr       */
+/*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
+/*   Updated: 2025/09/15 16:51:02 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ typedef struct s_map
 	int i;
 	int map_index;
 }				t_map;
+
+typedef struct s_door
+{
+	int x;
+	int y;
+	bool is_open;
+}		t_door;
 
 typedef struct s_element
 {
@@ -61,6 +68,8 @@ typedef struct s_nfo
 	int		player_y;
 	int		map_width;
 	int		map_height;
+	t_door	*door;
+	int		n_doors;
 	double	dir_x;
 	double	dir_y;
 	double	angle;
@@ -84,6 +93,7 @@ typedef struct s_mlx
 	void		*window;
 	t_mlx_img	draw_image;
 	void		*wall_image;
+	void		*door_image;
 	void		*floor_image;
 	void		*player_image;
 }	t_mlx;
@@ -97,5 +107,7 @@ typedef struct s_prog
 	t_mlx	*mlx;
 	t_info	*info;
 }	t_prog;
+
+
 
 #endif
