@@ -48,9 +48,10 @@ int	handle_key(int key_code, t_prog *prog)
 			&& info->map[info->player_y][info->player_x + 1] != '1')
 		info->player_x += 1;
 
-	mlx_draw_minimap(mlx, info);
+	/*mlx_draw_minimap(mlx, info);*/
+	mlx_draw_field(mlx, info);
 	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
-	mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);
+	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
 	return (0);
 }
 

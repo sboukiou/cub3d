@@ -42,8 +42,6 @@ int	main(int ac, char **av)
 	prog.mlx = &mlx;
 	prog.info = info;
 	mlx_simulate_game(&prog);
-	if (parse_map(av, &parse, &info) == FAILURE)
-		return (FAILURE);
 	
 	return (SUCCESS);
 }
