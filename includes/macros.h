@@ -37,6 +37,8 @@
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4
 # define DESTROY_NOTIFY_EVENT 17
+# define PI 3.14159
+# define ROT_SPEED 0.05
 
 
 # define UNUSED(X) (void)(X);
