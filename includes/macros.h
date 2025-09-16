@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/01 08:54:12 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/09/12 16:11:47 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define MAP_SIZE 1024
 # define SIZE_SCALE 44
 # define TRUE 1
+# define KEY_E 101
 # define FALSE 0
 # define FAIL -1
 # define ESCAPE 65307
