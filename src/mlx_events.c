@@ -79,6 +79,83 @@ void open_door(char **map, t_door **door, int p_x, int p_y, int n_d)
 	}
 }
 
+void	destroy_program(t_prog *prog)
+{
+	t_mlx	*mlx;
+	t_info	*info;
+
+	info = prog->info;
+	mlx = prog->mlx;
+	if (mlx->draw_image.img)
+		mlx_destroy_image(mlx->display, mlx->draw_image.img);
+	if (mlx->player_image)
+		mlx_destroy_image(mlx->display, mlx->player_image);
+	if (mlx->floor_image)
+		mlx_destroy_image(mlx->display, mlx->floor_image);
+	if (mlx->wall_image)
+		mlx_destroy_image(mlx->display, mlx->wall_image);
+	mlx_destroy_window(mlx->display, mlx->window);
+	mlx_destroy_display(mlx->display);
+	free(info->map);
+	free(mlx->display);
+	exit(0);
+}
+
+void	move_player(t_prog *prog, int key_code)
+{
+	t_mlx	*mlx;
+	t_info	*info;
+	int		px;
+	int		py;
+
+	info = prog->info;
+	px = info->player_x;
+	py = info->player_y;
+	mlx = prog->mlx;
+	/*Handle moving directions*/
+	if (key_code == XK_w)
+	{
+		if(info->map[(py - 10) / SIZE_SCALE][px / SIZE_SCALE] == '1')
+			return ;
+		if (info->player_y -10 > 0)
+			info->player_y -= 10;
+	}
+	if (key_code == XK_a)
+	{
+		if(info->map[py / SIZE_SCALE][(px - 10) / SIZE_SCALE] == '1')
+			return ;
+		if (info->player_x - 10 > 0)
+			info->player_x -= 10;
+	}
+	if (key_code == XK_s)
+	{
+		if(info->map[(py + 10) / SIZE_SCALE][px / SIZE_SCALE] == '1')
+			return ;
+		if (info->player_y + 10 < WIN_HEIGHT)
+			info->player_y += 10;
+	}
+	if (key_code == XK_d)
+	{
+		if(info->map[py / SIZE_SCALE][(px + 10) / SIZE_SCALE] == '1')
+			return ;
+		if (info->player_x + 10 < WIN_WIDTH)
+			info->player_x += 10;
+	}
+
+	/*Handle rotations*/
+	if (key_code == XK_Left)
+		info->angle -= ROT_SPEED;
+	else if (key_code == XK_Right)
+		info->angle += ROT_SPEED;
+	info->dir_x = cos(info->angle);
+	info->dir_y = sin(info->angle);
+	
+	/*if (key_code == KEY_E)*/
+		/*handle door opening*/
+		/*open_door(info->map, &info->door, info->player_x, info->player_y, info->n_doors);*/
+
+}
+
 int	handle_key(int key_code, t_prog *prog)
 {
 	t_mlx	*mlx;
@@ -89,47 +166,10 @@ int	handle_key(int key_code, t_prog *prog)
 	mlx = prog->mlx;
 	info = prog->info;
 	if (key_code == ESCAPE)
-	{
-		printf("ESC clicked !!\n");
-		if (mlx->draw_image.img)
-			mlx_destroy_image(mlx->display, mlx->draw_image.img);
-		if (mlx->player_image)
-			mlx_destroy_image(mlx->display, mlx->player_image);
-		if (mlx->floor_image)
-			mlx_destroy_image(mlx->display, mlx->floor_image);
-		if (mlx->wall_image)
-			mlx_destroy_image(mlx->display, mlx->wall_image);
-		mlx_destroy_window(mlx->display, mlx->window);
-		mlx_destroy_display(mlx->display);
-		free(info->map);
-		free(mlx->display);
-		exit(0);
-	}
-	if (key_code == XK_w && info->map[info->player_y - 1][info->player_x] != 'D'
-			&& info->map[info->player_y - 1][info->player_x] != '1')
-		info->player_y -= 1;
-	if (key_code == XK_a && info->map[info->player_y][info->player_x - 1] != 'D'
-			&& info->map[info->player_y][info->player_x - 1] != '1')
-		info->player_x -= 1;
-	if (key_code == XK_s && info->map[info->player_y + 1][info->player_x] != 'D'
-			&& info->map[info->player_y + 1][info->player_x] != '1')
-		info->player_y += 1;
-	if (key_code == XK_d && info->map[info->player_y][info->player_x + 1] != 'D'
-			&& info->map[info->player_y][info->player_x + 1] != '1')
-		info->player_x += 1;
-	if (key_code == KEY_E)
-		open_door(info->map, &info->door, info->player_x, info->player_y, info->n_doors);
-	if (key_code == XK_Left)
-		info->angle -= ROT_SPEED;
-	else if (key_code == XK_Right)
-		info->angle += ROT_SPEED;
-	info->dir_x = cos(info->angle);
-	info->dir_y = sin(info->angle);
-
-	/*mlx_draw_minimap(mlx, info);*/
+		destroy_program(prog);
+	else
+		move_player(prog, key_code);
 	mlx_draw_field(mlx, info);
-	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->floor_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
-	/*mlx_put_image_to_window(mlx->display, mlx->window, mlx->player_image, info->player_x * SIZE_SCALE, info->player_y * SIZE_SCALE);*/
 	return (0);
 }
 
