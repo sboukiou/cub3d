@@ -40,6 +40,7 @@
 # define DESTROY_NOTIFY_EVENT 17
 # define PI 3.14159
 # define ROT_SPEED 0.05
+# define BLOCK_SIZE 22
 
 
 # define UNUSED(X) (void)(X);
