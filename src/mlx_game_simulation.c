@@ -3,7 +3,6 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/mlx_draw.h"
 
-# define BLOCK_SIZE 22
 
 bool	mlx_simulate_game(t_prog *prog)
 {
