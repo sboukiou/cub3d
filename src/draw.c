@@ -13,13 +13,26 @@ static	void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+int calculate_distance(int px, int py, int dx, int dy)
+{
+    int diff_x = dx - px;
+    int diff_y = dy - py;
+    double distance = sqrt(diff_x * diff_x + diff_y * diff_y);
+    return (int)distance;
+}
+
 static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int color)
 {
+		(void)color;
 	if (mlx == NULL || info == NULL)
 		return (FAILURE);
     double norm = sqrt(dx * dx + dy * dy);
     double step_x = (dx / norm);
     double step_y = (dy / norm);
+	float		distance;
+	float	height;
+	int		start_y;
+	int		end_y;
 
 	int i= 0;
 	int px = x + (int)(step_x * i);
@@ -34,7 +47,18 @@ static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double d
 				put_pixel(mlx, px, py, color);
 		i += 1;
     }
-	return (SUCCESS);
+	distance = calculate_distance(x, y, px, py);
+    height = (BLOCK_SIZE / distance) * ((float)WIN_WIDTH / 2);
+	start_y = (WIN_HEIGHT - height) / 2;
+	end_y = start_y + height;
+	while (start_y < end_y)
+	{
+		if (x > 0 && start_y > 0 && x < WIN_WIDTH && start_y < WIN_HEIGHT)
+			put_pixel(mlx, x, start_y, BLUE);
+		start_y += 1;
+	}
+
+        return (SUCCESS);
 }
 
 
@@ -42,6 +66,8 @@ int	draw_player(t_mlx *mlx, t_info *info)
 {
 	int	px;
 	int	py;
+	double	fov_x;
+	double	fov_y;
 
 	if (mlx == NULL || info ==  NULL)
 		return (FAILURE);
@@ -54,7 +80,13 @@ int	draw_player(t_mlx *mlx, t_info *info)
 				return (SUCCESS);
 			put_pixel(mlx, j, i, GREEN);
 		}
-	draw_line(mlx, info, info->player_x, info->player_y, info->dir_x, info->dir_y, WHITE);
+	for (float degree = info->angle - (PI / 6); degree < info->angle + (PI / 6); degree += 0.001)
+	{
+		fov_x = cos(degree);
+		fov_y = sin(degree);
+		draw_line(mlx, info, info->player_x, info->player_y, fov_x, fov_y, WHITE);
+	}
+
 
 	return (SUCCESS);
 }
