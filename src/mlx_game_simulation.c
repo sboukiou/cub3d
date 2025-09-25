@@ -14,8 +14,8 @@ bool	mlx_simulate_game(t_prog *prog)
 	info = prog->info;
 
 	/*mlx_draw_minimap(mlx, info);*/
-	info->player_x = info->player_x * SIZE_SCALE + 22;
-	info->player_y = info->player_y * SIZE_SCALE + 22;
+	info->player_x = info->player_x * MINIMAP_SIZE_SCALE + 22;
+	info->player_y = info->player_y * MINIMAP_SIZE_SCALE + 22;
 	mlx_draw_field(mlx, info);
 	mlx_hook(mlx->window, 2, 1L<<0, handle_key, prog);
 	/*Looping the game window*/

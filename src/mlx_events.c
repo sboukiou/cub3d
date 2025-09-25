@@ -120,7 +120,7 @@ void	move_player(t_prog *prog, int key_code)
 	{
 		next_x = info->player_x + info->dir_x * move_speed;
 		next_y = info->player_y + info->dir_y * move_speed;
-		if(info->map[((int)next_y) / SIZE_SCALE][(int)next_x / SIZE_SCALE] == '1')
+		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
 			return ;
 		if (next_x <= 0 || next_y <= 0)
 			return ;
@@ -128,11 +128,11 @@ void	move_player(t_prog *prog, int key_code)
 		info->player_y = next_y;
 	}
 	/* Strafe left (A) */
-	if (key_code == XK_a)
+	if (key_code == XK_d)
 	{
 		next_x = info->player_x - info->dir_y * move_speed;
 		next_y = info->player_y + info->dir_x * move_speed;
-		if (info->map[(int)(next_y / SIZE_SCALE)][(int)(next_x / SIZE_SCALE)] != '1')
+		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
 		{
 			info->player_x = next_x;
 			info->player_y = next_y;
@@ -140,11 +140,11 @@ void	move_player(t_prog *prog, int key_code)
 	}
 
 	/* Strafe right (D) */
-	if (key_code == XK_d)
+	if (key_code == XK_a)
 	{
 		next_x = info->player_x + info->dir_y * move_speed;
 		next_y = info->player_y - info->dir_x * move_speed;
-		if (info->map[(int)(next_y / SIZE_SCALE)][(int)(next_x / SIZE_SCALE)] != '1')
+		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
 		{
 			info->player_x = next_x;
 			info->player_y = next_y;
@@ -154,7 +154,7 @@ void	move_player(t_prog *prog, int key_code)
 	{
 		next_x = info->player_x - info->dir_x * move_speed;
 		next_y = info->player_y - info->dir_y * move_speed;
-		if(info->map[((int)next_y) / SIZE_SCALE][(int)next_x / SIZE_SCALE] == '1')
+		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
 			return ;
 		if (next_x <= 0 || next_y <= 0)
 			return ;

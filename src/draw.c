@@ -33,13 +33,13 @@ static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double d
 	int i = 0;
 	int px = x + (int)(step_x * i);
 	int py = y + (int)(step_y * i);
-    while (py > 0 && py < WIN_HEIGHT && info->map[py / SIZE_SCALE][px / SIZE_SCALE] != '1')
+    while (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
     {
 		px = x + (int)(step_x * i);
 		py = y + (int)(step_y * i);
 
 		if (px > 0 && px < WIN_WIDTH)
-			if (py > 0 && py < WIN_HEIGHT && info->map[py / SIZE_SCALE][px / SIZE_SCALE] != '1')
+			if (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
 				put_pixel(mlx, px, py, color);
 		i += 1;
     }
@@ -58,10 +58,10 @@ int	draw_player(t_mlx *mlx, t_info *info)
 		return (FAILURE);
 	px = info->player_x;
 	py = info->player_y;
-	for (int i = py - 4; i < py + 4; i += 1)
-		for (int j = px - 4; j < px + 4; j += 1)
+	for (int i = py - 2; i < py + 2; i += 1)
+		for (int j = px - 2; j < px + 2; j += 1)
 		{
-			if(info->map[py / SIZE_SCALE][px / SIZE_SCALE] == '1')
+			if(info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] == '1')
 				return (SUCCESS);
 			put_pixel(mlx, j, i, GREEN);
 		}
@@ -70,12 +70,6 @@ int	draw_player(t_mlx *mlx, t_info *info)
 		fov_x = cos(degree);
 		fov_y = sin(degree);
 		draw_line(mlx, info, info->player_x, info->player_y, fov_x, fov_y, WHITE);
-		double distance = calculate_distance(info->player_x, info->player_y, fov_x, fov_y);
-		int	line_height = (int)(WIN_HEIGHT) / distance;
-		int draw_start = -line_height / 2 + WIN_HEIGHT / 2;
-		if (draw_start < 0) draw_start = 0;
-		int draw_end = line_height / 2 + WIN_HEIGHT / 2;
-		if (draw_end >= WIN_HEIGHT) draw_end = WIN_HEIGHT - 1;
 	}
 
 	return (SUCCESS);
@@ -107,7 +101,7 @@ int	mlx_draw_field(t_mlx *mlx, t_info *info)
 	for (int i = 0; info->map[i]; i++)
 		for (int j = 0; info->map[i][j]; j++)
 			if (info->map[i][j] == '1')
-				mlx_draw_square(mlx, j * SIZE_SCALE, i * SIZE_SCALE, WHITE, 40);
+				mlx_draw_square(mlx, j * MINIMAP_SIZE_SCALE, i * 10, WHITE, 10);
 	draw_player(mlx, info);
 
 	mlx_put_image_to_window(mlx->display, mlx->window, mlx->draw_image.img, 0, 0);
