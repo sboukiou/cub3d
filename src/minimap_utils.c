@@ -18,12 +18,13 @@ int	draw_miniplayer(t_prog *prog)
 	mlx = prog->mlx;
 	px = info->player_x;
 	py = info->player_y;
+	if(info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] == '1')
+		return (SUCCESS);
 	for (int i = py - 2; i < py + 2; i += 1)
 		for (int j = px - 2; j < px + 2; j += 1)
 		{
-			if(info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] == '1')
-				return (SUCCESS);
-			put_pixel(mlx, j, i, GREEN);
+			if(info->map[i / MINIMAP_SIZE_SCALE][j / MINIMAP_SIZE_SCALE] == '1')
+				put_pixel(mlx, j, i, GREEN);
 		}
 	for (float degree = info->angle - (PI / 6); degree < info->angle + (PI / 6); degree += 0.001)
 	{
