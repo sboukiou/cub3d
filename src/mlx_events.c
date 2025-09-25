@@ -107,6 +107,9 @@ void	move_player(t_prog *prog, int key_code)
 	t_info	*info;
 	int		px;
 	int		py;
+	double	move_speed = 4;
+	double	next_x;
+	double	next_y;
 
 	info = prog->info;
 	px = info->player_x;
@@ -115,31 +118,48 @@ void	move_player(t_prog *prog, int key_code)
 	/*Handle moving directions*/
 	if (key_code == XK_w)
 	{
-		if(info->map[(py - 10) / SIZE_SCALE][px / SIZE_SCALE] == '1')
+		next_x = info->player_x + info->dir_x * move_speed;
+		next_y = info->player_y + info->dir_y * move_speed;
+		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
 			return ;
-		if (info->player_y -10 > 0)
-			info->player_y -= 10;
+		if (next_x <= 0 || next_y <= 0)
+			return ;
+		info->player_x = next_x;
+		info->player_y = next_y;
 	}
+	/* Strafe left (A) */
+	if (key_code == XK_d)
+	{
+		next_x = info->player_x - info->dir_y * move_speed;
+		next_y = info->player_y + info->dir_x * move_speed;
+		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
+		{
+			info->player_x = next_x;
+			info->player_y = next_y;
+		}
+	}
+
+	/* Strafe right (D) */
 	if (key_code == XK_a)
 	{
-		if(info->map[py / SIZE_SCALE][(px - 10) / SIZE_SCALE] == '1')
-			return ;
-		if (info->player_x - 10 > 0)
-			info->player_x -= 10;
+		next_x = info->player_x + info->dir_y * move_speed;
+		next_y = info->player_y - info->dir_x * move_speed;
+		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
+		{
+			info->player_x = next_x;
+			info->player_y = next_y;
+		}
 	}
 	if (key_code == XK_s)
 	{
-		if(info->map[(py + 10) / SIZE_SCALE][px / SIZE_SCALE] == '1')
+		next_x = info->player_x - info->dir_x * move_speed;
+		next_y = info->player_y - info->dir_y * move_speed;
+		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
 			return ;
-		if (info->player_y + 10 < WIN_HEIGHT)
-			info->player_y += 10;
-	}
-	if (key_code == XK_d)
-	{
-		if(info->map[py / SIZE_SCALE][(px + 10) / SIZE_SCALE] == '1')
+		if (next_x <= 0 || next_y <= 0)
 			return ;
-		if (info->player_x + 10 < WIN_WIDTH)
-			info->player_x += 10;
+		info->player_x = next_x;
+		info->player_y = next_y;
 	}
 
 	/*Handle rotations*/
@@ -150,10 +170,6 @@ void	move_player(t_prog *prog, int key_code)
 	info->dir_x = cos(info->angle);
 	info->dir_y = sin(info->angle);
 	
-	/*if (key_code == KEY_E)*/
-		/*handle door opening*/
-		/*open_door(info->map, &info->door, info->player_x, info->player_y, info->n_doors);*/
-
 }
 
 int	handle_key(int key_code, t_prog *prog)

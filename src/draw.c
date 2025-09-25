@@ -29,35 +29,20 @@ static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double d
     double norm = sqrt(dx * dx + dy * dy);
     double step_x = (dx / norm);
     double step_y = (dy / norm);
-	float		distance;
-	float	height;
-	int		start_y;
-	int		end_y;
 
-	int i= 0;
+	int i = 0;
 	int px = x + (int)(step_x * i);
 	int py = y + (int)(step_y * i);
-    while (py > 0 && py < WIN_HEIGHT && info->map[py / SIZE_SCALE][px / SIZE_SCALE] != '1')
+    while (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
     {
 		px = x + (int)(step_x * i);
 		py = y + (int)(step_y * i);
 
 		if (px > 0 && px < WIN_WIDTH)
-			if (py > 0 && py < WIN_HEIGHT && info->map[py / SIZE_SCALE][px / SIZE_SCALE] != '1')
+			if (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
 				put_pixel(mlx, px, py, color);
 		i += 1;
     }
-	distance = calculate_distance(x, y, px, py);
-    height = (BLOCK_SIZE / distance) * ((float)WIN_WIDTH / 2);
-	start_y = (WIN_HEIGHT - height) / 2;
-	end_y = start_y + height;
-	while (start_y < end_y)
-	{
-		if (x > 0 && start_y > 0 && x < WIN_WIDTH && start_y < WIN_HEIGHT)
-			put_pixel(mlx, x, start_y, BLUE);
-		start_y += 1;
-	}
-
         return (SUCCESS);
 }
 
@@ -73,10 +58,10 @@ int	draw_player(t_mlx *mlx, t_info *info)
 		return (FAILURE);
 	px = info->player_x;
 	py = info->player_y;
-	for (int i = py - 4; i < py + 4; i += 1)
-		for (int j = px - 4; j < px + 4; j += 1)
+	for (int i = py - 2; i < py + 2; i += 1)
+		for (int j = px - 2; j < px + 2; j += 1)
 		{
-			if(info->map[py / SIZE_SCALE][px / SIZE_SCALE] == '1')
+			if(info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] == '1')
 				return (SUCCESS);
 			put_pixel(mlx, j, i, GREEN);
 		}
@@ -87,7 +72,6 @@ int	draw_player(t_mlx *mlx, t_info *info)
 		draw_line(mlx, info, info->player_x, info->player_y, fov_x, fov_y, WHITE);
 	}
 
-
 	return (SUCCESS);
 }
 
@@ -97,8 +81,6 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 	if (mlx == NULL)
 		return (false);
 
-	/*if (size > 10)*/
-	/*	size = size - 4;*/
 	for (int i = y; i < y + size; i++)
 		for (int j = x; j < x + size; j++)
 			if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)
@@ -119,7 +101,7 @@ int	mlx_draw_field(t_mlx *mlx, t_info *info)
 	for (int i = 0; info->map[i]; i++)
 		for (int j = 0; info->map[i][j]; j++)
 			if (info->map[i][j] == '1')
-				mlx_draw_square(mlx, j * SIZE_SCALE, i * SIZE_SCALE, WHITE, 40);
+				mlx_draw_square(mlx, j * MINIMAP_SIZE_SCALE, i * 10, WHITE, 10);
 	draw_player(mlx, info);
 
 	mlx_put_image_to_window(mlx->display, mlx->window, mlx->draw_image.img, 0, 0);

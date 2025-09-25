@@ -17,7 +17,7 @@
 # define SUCCESS 0
 #define FAILURE 1
 # define MAP_SIZE 1024
-# define SIZE_SCALE 44
+# define MINIMAP_SIZE_SCALE 10
 # define TRUE 1
 # define KEY_E 101
 # define FALSE 0
