@@ -32,7 +32,6 @@ bool	mlx_simulate_game(t_prog *prog)
 	mlx = prog->mlx;
 	info = prog->info;
 
-	/*mlx_draw_minimap(mlx, info);*/
 	info->player_x = info->player_x * MINIMAP_SIZE_SCALE + 22;
 	info->player_y = info->player_y * MINIMAP_SIZE_SCALE + 22;
 	game_layout(prog);
