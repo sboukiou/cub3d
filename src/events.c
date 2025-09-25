@@ -1,8 +1,7 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
-/* #include "../includes/include.h" */
+ #include "../includes/mlx_game_simulation.h" 
 #include "../includes/types.h"
-#include "../includes/mlx_draw.h"
 /**
 	* handle_key - Check if a given key is the escape
 	* @key_code: The number corresponding to the key
@@ -185,7 +184,7 @@ int	handle_key(int key_code, t_prog *prog)
 		destroy_program(prog);
 	else
 		move_player(prog, key_code);
-	mlx_draw_field(mlx, info);
+	game_layout(prog);
 	return (0);
 }
 

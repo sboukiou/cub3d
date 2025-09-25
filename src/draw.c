@@ -1,9 +1,9 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
-/* #include "../includes/include.h" */
+ #include "../includes/minimap_utils.h" 
 #include "../includes/types.h"
 
-static	void	put_pixel(t_mlx *mlx, int x, int y, int color)
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 	t_mlx_img *img;
@@ -13,15 +13,7 @@ static	void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int calculate_distance(int px, int py, int dx, int dy)
-{
-    int diff_x = dx - px;
-    int diff_y = dy - py;
-    double distance = sqrt(diff_x * diff_x + diff_y * diff_y);
-    return (int)distance;
-}
-
-static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int color)
+int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int color)
 {
 		(void)color;
 	if (mlx == NULL || info == NULL)
@@ -47,35 +39,6 @@ static int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double d
 }
 
 
-int	draw_player(t_mlx *mlx, t_info *info)
-{
-	int	px;
-	int	py;
-	double	fov_x;
-	double	fov_y;
-
-	if (mlx == NULL || info ==  NULL)
-		return (FAILURE);
-	px = info->player_x;
-	py = info->player_y;
-	for (int i = py - 2; i < py + 2; i += 1)
-		for (int j = px - 2; j < px + 2; j += 1)
-		{
-			if(info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] == '1')
-				return (SUCCESS);
-			put_pixel(mlx, j, i, GREEN);
-		}
-	for (float degree = info->angle - (PI / 6); degree < info->angle + (PI / 6); degree += 0.001)
-	{
-		fov_x = cos(degree);
-		fov_y = sin(degree);
-		draw_line(mlx, info, info->player_x, info->player_y, fov_x, fov_y, WHITE);
-	}
-
-	return (SUCCESS);
-}
-
-
 bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 {
 	if (mlx == NULL)
@@ -87,25 +50,3 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 				put_pixel(mlx, j, i, color);
 	return (true);
 }
-
-int	mlx_draw_field(t_mlx *mlx, t_info *info)
-{
-	if (mlx == NULL || info == NULL)
-		return (FAILURE);
-	if (mlx->draw_image.img != NULL)
-		mlx_destroy_image(mlx->display, mlx->draw_image.img);
-	mlx->draw_image.img = mlx_new_image(mlx->display, WIN_WIDTH, WIN_HEIGHT);
-	if (mlx->draw_image.img == NULL)
-		return (FAILURE);
-	mlx->draw_image.addr = mlx_get_data_addr(mlx->draw_image.img, &mlx->draw_image.bpp, &mlx->draw_image.llen, &mlx->draw_image.endian);
-	for (int i = 0; info->map[i]; i++)
-		for (int j = 0; info->map[i][j]; j++)
-			if (info->map[i][j] == '1')
-				mlx_draw_square(mlx, j * MINIMAP_SIZE_SCALE, i * 10, WHITE, 10);
-	draw_player(mlx, info);
-
-	mlx_put_image_to_window(mlx->display, mlx->window, mlx->draw_image.img, 0, 0);
-	return (SUCCESS);
-}
-
-
