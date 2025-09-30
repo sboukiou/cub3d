@@ -12,7 +12,7 @@
 
 #include "./includes/cub.h"
 #include "includes/mlx_create.h"
-#include "includes/mlx_draw.h"
+#include "includes/draw.h"
 #include "includes/mlx_game_simulation.h"
 #include "lib/mlx_linux/mlx.h"
 
