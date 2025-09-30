@@ -39,6 +39,7 @@
 # define PINK 0xFF8DA1
 # define DEFAULT_Z 0x99CCFF
 # define DEFAULT 0x00CC66
+# define YELLOW 0xFFFF8F
 /*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4

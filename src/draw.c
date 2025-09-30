@@ -1,6 +1,6 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
- #include "../includes/minimap_utils.h" 
+ #include "../includes/maths.h" 
 #include "../includes/types.h"
 
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
@@ -46,7 +46,18 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 
 	for (int i = y; i < y + size; i++)
 		for (int j = x; j < x + size; j++)
-			if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)
+			put_pixel(mlx, j, i, color);
+			/*if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)*/
+	return (true);
+}
+
+bool	mlx_draw_circle(t_mlx *mlx, int x, int y, int radius, int color)
+{
+	if (mlx == NULL)
+		return (false);
+	for (int i = y; i < y + radius; i++)
+		for (int j = x; j < x + radius; j++)
+			if (calculate_distance(x, y, i, j) <= radius)
 				put_pixel(mlx, j, i, color);
 	return (true);
 }
