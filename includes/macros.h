@@ -17,7 +17,9 @@
 # define SUCCESS 0
 #define FAILURE 1
 # define MAP_SIZE 1024
+# define SIZE_SCALE 10
 # define MINIMAP_SIZE_SCALE 10
+#define FOV PI / 3
 # define TRUE 1
 # define KEY_E 101
 # define FALSE 0
@@ -29,11 +31,15 @@
 /*Defining Colors*/
 # define RED 0xFF0000
 # define WHITE 0xFFFFFF
+# define BLACK 0x000000
 # define GREEN 0x00FF00
+# define LIGHT_BLUE 0x90D5FF
+# define BROWN 0xF2B949
 # define BLUE 0xFF00FF
 # define PINK 0xFF8DA1
 # define DEFAULT_Z 0x99CCFF
 # define DEFAULT 0x00CC66
+# define YELLOW 0xFFFF8F
 /*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4

@@ -106,7 +106,7 @@ void	move_player(t_prog *prog, int key_code)
 	t_info	*info;
 	int		px;
 	int		py;
-	double	move_speed = 4;
+	double	move_speed = 2;
 	double	next_x;
 	double	next_y;
 
