@@ -1,6 +1,6 @@
 #include "../includes/macros.h"
 #include "../includes/types.h"
-#include "../includes/mlx_draw.h"
+#include "../includes/draw.h"
  #include "../includes/checkers.h" 
 
 int	draw_miniplayer(t_prog *prog)
@@ -48,7 +48,7 @@ int	minimap(t_prog *prog)
 	for (int y = 0; info->map[y]; y++)
 		for (int x = 0; info->map[y][x]; x++)
 			if(info->map[y][x] == '1')
-				mlx_draw_square(mlx, x * MINIMAP_SIZE_SCALE, y * MINIMAP_SIZE_SCALE, WHITE, 10);
+				mlx_draw_square(mlx, x * MINIMAP_SIZE_SCALE, y * MINIMAP_SIZE_SCALE, BLACK, 10);
 	draw_miniplayer(prog);
 
 	return (SUCCESS);
