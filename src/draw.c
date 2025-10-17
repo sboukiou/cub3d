@@ -73,7 +73,7 @@ int	render(t_mlx *mlx, t_info *info)
 
         double ray_x = info->player_x;
         double ray_y = info->player_y;
-        double step = 1.0;
+        double step = 0.2;
         double distance = 0;
         while (1)
         {
