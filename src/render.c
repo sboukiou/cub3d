@@ -78,8 +78,6 @@ int render(t_prog *prog)
         //Check if ray has hit a wall
 		if(info->map[mapY][mapX] == '1')
 			hit = 1;
-		else
-			printf("found --> %c at [%d][%d]\n", info->map[mapY][mapX], mapY, mapX);
       }
       if(side == 0)
 		  perpWallDist = (sideDistX - deltaDistX);
