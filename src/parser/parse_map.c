@@ -125,8 +125,5 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 		(*final_info)->map_height++;
 	(*final_info)->map_width = get_width((*final_info)->map);
 	(*final_info)->door = creat_doors((*final_info)->map, &(*final_info)->n_doors);
-	(*final_info)->dir_y = -1;
-	(*final_info)->dir_x = 0;
-	(*final_info)->angle = 3 * PI /2;
 	return (SUCCESS);
 }

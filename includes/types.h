@@ -55,24 +55,30 @@ typedef struct s_map_info
 	char 		**map;
 }				t_map_info;
 
+typedef struct	s_player
+{
+	double posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+}	t_player;
+
 typedef struct s_nfo
 {
-	char	*north_textures_file;
-	char	*south_textures_file;
-	char	*west_textures_file;
-	char	*east_textures_file;
-	int		floor_colors[COLORS_SIZE];
-	int		ceiling_colors[COLORS_SIZE];
-	char	**map;
-	int		player_x;
-	int		player_y;
-	int		map_width;
-	int		map_height;
-	t_door	*door;
-	int		n_doors;
-	double	dir_x;
-	double	dir_y;
-	double	angle;
+	char		*north_textures_file;
+	char		*south_textures_file;
+	char		*west_textures_file;
+	char		*east_textures_file;
+	int			floor_colors[COLORS_SIZE];
+	int			ceiling_colors[COLORS_SIZE];
+	char		**map;
+	int			map_width;
+	int			map_height;
+	t_door		*door;
+	int			n_doors;
+	t_player	*player;
 }	t_info;
 
 /**
