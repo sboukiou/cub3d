@@ -13,29 +13,15 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int color)
+int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
 {
-		(void)color;
-	if (mlx == NULL || info == NULL)
+	if (mlx == NULL)
 		return (FAILURE);
-    double norm = sqrt(dx * dx + dy * dy);
-    double step_x = (dx / norm);
-    double step_y = (dy / norm);
-
-	int i = 0;
-	int px = x + (int)(step_x * i);
-	int py = y + (int)(step_y * i);
-    while (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
-    {
-		px = x + (int)(step_x * i);
-		py = y + (int)(step_y * i);
-
-		if (px > 0 && px < WIN_WIDTH)
-			if (py > 0 && py < WIN_HEIGHT && info->map[py / MINIMAP_SIZE_SCALE][px / MINIMAP_SIZE_SCALE] != '1')
-				put_pixel(mlx, px, py, color);
-		i += 1;
-    }
-        return (SUCCESS);
+	for (int i =  drawStart; i < drawEnd; i += 1)
+	{
+		put_pixel(mlx, x, i, color);
+	}
+	return (SUCCESS);
 }
 
 

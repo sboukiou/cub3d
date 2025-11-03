@@ -113,6 +113,6 @@ void	fill_struct_info(t_map_info *info, t_info **final_info)
 	while (++i < 3)
 		(*final_info)->floor_colors[i] = info->floor[i];
 	(*final_info)->map = fill_final_map(info->map);
-	get_player_position((*final_info)->map, &(*final_info)->player_x,
-		&(*final_info)->player_y);
+	/*get_player_position((*final_info)->map, &(*final_info)->player_x,*/
+	/*	&(*final_info)->player_y);*/
 }

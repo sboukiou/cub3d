@@ -1,7 +1,7 @@
-            SO files/b     
-            WE files/b       
-        EA files/c      
-        NO files/d    
+            SO ./textures/minimap/Castle/Castle_Floor_Big.xpm
+            WE ./textures/minimap/Castle/Castle_Floor_Big.xpm       
+        EA ./textures/minimap/Castle/Castle_Floor_Big.xpm      
+        NO ./textures/minimap/Castle/Castle_Floor_Big.xpm    
 
 
 F 200,01,28

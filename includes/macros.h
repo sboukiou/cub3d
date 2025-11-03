@@ -26,14 +26,6 @@
 /*Defining Window demensions*/
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-/*Defining Colors*/
-# define RED 0xFF0000
-# define WHITE 0xFFFFFF
-# define GREEN 0x00FF00
-# define BLUE 0xFF00FF
-# define PINK 0xFF8DA1
-# define DEFAULT_Z 0x99CCFF
-# define DEFAULT 0x00CC66
 /*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4
@@ -42,6 +34,32 @@
 # define ROT_SPEED 0.05
 # define BLOCK_SIZE 22
 
+/*Error Messages Macor-Definitions*/
+# define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
+
+# define ERR_FILE_NOT_CUB "Not a .cub file"
+# define ERR_FILE_NOT_XPM "Not an .xpm file"
+# define ERR_FILE_IS_DIR "Is a directory"
+# define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
+# define ERR_COLOR_FLOOR "Invalid floor RGB color"
+# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
+# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
+# define ERR_INV_LETTER "Invalid character in map"
+# define ERR_NUM_PLAYER "Map has more than one player"
+# define ERR_TEX_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
+# define ERR_TEX_MISSING "Missing texture(s)"
+# define ERR_TEX_INVALID "Invalid texture(s)"
+# define ERR_COLOR_MISSING "Missing color(s)"
+# define ERR_MAP_MISSING "Missing map"
+# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
+# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
+# define ERR_MAP_LAST "Map is not the last element in file"
+# define ERR_PLAYER_POS "Invalid player position"
+# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
+# define ERR_MALLOC "Could not allocate memory"
+# define ERR_MLX_START "Could not start mlx"
+# define ERR_MLX_WIN "Could not create mlx window"
+# define ERR_MLX_IMG "Could not create mlx image"
 
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\

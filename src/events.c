@@ -1,6 +1,6 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
- #include "../includes/mlx_game_simulation.h" 
+ #include "../includes/game.h" 
 #include "../includes/types.h"
 /**
 	* handle_key - Check if a given key is the escape
@@ -104,70 +104,59 @@ void	move_player(t_prog *prog, int key_code)
 {
 	t_mlx	*mlx;
 	t_info	*info;
+	t_player *player;
 	int		px;
 	int		py;
-	double	move_speed = 4;
-	double	next_x;
-	double	next_y;
+	double	moveSpeed = 0.1;
+	double	rotSpeed = 0.03;
 
 	info = prog->info;
-	px = info->player_x;
-	py = info->player_y;
+	px = info->player->posX;
+	py = info->player->posY;
 	mlx = prog->mlx;
+	player = info->player;
 	/*Handle moving directions*/
-	if (key_code == XK_w)
-	{
-		next_x = info->player_x + info->dir_x * move_speed;
-		next_y = info->player_y + info->dir_y * move_speed;
-		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
-			return ;
-		if (next_x <= 0 || next_y <= 0)
-			return ;
-		info->player_x = next_x;
-		info->player_y = next_y;
-	}
-	/* Strafe left (A) */
-	if (key_code == XK_d)
-	{
-		next_x = info->player_x - info->dir_y * move_speed;
-		next_y = info->player_y + info->dir_x * move_speed;
-		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
-		{
-			info->player_x = next_x;
-			info->player_y = next_y;
-		}
-	}
-
-	/* Strafe right (D) */
-	if (key_code == XK_a)
-	{
-		next_x = info->player_x + info->dir_y * move_speed;
-		next_y = info->player_y - info->dir_x * move_speed;
-		if (info->map[(int)(next_y / MINIMAP_SIZE_SCALE)][(int)(next_x / MINIMAP_SIZE_SCALE)] != '1')
-		{
-			info->player_x = next_x;
-			info->player_y = next_y;
-		}
-	}
-	if (key_code == XK_s)
-	{
-		next_x = info->player_x - info->dir_x * move_speed;
-		next_y = info->player_y - info->dir_y * move_speed;
-		if(info->map[((int)next_y) / MINIMAP_SIZE_SCALE][(int)next_x / MINIMAP_SIZE_SCALE] == '1')
-			return ;
-		if (next_x <= 0 || next_y <= 0)
-			return ;
-		info->player_x = next_x;
-		info->player_y = next_y;
-	}
-
-	/*Handle rotations*/
-	if (key_code == XK_Left)
-		info->angle -= ROT_SPEED;
-	else if (key_code == XK_Right)
-		info->angle += ROT_SPEED;
-	info->dir_x = cos(info->angle);
-	info->dir_y = sin(info->angle);
+    if(key_code == XK_w)
+    {
+		if(info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)]
+				!= '1')
+			player->posX += player->dirX * moveSpeed;
+		if(info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX]
+				!= '1')
+			player->posY += player->dirY * moveSpeed;
+    }
+    //move backwards if no wall behind you
+    if(key_code == XK_s)
+    {
+      if(info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)]
+			  != '1')
+		  player->posX -= player->dirX * moveSpeed;
+      if(info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX]
+			  != '1')
+		  player->posY -= player->dirY * moveSpeed;
+    }
+    //rotate to the right
+    if(key_code == XK_Right)
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = player->dirX;
+      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
+      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
+      double oldPlaneX = player->planeX;
+      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
+      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
+    }
+    //rotate to the left
+    if(key_code == XK_Left)
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = player->dirX;
+      player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
+      player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
+      double oldPlaneX = player->planeX;
+      player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
+      player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+    }
 	
 }
 
