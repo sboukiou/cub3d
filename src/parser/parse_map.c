@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/17 15:22:43 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/04 14:17:28 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	is_valid_map(char **map, t_map_info **info, t_map *map_info)
 	return (SUCCESS);
 }
 
-void	get_player_position(char **map, int *player_x, int *player_y)
+void	get_player_position(char **map, double *player_x, double *player_y, char *c)
 {
 	int	i;
 	int	j;
@@ -82,6 +82,7 @@ void	get_player_position(char **map, int *player_x, int *player_y)
 			{
 				*player_x = j;
 				*player_y = i;
+				*c = map[i][j];
 				return ;
 			}
 		}

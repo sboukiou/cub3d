@@ -6,11 +6,12 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/17 15:22:03 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/04 14:36:07 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+#include "../includes/parse_map.h"
 #include "../includes/init.h"
 #include "../includes/game.h"
 #include "../includes/colors.h"
@@ -31,15 +32,38 @@ static void	print_controllers(void)
 	printf("\n");
 }
 
+void init(t_info **info, t_player *player)
+{
+	char c;
+
+	c = 0;
+	get_player_position((*info)->map, &player->posX, &player->posY, &c);
+	if (c == 'N' || c == 'S')
+		player->dirX = 0;
+	if (c == 'N')
+		player->dirY = -1;
+	if (c == 'S')
+		player->dirY = +1;	
+	if (c == 'W' || c == 'E')
+		player->dirY = 0;
+	if (c == 'W')
+		player->dirX = -1;
+	if (c == 'E')
+		player->dirX = +1;
+	player->planeX = 0;
+	player->planeY = 0.66;
+	(*info)->player = player;
+}
+
 int	main(int ac, char **av)
 {
 	t_map_info	*parse;
 	t_info	*info;
 	t_mlx	mlx;
-	t_player	player;
+	t_player	*player;
 	t_prog	prog;
 
-	
+	player = malloc(sizeof(t_player));
 	parse = NULL;
 	info = NULL;
 	if (ac != 2)
@@ -54,15 +78,9 @@ int	main(int ac, char **av)
 
 	/*Initializing the display, window and image attributes*/
 	print_controllers();
+	init(&info, player);
 	prog.mlx = &mlx;
 	prog.info = info;
-	player.posX = 9;
-	player.posY = 9;
-	player.dirX = -1;
-	player.dirY = 0;
-	player.planeX = 0;
-	player.planeY = 0.66;
-	info->player = &player;
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
