@@ -21,7 +21,6 @@ int	game_layout(t_prog *prog)
 		return (FAILURE);
 	mlx->draw_image.addr = mlx_get_data_addr(mlx->draw_image.img, &mlx->draw_image.bpp, &mlx->draw_image.llen, &mlx->draw_image.endian);
 	/*Do the math here*/
-	printf("Before the render starts working\n");
 	render(prog);
 	mlx_put_image_to_window(mlx->display, mlx->window, mlx->draw_image.img, 0, 0);
 	return (SUCCESS);
