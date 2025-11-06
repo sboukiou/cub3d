@@ -17,8 +17,14 @@ int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
 {
 	if (mlx == NULL)
 		return (FAILURE);
+	  if (drawStart < 0 || drawEnd < 0)
+		  return (FAILURE);
+	if ( drawStart >= WIN_HEIGHT)
+		return (SUCCESS);
 	for (int i =  drawStart; i < drawEnd; i += 1)
 	{
+		if (i >= WIN_HEIGHT)
+			return (SUCCESS);
 		put_pixel(mlx, x, i, color);
 	}
 	return (SUCCESS);

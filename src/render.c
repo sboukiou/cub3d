@@ -107,7 +107,9 @@ int render(t_prog *prog)
 
 
       //draw the pixels of the stripe as a vertical line
+      draw_vert_line(mlx, x, 0, drawStart, 0X1A8FC9);
       draw_vert_line(mlx, x, drawStart, drawEnd, color);
+      draw_vert_line(mlx, x, drawEnd, WIN_WIDTH - 1, 0XB09C17);
     }
 	return (0);
 }
