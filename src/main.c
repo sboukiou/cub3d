@@ -38,20 +38,34 @@ void init(t_info **info, t_player *player)
 
 	c = 0;
 	get_player_position((*info)->map, &player->posX, &player->posY, &c);
-	if (c == 'N' || c == 'S')
+	if (c == 'N')  // North = UP on screen = negative Y direction
+	{
 		player->dirX = 0;
-	if (c == 'N')
-		player->dirY = -1;
-	if (c == 'S')
-		player->dirY = +1;	
-	if (c == 'W' || c == 'E')
+		player->dirY = -1;      // NEGATIVE (moving up decreases Y)
+		player->planeX = 0.66;   // Perpendicular: points right
+		player->planeY = 0;
+	}
+	else if (c == 'S')  // South = DOWN on screen = positive Y direction
+	{
+		player->dirX = 0;
+		player->dirY = 1;        // POSITIVE (moving down increases Y)
+		player->planeX = -0.66;  // Perpendicular: points left
+		player->planeY = 0;
+	}
+	else if (c == 'W')  // West = LEFT on screen = negative X direction
+	{
+		player->dirX = -1;       // NEGATIVE (moving left decreases X)
 		player->dirY = 0;
-	if (c == 'W')
-		player->dirX = -1;
-	if (c == 'E')
-		player->dirX = +1;
-	player->planeX = 0;
-	player->planeY = 0.66;
+		player->planeX = 0;
+		player->planeY = -0.66;  // Perpendicular: points up (negative Y)
+	}
+	else if (c == 'E')  // East = RIGHT on screen = positive X direction
+	{
+		player->dirX = 1;        // POSITIVE (moving right increases X)
+		player->dirY = 0;
+		player->planeX = 0;
+		player->planeY = 0.66;   // Perpendicular: points down (positive Y)
+	}
 	(*info)->player = player;
 }
 
