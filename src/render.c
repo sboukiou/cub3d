@@ -101,9 +101,11 @@ int render(t_prog *prog)
       {
         case '1':  color = 0XAA4A44;  break; //red
         case '0':  color = 0XB09C17;  break; //yellow
-        case 'S':  color = 0X21801B;  break; //green
         default: color = 0X1A8FC9; break; //cyan
       }
+
+	  if (side == 1)
+		  color /= 2;
 
 
       //draw the pixels of the stripe as a vertical line

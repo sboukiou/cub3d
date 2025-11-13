@@ -135,19 +135,26 @@ void	move_player(t_prog *prog, int key_code)
 			  != '1')
 		  player->posY -= player->dirY * moveSpeed;
     }
+    if(key_code == XK_d)
+    {
+      if(info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)]
+			  != '1')
+		  player->posX -= player->dirY * moveSpeed;
+      if(info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX]
+			  != '1')
+		  player->posY += player->dirX * moveSpeed;
+    }
+    if(key_code == XK_a)
+    {
+      if(info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)]
+			  != '1')
+		  player->posX += player->dirY * moveSpeed;
+      if(info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX]
+			  != '1')
+		  player->posY -= player->dirX * moveSpeed;
+    }
     //rotate to the right
     if(key_code == XK_Right)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = player->dirX;
-      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
-      double oldPlaneX = player->planeX;
-      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
-      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
-    }
-    //rotate to the left
-    if(key_code == XK_Left)
     {
       //both camera direction and camera plane must be rotated
       double oldDirX = player->dirX;
@@ -156,6 +163,17 @@ void	move_player(t_prog *prog, int key_code)
       double oldPlaneX = player->planeX;
       player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
       player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+    }
+    //rotate to the left
+    if(key_code == XK_Left)
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = player->dirX;
+      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
+      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
+      double oldPlaneX = player->planeX;
+      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
+      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
     }
 	
 }
