@@ -105,7 +105,8 @@ int render(t_prog *prog)
       }
 
 	  if (side == 1)
-		  color = color / 2;
+		  color /= 2;
+
 
       //draw the pixels of the stripe as a vertical line
       draw_vert_line(mlx, x, 0, drawStart, 0X1A8FC9);
