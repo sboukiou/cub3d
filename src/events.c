@@ -140,22 +140,22 @@ void	move_player(t_prog *prog, int key_code)
     {
       //both camera direction and camera plane must be rotated
       double oldDirX = player->dirX;
-      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
+      player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
+      player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
       double oldPlaneX = player->planeX;
-      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
-      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
+      player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
+      player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
     }
     //rotate to the left
     if(key_code == XK_Left)
     {
       //both camera direction and camera plane must be rotated
       double oldDirX = player->dirX;
-      player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
-      player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
+      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
+      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
       double oldPlaneX = player->planeX;
-      player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
-      player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
+      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
     }
 	
 }
