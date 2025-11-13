@@ -135,6 +135,24 @@ void	move_player(t_prog *prog, int key_code)
 			  != '1')
 		  player->posY -= player->dirY * moveSpeed;
     }
+    if(key_code == XK_d)
+    {
+      if(info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)]
+			  != '1')
+		  player->posX -= player->dirY * moveSpeed;
+      if(info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX]
+			  != '1')
+		  player->posY += player->dirX * moveSpeed;
+    }
+    if(key_code == XK_a)
+    {
+      if(info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)]
+			  != '1')
+		  player->posX += player->dirY * moveSpeed;
+      if(info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX]
+			  != '1')
+		  player->posY -= player->dirX * moveSpeed;
+    }
     //rotate to the right
     if(key_code == XK_Right)
     {
