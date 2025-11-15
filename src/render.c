@@ -3,6 +3,7 @@
 #include <strings.h>
 #include "../includes/draw.h"
 #include "../includes/types.h"
+#include "../includes/textures.h"
 
 
 int render(t_prog *prog)
@@ -96,22 +97,50 @@ int render(t_prog *prog)
 		  drawEnd = WIN_HEIGHT - 1;
 
       //choose wall color
-      int color;
-      switch(info->map[mapY][mapX])
-      {
-        case '1':  color = 0XAA4A44;  break; //red
-        case '0':  color = 0XB09C17;  break; //yellow
-        default: color = 0X1A8FC9; break; //cyan
-      }
-
-	  if (side == 1)
-		  color /= 2;
-
-
-      //draw the pixels of the stripe as a vertical line
-      draw_vert_line(mlx, x, 0, drawStart, 0X1A8FC9);
-      draw_vert_line(mlx, x, drawStart, drawEnd, color);
-      draw_vert_line(mlx, x, drawEnd, WIN_WIDTH - 1, 0XB09C17);
+	  double wallX;
+	  if (side == 0)
+		  wallX = info->player->posY + perpWallDist * rayDirX;
+	  else
+		  wallX = info->player->posX + perpWallDist * rayDirX;
+	  wallX -= floor(wallX);
+	  int	tex_idx;
+	  if (side == 0)
+		  tex_idx = (rayDirX > 0) ? LT_WEST: LT_EAST;
+	  else
+		  tex_idx = (rayDirX > 0) ? LT_NORTH: LT_SOUTH;
+	  t_tex *tex = &info->texs[tex_idx];
+	  int	texX = (int)(wallX * (double)(tex->width));
+	  double step = 1.0 * tex->height / (double)lineHeight;
+	  double texPos = (double)(drawStart - (double)WIN_HEIGHT / 2 + (double)lineHeight / 2);
+	  for (int y = drawStart; y < drawEnd; ++y)
+	  {
+		  int texY = (int)texPos;
+		  if (texY < 0)
+			  texY = 0;
+		  if (texY >= tex->height)
+			  texY = tex->height - 1;
+		  texPos += step;
+		  unsigned int color = textures_get_pixel(tex, texX, texY);
+		  if (side == 0)
+			  color = ((color >> 1) & 0X7F7F7F);
+		  put_pixel(mlx, x, y , color);
+	  }
+	  /*   int color;*/
+	  /*   switch(info->map[mapY][mapX])*/
+	  /*   {*/
+	  /*     case '1':  color = 0XAA4A44;  break; //red*/
+	  /*     case '0':  color = 0XB09C17;  break; //yellow*/
+	  /*     default: color = 0X1A8FC9; break; //cyan*/
+	  /*   }*/
+	  /**/
+	  /*if (side == 1)*/
+	  /* color /= 2;*/
+	  /**/
+	  /**/
+	  /*   //draw the pixels of the stripe as a vertical line*/
+	  /*   draw_vert_line(mlx, x, 0, drawStart, 0X1A8FC9);*/
+	  /*   draw_vert_line(mlx, x, drawStart, drawEnd, color);*/
+	  /*   draw_vert_line(mlx, x, drawEnd, WIN_WIDTH - 1, 0XB09C17);*/
     }
 	return (0);
 }

@@ -65,6 +65,20 @@ typedef struct	s_player
 	double	planeY;
 }	t_player;
 
+#define TEX_COUNT 4
+
+
+typedef struct s_tex{
+	void	*img;
+	char	*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		llen;
+	int		endian;
+	char	*path;
+}t_tex;
+
 typedef struct s_nfo
 {
 	char		*north_textures_file;
@@ -73,6 +87,7 @@ typedef struct s_nfo
 	char		*east_textures_file;
 	int			floor_colors[COLORS_SIZE];
 	int			ceiling_colors[COLORS_SIZE];
+	t_tex		texs[TEX_COUNT];
 	char		**map;
 	int			map_width;
 	int			map_height;

@@ -29,5 +29,7 @@ int	pars_ceiling_colors(t_map_info **info, char *str);
 int	floor_color(char *line, int *flag, t_map *map_info, t_element **element);
 int	check_path(char *str, char **path);
 int	ceiling_color(char *line, int *flag, t_map *map_info, t_element **element);
+int	load_textures(t_info *info, t_mlx *mlx);
+unsigned int	textures_get_pixel(t_tex *tex, int tx, int ty);
 
 #endif

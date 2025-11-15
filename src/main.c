@@ -93,6 +93,8 @@ int	main(int ac, char **av)
 	/*Initializing the display, window and image attributes*/
 	print_controllers();
 	init(&info, player);
+	if (load_textures(info,&mlx) == FAILURE)
+		return (FAILURE);
 	prog.mlx = &mlx;
 	prog.info = info;
 	mlx_init_display(&mlx);
