@@ -9,7 +9,7 @@ static int	load_single_texture(t_info *info, t_mlx *mlx, t_tex *tex)
 
 	if (info == NULL)
 		return (FAILURE);
-	info->texs[LT_NORTH].img = mlx_xpm_file_to_image(mlx->display,
+	tex->img = mlx_xpm_file_to_image(mlx->display,
 			info->north_textures_file, &w, &h);
 	if (info->texs[LT_NORTH].img == NULL)
 		return (FAILURE);
