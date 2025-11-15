@@ -99,7 +99,7 @@ int render(t_prog *prog)
       //choose wall color
 	  double wallX;
 	  if (side == 0)
-		  wallX = info->player->posY + perpWallDist * rayDirX;
+		  wallX = info->player->posY + perpWallDist * rayDirY;
 	  else
 		  wallX = info->player->posX + perpWallDist * rayDirX;
 	  wallX -= floor(wallX);
@@ -107,11 +107,11 @@ int render(t_prog *prog)
 	  if (side == 0)
 		  tex_idx = (rayDirX > 0) ? LT_WEST: LT_EAST;
 	  else
-		  tex_idx = (rayDirX > 0) ? LT_NORTH: LT_SOUTH;
+		  tex_idx = (rayDirY > 0) ? LT_NORTH: LT_SOUTH;
 	  t_tex *tex = &info->texs[tex_idx];
 	  int	texX = (int)(wallX * (double)(tex->width));
 	  double step = 1.0 * tex->height / (double)lineHeight;
-	  double texPos = (double)(drawStart - (double)WIN_HEIGHT / 2 + (double)lineHeight / 2);
+	  double texPos = (double)(drawStart - (double)WIN_HEIGHT / 2 + (double)lineHeight / 2) * step;
 	  for (int y = drawStart; y < drawEnd; ++y)
 	  {
 		  int texY = (int)texPos;

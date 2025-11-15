@@ -93,13 +93,13 @@ int	main(int ac, char **av)
 	/*Initializing the display, window and image attributes*/
 	print_controllers();
 	init(&info, player);
-	if (load_textures(info,&mlx) == FAILURE)
-		return (FAILURE);
 	prog.mlx = &mlx;
 	prog.info = info;
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
+	if (load_textures(prog.info,prog.mlx) == FAILURE)
+		return (FAILURE);
 	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);
 	
