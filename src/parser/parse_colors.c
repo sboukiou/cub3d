@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:53:50 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 11:43:06 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 14:14:04 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,31 @@ void	fill_map_structure(t_map *map)
 	map->map_index = 0;
 }
 
+int	check_color_path(char *str, char **path)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	i++;
+	while (str[i] == ' ')
+		i++;
+	if (!str[i])
+		return (FAILURE);
+	while (str[i])
+	{
+		while (str[i] && str[i] != ' ')
+		{
+			char_join(path, str[i]);
+			i++;
+		}
+		while (str[i] && str[i] == ' ')
+			i++;
+	}
+	return (SUCCESS);
+}
+
 int	floor_color(char *line, int *flag, t_map *map_info, t_element **element)
 {
 	char	*path;
@@ -36,7 +61,7 @@ int	floor_color(char *line, int *flag, t_map *map_info, t_element **element)
 			map_info->f = true;
 		else
 			return (*flag = 1, SUCCESS);
-		if (check_path(line, &path) == FAILURE)
+		if (check_color_path(line, &path) == FAILURE)
 			return (*flag = 1, SUCCESS);
 		add_node(element, path, C_floor);
 		return (SUCCESS);
@@ -83,7 +108,7 @@ int	ceiling_color(char *line, int *flag, t_map *map_info, t_element **element)
 			map_info->c = true;
 		else
 			return (*flag = 1, SUCCESS);
-		if (check_path(line, &path) == FAILURE)
+		if (check_color_path(line, &path) == FAILURE)
 			return (*flag = 1, SUCCESS);
 		add_node(element, path, C_CEILING);
 		return (SUCCESS);
