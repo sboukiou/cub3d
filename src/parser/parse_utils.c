@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:36 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 11:43:25 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 15:09:27 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,19 @@ int	all_element(t_map map_info)
 	return (SUCCESS);
 }
 
-int	is_empty(char *line)
+int	is_empty(char *line, int track)
 {
 	int	i;
 
 	i = 0;
 	while (line[i] && line[i] == ' ')
 		i++;
-	if (!line[i])
+	if (!line[i] && !track)
 	{
 		ft_putstr_fd("ERROR\nempty line\n", 2);
 		return (SUCCESS);
 	}
+	if (!line[i] && track)
+		return (SUCCESS);
 	return (FAILURE);
 }
