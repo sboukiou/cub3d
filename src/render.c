@@ -4,6 +4,7 @@
 #include "../includes/draw.h"
 #include "../includes/types.h"
 #include "../includes/textures.h"
+#include "../includes/maths.h"
 
 
 int render(t_prog *prog)
@@ -125,22 +126,12 @@ int render(t_prog *prog)
 			  color = ((color >> 1) & 0X7F7F7F);
 		  put_pixel(mlx, x, y , color);
 	  }
-	  /*   int color;*/
-	  /*   switch(info->map[mapY][mapX])*/
-	  /*   {*/
-	  /*     case '1':  color = 0XAA4A44;  break; //red*/
-	  /*     case '0':  color = 0XB09C17;  break; //yellow*/
-	  /*     default: color = 0X1A8FC9; break; //cyan*/
-	  /*   }*/
-	  /**/
-	  /*if (side == 1)*/
-	  /* color /= 2;*/
-	  /**/
-	  /**/
-	  /*   //draw the pixels of the stripe as a vertical line*/
-	  /*   draw_vert_line(mlx, x, 0, drawStart, 0X1A8FC9);*/
-	  /*   draw_vert_line(mlx, x, drawStart, drawEnd, color);*/
-	  /*   draw_vert_line(mlx, x, drawEnd, WIN_WIDTH - 1, 0XB09C17);*/
+	  unsigned int floor = rgb_merge(info->floor_colors[0],
+			  info->floor_colors[1], info->floor_colors[2]);
+	  unsigned int ceiling = rgb_merge(info->ceiling_colors[0],
+			  info->ceiling_colors[1], info->ceiling_colors[2]);
+	     draw_vert_line(mlx, x, 0, drawStart, ceiling);
+	     draw_vert_line(mlx, x, drawEnd, WIN_WIDTH - 1, floor);
     }
 	return (0);
 }
