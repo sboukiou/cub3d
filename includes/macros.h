@@ -61,6 +61,12 @@
 # define ERR_MLX_WIN "Could not create mlx window"
 # define ERR_MLX_IMG "Could not create mlx image"
 
+# define LT_NORTH  0
+# define LT_SOUTH  1
+# define LT_WEST   2
+# define LT_EAST   3
+# define LT_COUNT  4
+
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
 	exit(EXIT_FAILURE);

@@ -98,6 +98,8 @@ int	main(int ac, char **av)
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
+	if (load_textures(prog.info,prog.mlx) == FAILURE)
+		return (FAILURE);
 	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);
 	
