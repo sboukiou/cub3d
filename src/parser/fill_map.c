@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:36:22 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 16:48:14 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 15:08:15 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	pars_0(char *line, char **arr, int flag, int i)
 
 int	pars_empty_line(int *i, char *line)
 {
-	if (is_empty(line) == SUCCESS)
+	if (is_empty(line, 0) == SUCCESS)
 		return (FAILURE);
 	while (line[*i] == ' ')
 		(*i)++;

@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 06:32:12 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 17:28:38 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 15:08:00 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	pars_empty_line(int *i, char *line);
 int	count_comma(char *str);
 char	*strcpy_nl(char *str);
 int	all_element(t_map map_info);
-int	is_empty(char *line);
+int	is_empty(char *line, int track);
 char	*strcpy_nl(char *str);
 void	add_node(t_element **lst, char *content, t_type type);
 t_map_info	*creat_node_info(t_element *element);

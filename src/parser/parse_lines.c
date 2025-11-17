@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:55:01 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 17:03:53 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 15:21:10 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	first_line(char *line, int flag)
 	int	i;
 
 	i = 0;
-	if (is_empty(line) == SUCCESS)
+	if (is_empty(line, 0) == SUCCESS)
 		return (FAILURE);
 	while (line[i] && (line[i] == ' ' || line[i] == '1'))
 		i++;
@@ -90,6 +90,8 @@ int	pars_lines(char **map, t_map *map_info, int *i)
 	while (map[*i])
 	{
 		map_info->i = *i;
+		if (is_empty(map[*i], 1) == SUCCESS)
+			return (SUCCESS);
 		if (pars_line(map[*i], flag, map_info, map) == FAILURE)
 			return (FAILURE);
 		(*i)++;

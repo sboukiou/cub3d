@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/04 14:17:28 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/11/16 15:22:11 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,18 @@ int	is_valid_map(char **map, t_map_info **info, t_map *map_info)
 	map_info->map_index = i;
 	if (pars_lines(map, map_info, &i) == FAILURE)
 		return (FAILURE);
-	if (!map[i])
+	if (!map[i] || is_empty(map[i], 1) == SUCCESS)
 		i--;
 	map_info->i = i;
 	if (pars_line(map[i], -1, map_info, map) == FAILURE)
 		return (FAILURE);
+	i++;
+	while (map[i] && is_empty(map[i], 1) == SUCCESS)
+		i++;
+	if (map[i])
+		return (ft_putstr_fd("ERROR\nThe end of map must be a composed of '1' and ' '\n", 2), FAILURE);
 	if (!map_info->player)
-	{
-		ft_putstr_fd("ERROR\nplayer position is necessary\n", 2);
-		return (FAILURE);
-	}
+		return (ft_putstr_fd("ERROR\nplayer position is necessary\n", 2), FAILURE);
 	*info = creat_node_info(element);
 	return (SUCCESS);
 }
