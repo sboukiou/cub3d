@@ -72,10 +72,11 @@ void init(t_info **info, t_player *player)
 int	main(int ac, char **av)
 {
 	t_map_info	*parse;
-	t_info	*info;
-	t_mlx	mlx;
+	t_info		*info;
+	t_mlx		mlx;
 	t_player	*player;
-	t_prog	prog;
+	t_prog		prog;
+	t_assets	assets;
 
 	player = malloc(sizeof(t_player));
 	parse = NULL;
@@ -95,6 +96,7 @@ int	main(int ac, char **av)
 	init(&info, player);
 	prog.mlx = &mlx;
 	prog.info = info;
+	prog.assets = &assets;
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
