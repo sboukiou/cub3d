@@ -119,14 +119,47 @@ typedef struct s_mlx
 	void		*player_image;
 }	t_mlx;
 
+
+typedef struct	s_assets
+{
+	double			cameraX;
+	double			rayDirX;
+	double			rayDirY;
+	int				mapX;
+	int				mapY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int				side;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	double			wallX;
+	int				texIdx;
+	int				teX;
+	int				teY;
+	double			step;
+	double			texPos;
+	unsigned int	color;
+	unsigned int	floor;
+	unsigned int	ceiling;
+}	t_assets;
+
+
 /**
  * Full Program strcture, holding data for
  * both the map and the mlx information.
  */
 typedef struct s_prog
 {
-	t_mlx	*mlx;
-	t_info	*info;
+	t_mlx		*mlx;
+	t_info		*info;
+	t_assets	*assets;
 }	t_prog;
 
 

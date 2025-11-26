@@ -10,4 +10,5 @@ int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int 
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
 int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color);
 int render(t_prog *prog);
+void	cast_ray(t_prog *prog);
 #endif
