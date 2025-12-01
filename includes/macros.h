@@ -68,6 +68,15 @@
 # define LT_DOOR   4
 # define LT_COUNT  5
 
+#define TEX_COUNT 5
+#define STAND_FRAMES 1
+#define STAND 0
+#define ATTACK 1
+#define RUN 2
+#define ATTACK_FRAMES 20
+#define RUN_FRAMES 15
+#define ANIM_DELAY 2
+
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
 	exit(EXIT_FAILURE);

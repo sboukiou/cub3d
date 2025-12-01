@@ -65,9 +65,6 @@ typedef struct	s_player
 	double	planeY;
 }	t_player;
 
-#define TEX_COUNT 5
-
-
 typedef struct s_tex{
 	void	*img;
 	char	*data;
@@ -78,6 +75,14 @@ typedef struct s_tex{
 	int		endian;
 	char	*path;
 }t_tex;
+
+typedef struct s_anim
+{
+	t_tex	*frames;
+	int		frame_count;
+	int		current_frame;
+	int		delay_counter;
+}	t_anim;
 
 typedef struct s_nfo
 {
@@ -161,6 +166,12 @@ typedef struct s_prog
 	t_mlx		*mlx;
 	t_info		*info;
 	t_assets	*assets;
+	t_anim		stand_anim;
+	t_anim		attack_anim;
+	t_anim		run_anim;
+	bool		is_attacking;
+	bool		is_running;
+	bool		keys[65536];
 }	t_prog;
 
 
