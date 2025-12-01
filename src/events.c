@@ -9,74 +9,74 @@
 	* @Return: 0 , Or quit berfore if it's ESC
 	*/
 
-int track_door(t_door *door, int p_x, int p_y, int n_d, int *d_pos)
-{
-	for (int i = 0; i < n_d; i++)
-	{
-		if (door[i].x == p_x && door[i].y == p_y)
-			return (*d_pos = i, 1);
-	}
-	return (0);
-}
+// int track_door(t_door *door, int p_x, int p_y, int n_d, int *d_pos)
+// {
+// 	for (int i = 0; i < n_d; i++)
+// 	{
+// 		if (door[i].x == p_x && door[i].y == p_y)
+// 			return (*d_pos = i, 1);
+// 	}
+// 	return (0);
+// }
 
-void open_door(char **map, t_door **door, int p_x, int p_y, int n_d)
-{
-	int d_pos;
+// void open_door(char **map, t_door **door, int p_x, int p_y, int n_d)
+// {
+// 	int d_pos;
 
-	d_pos = -1;
-	if (track_door(*door, p_x + 1, p_y, n_d, &d_pos))
-	{
-		if ((*door)[d_pos].is_open)
-		{
-			(*door)[d_pos].is_open = false;
-			map[p_y][p_x + 1] = 'D';
-		}
-		else
-		{
-			(*door)[d_pos].is_open = true;
-			map[p_y][p_x + 1] = '0';
-		}
-	}
-	else if (track_door(*door, p_x - 1, p_y, n_d, &d_pos))
-	{
-		if ((*door)[d_pos].is_open)
-		{
-			(*door)[d_pos].is_open = false;
-			map[p_y][p_x - 1] = 'D';
-		}
-		else
-		{
-			(*door)[d_pos].is_open = true;
-			map[p_y][p_x - 1] = '0';
-		}
-	}	
-	else if (track_door(*door, p_x, p_y + 1, n_d, &d_pos))
-	{
-		if ((*door)[d_pos].is_open)
-		{
-			(*door)[d_pos].is_open = false;
-			map[p_y + 1][p_x] = 'D';
-		}
-		else
-		{
-			(*door)[d_pos].is_open = true;
-			map[p_y + 1][p_x] = '0';
-		}
-	}	
-	else if (track_door(*door, p_x, p_y - 1, n_d, &d_pos))
-	{
-		if ((*door)[d_pos].is_open)
-		{
-			(*door)[d_pos].is_open = false;
-			map[p_y - 1][p_x] = 'D';
-		}
-		else
-		{
-			(*door)[d_pos].is_open = true;
-			map[p_y - 1][p_x] = '0';
-		}
-	}
-}
+// 	d_pos = -1;
+// 	if (track_door(*door, p_x + 1, p_y, n_d, &d_pos))
+// 	{
+// 		if ((*door)[d_pos].is_open)
+// 		{
+// 			(*door)[d_pos].is_open = false;
+// 			map[p_y][p_x + 1] = 'D';
+// 		}
+// 		else
+// 		{
+// 			(*door)[d_pos].is_open = true;
+// 			map[p_y][p_x + 1] = '0';
+// 		}
+// 	}
+// 	else if (track_door(*door, p_x - 1, p_y, n_d, &d_pos))
+// 	{
+// 		if ((*door)[d_pos].is_open)
+// 		{
+// 			(*door)[d_pos].is_open = false;
+// 			map[p_y][p_x - 1] = 'D';
+// 		}
+// 		else
+// 		{
+// 			(*door)[d_pos].is_open = true;
+// 			map[p_y][p_x - 1] = '0';
+// 		}
+// 	}	
+// 	else if (track_door(*door, p_x, p_y + 1, n_d, &d_pos))
+// 	{
+// 		if ((*door)[d_pos].is_open)
+// 		{
+// 			(*door)[d_pos].is_open = false;
+// 			map[p_y + 1][p_x] = 'D';
+// 		}
+// 		else
+// 		{
+// 			(*door)[d_pos].is_open = true;
+// 			map[p_y + 1][p_x] = '0';
+// 		}	
+// 	}	
+// 	else if (track_door(*door, p_x, p_y - 1, n_d, &d_pos))
+// 	{
+// 		if ((*door)[d_pos].is_open)
+// 		{
+// 			(*door)[d_pos].is_open = false;
+// 			map[p_y - 1][p_x] = 'D';
+// 		}
+// 		else
+// 		{
+// 			(*door)[d_pos].is_open = true;
+// 			map[p_y - 1][p_x] = '0';
+// 		}
+// 	}
+// }
 
 void	destroy_program(t_prog *prog)
 {
@@ -175,7 +175,6 @@ void	move_player(t_prog *prog, int key_code)
       player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
       player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
     }
-	
 }
 
 int	handle_key(int key_code, t_prog *prog)

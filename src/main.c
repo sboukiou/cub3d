@@ -37,6 +37,7 @@ void init(t_info **info, t_player *player)
 	char c;
 
 	c = 0;
+	(*info)->door_textures_file = "textures/door.xpm";
 	get_player_position((*info)->map, &player->posX, &player->posY, &c);
 	if (c == 'N')  // North = UP on screen = negative Y direction
 	{
