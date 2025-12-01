@@ -24,8 +24,8 @@
 # define FAIL -1
 # define ESCAPE 65307
 /*Defining Window demensions*/
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 576
+# define WIN_WIDTH 1080
 /*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4
@@ -65,7 +65,8 @@
 # define LT_SOUTH  1
 # define LT_WEST   2
 # define LT_EAST   3
-# define LT_COUNT  4
+# define LT_DOOR   4
+# define LT_COUNT  5
 
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\

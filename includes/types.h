@@ -65,7 +65,7 @@ typedef struct	s_player
 	double	planeY;
 }	t_player;
 
-#define TEX_COUNT 4
+#define TEX_COUNT 5
 
 
 typedef struct s_tex{
@@ -85,6 +85,7 @@ typedef struct s_nfo
 	char		*south_textures_file;
 	char		*west_textures_file;
 	char		*east_textures_file;
+	char		*door_textures_file;
 	int			floor_colors[COLORS_SIZE];
 	int			ceiling_colors[COLORS_SIZE];
 	t_tex		texs[TEX_COUNT];
