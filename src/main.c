@@ -15,6 +15,7 @@
 #include "../includes/init.h"
 #include "../includes/game.h"
 #include "../includes/colors.h"
+#include "../includes/animation.h"
 
 static void	print_controllers(void)
 {
@@ -98,10 +99,14 @@ int	main(int ac, char **av)
 	prog.mlx = &mlx;
 	prog.info = info;
 	prog.assets = &assets;
+	prog.is_attacking = false;
+	prog.is_running = false;
+	ft_bzero(prog.keys, sizeof(prog.keys));
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
-	if (load_textures(prog.info,prog.mlx) == FAILURE)
+	if (load_textures(prog.info,prog.mlx) == FAILURE || load_stand_animation(&prog) == FAILURE 
+			|| load_attack_animation(&prog) == FAILURE || load_run_animation(&prog) == FAILURE)
 		return (FAILURE);
 	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);

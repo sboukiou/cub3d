@@ -2,6 +2,7 @@
 #include "../includes/macros.h"
  #include "../includes/game.h" 
 #include "../includes/types.h"
+#include "../includes/animation.h"
 /**
 	* handle_key - Check if a given key is the escape
 	* @key_code: The number corresponding to the key
@@ -100,97 +101,88 @@ void	destroy_program(t_prog *prog)
 	exit(0);
 }
 
-void	move_player(t_prog *prog, int key_code)
+void	move_player(t_prog *prog)
 {
-	t_mlx	*mlx;
-	t_info	*info;
-	t_player *player;
-	int		px;
-	int		py;
-	double	moveSpeed = 0.1;
-	double	rotSpeed = 0.03;
+	t_info		*info;
+	t_player	*player;
+	double		moveSpeed;
+	double		rotSpeed;
 
+	moveSpeed = 0.05;
+	rotSpeed = 0.03;
 	info = prog->info;
-	px = info->player->posX;
-	py = info->player->posY;
-	mlx = prog->mlx;
 	player = info->player;
-	/*Handle moving directions*/
-    if(key_code == XK_w)
-    {
-		if(info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)]
-				!= '1')
+	if (prog->keys[XK_w])
+	{
+		if (info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != '1')
 			player->posX += player->dirX * moveSpeed;
-		if(info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX]
-				!= '1')
+		if (info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != '1')
 			player->posY += player->dirY * moveSpeed;
-    }
-    //move backwards if no wall behind you
-    if(key_code == XK_s)
-    {
-      if(info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)]
-			  != '1')
-		  player->posX -= player->dirX * moveSpeed;
-      if(info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX]
-			  != '1')
-		  player->posY -= player->dirY * moveSpeed;
-    }
-    if(key_code == XK_d)
-    {
-      if(info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)]
-			  != '1')
-		  player->posX -= player->dirY * moveSpeed;
-      if(info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX]
-			  != '1')
-		  player->posY += player->dirX * moveSpeed;
-    }
-    if(key_code == XK_a)
-    {
-      if(info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)]
-			  != '1')
-		  player->posX += player->dirY * moveSpeed;
-      if(info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX]
-			  != '1')
-		  player->posY -= player->dirX * moveSpeed;
-    }
-    //rotate to the right
-    if(key_code == XK_Right)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = player->dirX;
-      player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
-      player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
-      double oldPlaneX = player->planeX;
-      player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
-      player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
-    }
-    //rotate to the left
-    if(key_code == XK_Left)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = player->dirX;
-      player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-      player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
-      double oldPlaneX = player->planeX;
-      player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
-      player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
-    }
+	}
+	if (prog->keys[XK_s])
+	{
+		if (info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != '1')
+			player->posX -= player->dirX * moveSpeed;
+		if (info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != '1')
+			player->posY -= player->dirY * moveSpeed;
+	}
+	if (prog->keys[XK_d])
+	{
+		if (info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != '1')
+			player->posX -= player->dirY * moveSpeed;
+		if (info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != '1')
+			player->posY += player->dirX * moveSpeed;
+	}
+	if (prog->keys[XK_a])
+	{
+		if (info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != '1')
+			player->posX += player->dirY * moveSpeed;
+		if (info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != '1')
+			player->posY -= player->dirX * moveSpeed;
+	}
+	if (prog->keys[XK_Right])
+	{
+		double oldDirX = player->dirX;
+		player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
+		player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
+		double oldPlaneX = player->planeX;
+		player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
+		player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+	}
+	if (prog->keys[XK_Left])
+	{
+		double oldDirX = player->dirX;
+		player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
+		player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
+		double oldPlaneX = player->planeX;
+		player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
+		player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
+	}
 }
 
-int	handle_key(int key_code, t_prog *prog)
+int	handle_key_press(int key_code, t_prog *prog)
 {
-	t_mlx	*mlx;
-	t_info	*info;
-
 	if (prog == NULL)
 		return (FAILURE);
-	mlx = prog->mlx;
-	info = prog->info;
 	if (key_code == ESCAPE)
 		destroy_program(prog);
-	else
-		move_player(prog, key_code);
-	game_layout(prog);
+	if (key_code >= 0 && key_code < 65536)
+		prog->keys[key_code] = true;
+	if (key_code == KEY_E && !prog->is_attacking)
+	{
+		prog->is_attacking = true;
+		prog->attack_anim.current_frame = 0;
+		prog->attack_anim.delay_counter = 0;
+	}
+	return (0);
+}
+
+int	handle_key_release(int key_code, t_prog *prog)
+{
+	if (prog == NULL)
+		return (FAILURE);
+	if (key_code >= 0 && key_code < 65536)
+		prog->keys[key_code] = false;
 	return (0);
 }
 
