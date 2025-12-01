@@ -108,8 +108,8 @@ void	move_player(t_prog *prog)
 	double		moveSpeed;
 	double		rotSpeed;
 
-	moveSpeed = 0.05;
-	rotSpeed = 0.03;
+	moveSpeed = 0.02;
+	rotSpeed = 0.01;
 	info = prog->info;
 	player = info->player;
 	if (prog->keys[XK_w])

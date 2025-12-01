@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/12 16:11:47 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/01 18:56:54 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@
 #define RUN 2
 #define ATTACK_FRAMES 20
 #define RUN_FRAMES 15
-#define ANIM_DELAY 2
+#define ANIM_DELAY 4
 
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
