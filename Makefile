@@ -41,9 +41,10 @@ $(TEST_OUT_NAME): $(TESTS_OBJ_FILES)
 test: $(TEST_OUT_NAME)
 
 clean:
-	$(RM) $(BUILD_DIR)
+	$(RM) $(BUILD_DIR)/*.o
 
 fclean: clean
+	$(RM) $(BUILD_DIR)/*.a
 	$(RM) $(BIN_DIR)
 
 re: fclean all
