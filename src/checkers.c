@@ -1,5 +1,6 @@
 #include "../includes/types.h"
-bool	is_prog_valid(t_prog *prog)
+
+bool	isProgValid(t_prog *prog)
 {
 	if (prog == NULL)
 		return (false);

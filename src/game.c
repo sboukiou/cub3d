@@ -4,13 +4,11 @@
 #include "../includes/checkers.h"
 #include "../includes/draw.h"
 
-
-
 int	game_layout(t_prog *prog)
 {
 	t_mlx	*mlx;
 	t_info	*info;
-	if (is_prog_valid(prog) == false)
+	if (isProgValid(prog) == false)
 		return (FAILURE);
 	mlx = prog->mlx;
 	info = prog->info;
