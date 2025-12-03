@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/01 18:56:54 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:46:50 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define MINIMAP_SIZE_SCALE 10
 # define TRUE 1
 # define KEY_E 101
+# define KEY_F 102
 # define FALSE 0
 # define FAIL -1
 # define ESCAPE 65307

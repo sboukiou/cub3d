@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/15 16:51:02 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:25:18 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct s_prog
 	t_mlx		*mlx;
 	t_info		*info;
 	t_assets	*assets;
+	t_player	*player;
 	t_anim		stand_anim;
 	t_anim		attack_anim;
 	t_anim		run_anim;
