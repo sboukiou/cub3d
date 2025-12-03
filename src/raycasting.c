@@ -81,6 +81,8 @@ void	performeDDA(t_prog *prog)
 		}
 		if(info->map[assets->mapY][assets->mapX] == '1')
 			assets->hit = 1;
+		if(info->map[assets->mapY][assets->mapX] == 'D')
+			assets->hit = 2;
 	}
 	if(assets->side == 0)
 		assets->perpWallDist = (assets->sideDistX - assets->deltaDistX);
@@ -113,4 +115,6 @@ void	calculateVertLine(t_prog *prog)
 		assets->texIdx = (assets->rayDirX > 0) ? LT_WEST: LT_EAST;
 	else
 		assets->texIdx = (assets->rayDirY > 0) ? LT_NORTH: LT_SOUTH;
+	if (assets->hit == 2)
+		assets->texIdx = LT_DOOR;
 }

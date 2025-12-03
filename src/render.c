@@ -16,6 +16,7 @@
 #include "../includes/types.h"
 #include "../includes/textures.h"
 #include "../includes/maths.h"
+#include "../includes/animation.h"
 
 
 static void	placeTextures(t_prog *prog, int currentColumn)
@@ -55,23 +56,23 @@ static void	drawFloorCeiling(t_prog *prog, int currentColumn)
 	info = prog->info;
 	assets = prog->assets;
 	mlx = prog->mlx;
-	  assets->floor = rgb_merge(info->floor_colors[0],
-			  info->floor_colors[1], info->floor_colors[2]);
-	  assets->ceiling = rgb_merge(info->ceiling_colors[0],
-			  info->ceiling_colors[1], info->ceiling_colors[2]);
-	     draw_vert_line(mlx, currentColumn, 0, assets->drawStart, assets->ceiling);
-	     draw_vert_line(mlx, currentColumn, assets->drawEnd, WIN_WIDTH - 1, assets->floor);
+	assets->floor = rgb_merge(info->floor_colors[0],
+			info->floor_colors[1], info->floor_colors[2]);
+	assets->ceiling = rgb_merge(info->ceiling_colors[0],
+			info->ceiling_colors[1], info->ceiling_colors[2]);
+	draw_vert_line(mlx, currentColumn, 0, assets->drawStart, assets->ceiling);
+	draw_vert_line(mlx, currentColumn, assets->drawEnd, WIN_WIDTH - 1, assets->floor);
 }
 
 int render(t_prog *prog)
 {
-  t_mlx		*mlx;
-  t_info	*info;
+	t_mlx		*mlx;
+	t_info	*info;
 
-  mlx = prog->mlx;
-  info = prog->info;
-  for (int x = 0; x < WIN_WIDTH; x += 1)
-  {
+	mlx = prog->mlx;
+	info = prog->info;
+	for (int x = 0; x < WIN_WIDTH; x += 1)
+	{
 		ft_bzero(prog->assets, sizeof(*prog->assets));
 		calculateRayPostion(prog, x);
 		settingSteps(prog);
@@ -79,7 +80,19 @@ int render(t_prog *prog)
 		calculateVertLine(prog);
 		placeTextures(prog, x);
 		drawFloorCeiling(prog, x);
-  }
-  cast_ray(prog);
+	}
+	prog->is_running = (prog->keys[XK_w] || prog->keys[XK_a] 
+			|| prog->keys[XK_s] || prog->keys[XK_d]);
+	if (prog->is_attacking)
+	{
+		render_animation(prog, 0, 0, ATTACK);
+		if (prog->attack_anim.current_frame == 0 && prog->attack_anim.delay_counter == 0)
+			prog->is_attacking = false;
+	}
+	else if (prog->is_running)
+		render_animation(prog, 0, 0, RUN);
+	else
+		render_animation(prog, 0, 0, STAND);
+	cast_ray(prog);
 	return (0);
 }

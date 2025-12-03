@@ -2,17 +2,28 @@
 #include "../includes/macros.h"
 #include "../lib/mlx_linux/mlx.h"
 
-static int	load_single_texture(t_info *info, t_mlx *mlx, t_tex *tex)
+static int	load_single_texture(t_info *info, t_mlx *mlx, t_tex *tex, int texture_type)
 {
 	int	w;
 	int	h;
 
 	if (info == NULL)
 		return (FAILURE);
-	tex->img = mlx_xpm_file_to_image(mlx->display,
-			info->north_textures_file, &w, &h);
-	if (info->texs[LT_NORTH].img == NULL)
+	if (texture_type == LT_NORTH)
+			tex->img = mlx_xpm_file_to_image(mlx->display, info->north_textures_file, &w, &h);
+	else if (texture_type == LT_SOUTH)
+			tex->img = mlx_xpm_file_to_image(mlx->display, info->south_textures_file, &w, &h);
+	else if (texture_type == LT_WEST)
+			tex->img = mlx_xpm_file_to_image(mlx->display, info->west_textures_file, &w, &h);
+	else if (texture_type == LT_EAST)
+			tex->img = mlx_xpm_file_to_image(mlx->display, info->east_textures_file, &w, &h);
+	else if (texture_type == LT_DOOR)
+			tex->img = mlx_xpm_file_to_image(mlx->display, info->door_textures_file, &w, &h);
+	if (tex->img == NULL)
+	{
+		printf("Error: Could not load texture file for type %d\n", texture_type);
 		return (FAILURE);
+	}
 	tex->data = mlx_get_data_addr(tex->img,
 			&tex->bpp, &tex->llen, &tex->endian);
 	tex->width = w;
@@ -24,14 +35,16 @@ int	load_textures(t_info *info, t_mlx *mlx)
 {
 	if (info == NULL || mlx == NULL)
 		return (FAILURE);
-	if (load_single_texture(info, mlx, &info->texs[LT_NORTH]) == FAILURE)
+	if (load_single_texture(info, mlx, &info->texs[LT_NORTH], LT_NORTH) == FAILURE)
 		return (FAILURE);
-	if (load_single_texture(info, mlx, &info->texs[LT_SOUTH]) == FAILURE)
+	if (load_single_texture(info, mlx, &info->texs[LT_SOUTH], LT_SOUTH) == FAILURE)
 		return (FAILURE);
-	if (load_single_texture(info, mlx, &info->texs[LT_WEST]) == FAILURE)
+	if (load_single_texture(info, mlx, &info->texs[LT_WEST], LT_WEST) == FAILURE)
 		return (FAILURE);
-	if (load_single_texture(info, mlx, &info->texs[LT_EAST]) == FAILURE)
+	if (load_single_texture(info, mlx, &info->texs[LT_EAST], LT_EAST) == FAILURE)
 		return (FAILURE);
+	if (load_single_texture(info, mlx, &info->texs[LT_DOOR], LT_DOOR) == FAILURE)
+			return (FAILURE);
 	return (SUCCESS);
 }
 

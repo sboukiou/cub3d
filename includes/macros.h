@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/12 16:11:47 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:46:50 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # define MINIMAP_SIZE_SCALE 10
 # define TRUE 1
 # define KEY_E 101
+# define KEY_F 102
 # define FALSE 0
 # define FAIL -1
 # define ESCAPE 65307
 /*Defining Window demensions*/
-# define WIN_HEIGHT 1080
-# define WIN_WIDTH 1920
+# define WIN_HEIGHT 576
+# define WIN_WIDTH 1080
 /*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4
@@ -65,7 +66,17 @@
 # define LT_SOUTH  1
 # define LT_WEST   2
 # define LT_EAST   3
-# define LT_COUNT  4
+# define LT_DOOR   4
+# define LT_COUNT  5
+
+#define TEX_COUNT 5
+#define STAND_FRAMES 1
+#define STAND 0
+#define ATTACK 1
+#define RUN 2
+#define ATTACK_FRAMES 20
+#define RUN_FRAMES 15
+#define ANIM_DELAY 4
 
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\

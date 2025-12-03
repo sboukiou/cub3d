@@ -4,8 +4,8 @@
 
 CC=cc
 RM=rm -rf
-CFLAGS=-Wall -Werror -Wextra -Ilib/mlx_linux -c
-LFLAGS=-lX11 -lXext -lm -lz -L./build -lmlx -L./build -lft
+CFLAGS=-Ilib/mlx_linux -c
+LFLAGS=-L./build -lmlx -lft -lX11 -lXext -lm -lz
 NAME=bin/cub3D
 TEST_OUT_NAME=bin/test
 BUILD_DIR=build
@@ -41,9 +41,10 @@ $(TEST_OUT_NAME): $(TESTS_OBJ_FILES)
 test: $(TEST_OUT_NAME)
 
 clean:
-	$(RM) $(BUILD_DIR)
+	$(RM) $(BUILD_DIR)/*.o
 
 fclean: clean
+	$(RM) $(BUILD_DIR)/*.a
 	$(RM) $(BIN_DIR)
 
 re: fclean all

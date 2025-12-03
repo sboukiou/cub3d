@@ -42,3 +42,9 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 				put_pixel(mlx, j, i, color);
 	return (true);
 }
+
+void	cast_ray(t_prog *prog)
+{
+	(void)prog;
+	// TODO: Implement cast_ray for minimap or other visualization
+}

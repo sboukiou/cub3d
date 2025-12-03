@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/04 14:36:07 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:29:47 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/init.h"
 #include "../includes/game.h"
 #include "../includes/colors.h"
+#include "../includes/animation.h"
 
 static void	print_controllers(void)
 {
@@ -37,6 +38,7 @@ void init(t_info **info, t_player *player)
 	char c;
 
 	c = 0;
+	(*info)->door_textures_file = "textures/door.xpm";
 	get_player_position((*info)->map, &player->posX, &player->posY, &c);
 	if (c == 'N')  // North = UP on screen = negative Y direction
 	{
@@ -97,10 +99,15 @@ int	main(int ac, char **av)
 	prog.mlx = &mlx;
 	prog.info = info;
 	prog.assets = &assets;
+	prog.is_attacking = false;
+	prog.is_running = false;
+	prog.player = player;
+	ft_bzero(prog.keys, sizeof(prog.keys));
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
-	if (load_textures(prog.info,prog.mlx) == FAILURE)
+	if (load_textures(prog.info,prog.mlx) == FAILURE || load_stand_animation(&prog) == FAILURE 
+			|| load_attack_animation(&prog) == FAILURE || load_run_animation(&prog) == FAILURE)
 		return (FAILURE);
 	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);

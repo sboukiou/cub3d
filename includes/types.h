@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/15 16:51:02 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:54:15 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,6 @@ typedef struct s_map
 	int map_index;
 }				t_map;
 
-typedef struct s_door
-{
-	int x;
-	int y;
-	bool is_open;
-}		t_door;
-
 typedef struct s_element
 {
 	char *content;
@@ -65,9 +58,6 @@ typedef struct	s_player
 	double	planeY;
 }	t_player;
 
-#define TEX_COUNT 4
-
-
 typedef struct s_tex{
 	void	*img;
 	char	*data;
@@ -79,20 +69,27 @@ typedef struct s_tex{
 	char	*path;
 }t_tex;
 
+typedef struct s_anim
+{
+	t_tex	*frames;
+	int		frame_count;
+	int		current_frame;
+	int		delay_counter;
+}	t_anim;
+
 typedef struct s_nfo
 {
 	char		*north_textures_file;
 	char		*south_textures_file;
 	char		*west_textures_file;
 	char		*east_textures_file;
+	char		*door_textures_file;
 	int			floor_colors[COLORS_SIZE];
 	int			ceiling_colors[COLORS_SIZE];
 	t_tex		texs[TEX_COUNT];
 	char		**map;
 	int			map_width;
 	int			map_height;
-	t_door		*door;
-	int			n_doors;
 	t_player	*player;
 }	t_info;
 
@@ -160,6 +157,13 @@ typedef struct s_prog
 	t_mlx		*mlx;
 	t_info		*info;
 	t_assets	*assets;
+	t_player	*player;
+	t_anim		stand_anim;
+	t_anim		attack_anim;
+	t_anim		run_anim;
+	bool		is_attacking;
+	bool		is_running;
+	bool		keys[65536];
 }	t_prog;
 
 
