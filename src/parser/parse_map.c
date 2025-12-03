@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/16 15:22:11 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:54:44 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 	while ((*final_info)->map[(*final_info)->map_height])
 		(*final_info)->map_height++;
 	(*final_info)->map_width = get_width((*final_info)->map);
-	(*final_info)->door = creat_doors((*final_info)->map, &(*final_info)->n_doors);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/15 16:51:02 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:54:15 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ typedef struct s_map
 	int i;
 	int map_index;
 }				t_map;
-
-typedef struct s_door
-{
-	int x;
-	int y;
-	bool is_open;
-}		t_door;
 
 typedef struct s_element
 {
@@ -97,8 +90,6 @@ typedef struct s_nfo
 	char		**map;
 	int			map_width;
 	int			map_height;
-	t_door		*door;
-	int			n_doors;
 	t_player	*player;
 }	t_info;
 
@@ -166,6 +157,7 @@ typedef struct s_prog
 	t_mlx		*mlx;
 	t_info		*info;
 	t_assets	*assets;
+	t_player	*player;
 	t_anim		stand_anim;
 	t_anim		attack_anim;
 	t_anim		run_anim;
