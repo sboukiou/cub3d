@@ -109,35 +109,35 @@ void	move_player(t_prog *prog)
 	double		rotSpeed;
 
 	moveSpeed = 0.02;
-	rotSpeed = 0.01;
+	rotSpeed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (prog->keys[XK_w])
 	{
-		if (info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != '1')
+		if (info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != '1' && info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != 'D')
 			player->posX += player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != '1')
+		if (info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != 'D')
 			player->posY += player->dirY * moveSpeed;
 	}
 	if (prog->keys[XK_s])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != '1')
+		if (info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != 'D')
 			player->posX -= player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != '1')
+		if (info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != 'D')
 			player->posY -= player->dirY * moveSpeed;
 	}
 	if (prog->keys[XK_d])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != '1')
+		if (info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != 'D')
 			player->posX -= player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != '1')
+		if (info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != 'D')
 			player->posY += player->dirX * moveSpeed;
 	}
 	if (prog->keys[XK_a])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != '1')
+		if (info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != 'D')
 			player->posX += player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != '1')
+		if (info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != 'D')
 			player->posY -= player->dirX * moveSpeed;
 	}
 	if (prog->keys[XK_Right])
@@ -168,11 +168,20 @@ int	handle_key_press(int key_code, t_prog *prog)
 		destroy_program(prog);
 	if (key_code >= 0 && key_code < 65536)
 		prog->keys[key_code] = true;
-	if (key_code == KEY_E && !prog->is_attacking)
+	if (key_code == KEY_F && !prog->is_attacking)
 	{
 		prog->is_attacking = true;
 		prog->attack_anim.current_frame = 0;
 		prog->attack_anim.delay_counter = 0;
+	}
+	if (key_code == KEY_E)
+	{
+		int y = prog->player->posY + prog->player->dirY * 1.5;
+		int x = prog->player->posX + prog->player->dirX * 1.5;
+		if (prog->info->map[y][x] == 'D')
+			prog->info->map[y][x] = 'd';
+		else if (prog->info->map[y][x] == 'd')
+			prog->info->map[y][x] = 'D';
 	}
 	return (0);
 }

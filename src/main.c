@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/04 14:36:07 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/03 16:29:47 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	main(int ac, char **av)
 	prog.assets = &assets;
 	prog.is_attacking = false;
 	prog.is_running = false;
+	prog.player = player;
 	ft_bzero(prog.keys, sizeof(prog.keys));
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
