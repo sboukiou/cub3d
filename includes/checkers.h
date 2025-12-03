@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-bool	is_prog_valid(t_prog *prog);
+bool	isProgValid(t_prog *prog);
 
 #endif

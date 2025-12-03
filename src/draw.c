@@ -1,6 +1,4 @@
-#include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
- #include "../includes/minimap_utils.h" 
 #include "../includes/types.h"
 
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
@@ -30,7 +28,6 @@ int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
 	return (SUCCESS);
 }
 
-
 bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 {
 	if (mlx == NULL)
@@ -38,13 +35,7 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 
 	for (int i = y; i < y + size; i++)
 		for (int j = x; j < x + size; j++)
-			if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)
-				put_pixel(mlx, j, i, color);
+			/*if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)*/
+			put_pixel(mlx, j, i, color);
 	return (true);
-}
-
-void	cast_ray(t_prog *prog)
-{
-	(void)prog;
-	// TODO: Implement cast_ray for minimap or other visualization
 }

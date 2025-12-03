@@ -1,14 +1,6 @@
 #include "../lib/mlx_linux/mlx.h"
 #include "../includes/macros.h"
- #include "../includes/game.h" 
 #include "../includes/types.h"
-#include "../includes/animation.h"
-/**
-	* handle_key - Check if a given key is the escape
-	* @key_code: The number corresponding to the key
-	* @data: Info about the mlx and mlx_window ptrs
-	* @Return: 0 , Or quit berfore if it's ESC
-	*/
 
 void	destroy_program(t_prog *prog)
 {

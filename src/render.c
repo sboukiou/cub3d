@@ -17,6 +17,7 @@
 #include "../includes/textures.h"
 #include "../includes/maths.h"
 #include "../includes/animation.h"
+#include "../includes/minimap.h"
 
 
 static void	placeTextures(t_prog *prog, int currentColumn)
@@ -93,6 +94,7 @@ int render(t_prog *prog)
 		render_animation(prog, 0, 0, RUN);
 	else
 		render_animation(prog, 0, 0, STAND);
-	cast_ray(prog);
+	/*cast_ray(prog);*/
+	miniMap(prog);
 	return (0);
 }

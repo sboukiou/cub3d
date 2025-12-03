@@ -2,6 +2,6 @@
 # define MINIMAP_UTILS_H
 
 #include "types.h"
-int	minimap(t_prog *prog);
+int	miniMap(t_prog *prog);
 
 #endif
