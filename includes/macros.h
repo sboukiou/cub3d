@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/03 16:46:50 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/04 18:44:40 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@
 # define LT_COUNT  5
 
 #define TEX_COUNT 5
-#define STAND_FRAMES 1
 #define STAND 0
 #define ATTACK 1
 #define RUN 2
+#define STAND_FRAMES 1
 #define ATTACK_FRAMES 20
 #define RUN_FRAMES 15
 #define ANIM_DELAY 4

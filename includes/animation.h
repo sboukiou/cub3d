@@ -3,10 +3,7 @@
 
 # include "types.h"
 
-int		load_stand_animation(t_prog *prog);
-int		load_attack_animation(t_prog *prog);
-int		load_run_animation(t_prog *prog);
-void	update_animation(t_anim *anim);
+int	    load_animation(t_prog *prog, t_anim *anim, int frame_count, char *path);
 void	render_animation(t_prog *prog, int x, int y, int flag);
 void	free_animation(t_anim *anim, void *display);
 
