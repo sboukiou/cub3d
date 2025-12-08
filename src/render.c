@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:51 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/11/24 16:34:52 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:01:26 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	drawFloorCeiling(t_prog *prog, int currentColumn)
 	t_assets	*assets;
 	t_info		*info;
 	t_mlx		*mlx;
+	t_line		line;
 
 	info = prog->info;
 	assets = prog->assets;
@@ -61,8 +62,14 @@ static void	drawFloorCeiling(t_prog *prog, int currentColumn)
 			info->floor_colors[1], info->floor_colors[2]);
 	assets->ceiling = rgb_merge(info->ceiling_colors[0],
 			info->ceiling_colors[1], info->ceiling_colors[2]);
-	draw_vert_line(mlx, currentColumn, 0, assets->drawStart, assets->ceiling);
-	draw_vert_line(mlx, currentColumn, assets->drawEnd, WIN_WIDTH - 1, assets->floor);
+	line.color = assets->ceiling;
+	line.drawStart = 0;
+	line.drawEnd = assets->drawStart;
+	draw_vert_line(mlx, currentColumn, line);
+	line.color = assets->floor;
+	line.drawStart = assets->drawEnd;
+	line.drawEnd = WIN_WIDTH - 1;
+	draw_vert_line(mlx, currentColumn, line);
 }
 
 int render(t_prog *prog)

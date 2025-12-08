@@ -11,24 +11,24 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color)
+int	draw_vert_line(t_mlx *mlx, int x, t_line line)
 {
 	if (mlx == NULL)
 		return (FAILURE);
-	  if (drawStart < 0 || drawEnd < 0)
+	  if (line.drawStart < 0 || line.drawEnd < 0)
 		  return (FAILURE);
-	if ( drawStart >= WIN_HEIGHT)
+	if ( line.drawStart >= WIN_HEIGHT)
 		return (SUCCESS);
-	for (int i =  drawStart; i < drawEnd; i += 1)
+	for (int i =  line.drawStart; i < line.drawEnd; i += 1)
 	{
 		if (i >= WIN_HEIGHT)
 			return (SUCCESS);
-		put_pixel(mlx, x, i, color);
+		put_pixel(mlx, x, i, line.color);
 	}
 	return (SUCCESS);
 }
 
-bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
+bool	mlx_draw_square(t_mlx *mlx, int x, int y, int size)
 {
 	if (mlx == NULL)
 		return (false);
@@ -36,6 +36,6 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size)
 	for (int i = y; i < y + size; i++)
 		for (int j = x; j < x + size; j++)
 			/*if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)*/
-			put_pixel(mlx, j, i, color);
+			put_pixel(mlx, j, i, 0XFFFFF0);
 	return (true);
 }
