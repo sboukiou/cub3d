@@ -112,9 +112,9 @@ void	calculateVertLine(t_prog *prog)
 		assets->wallX = info->player->posX + assets->perpWallDist * assets->rayDirX;
 	assets->wallX -= floor(assets->wallX);
 	if (assets->side == 0)
-		assets->texIdx = (assets->rayDirX > 0) ? LT_WEST: LT_EAST;
+		assets->texIdx = (assets->rayDirX > 0) ? LT_EAST: LT_WEST;
 	else
-		assets->texIdx = (assets->rayDirY > 0) ? LT_NORTH: LT_SOUTH;
+		assets->texIdx = (assets->rayDirY > 0) ? LT_SOUTH: LT_NORTH;
 	if (assets->hit == 2)
 		assets->texIdx = LT_DOOR;
 }
