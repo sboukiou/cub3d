@@ -1,7 +1,19 @@
-#ifndef MLX_EVENTS
-# define MLX_EVENTS
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:02:27 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/08 17:02:45 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "./types.h"
+#ifndef EVENTS_H
+# define EVENTS_H
+
+# include "./types.h"
 
 int		handle_key_press(int key_code, t_prog *prog);
 int		handle_key_release(int key_code, t_prog *prog);

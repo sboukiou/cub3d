@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/03 16:29:47 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/08 17:33:49 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,34 @@ void init(t_info **info, t_player *player)
 
 	c = 0;
 	(*info)->door_textures_file = "textures/door.xpm";
-	get_player_position((*info)->map, &player->posX, &player->posY, &c);
+	get_player_position((*info)->map, &player->posx, &player->posy, &c);
 	if (c == 'N')  // North = UP on screen = negative Y direction
 	{
-		player->dirX = 0;
-		player->dirY = -1;      // NEGATIVE (moving up decreases Y)
-		player->planeX = 0.66;   // Perpendicular: points right
-		player->planeY = 0;
+		player->dirx = 0;
+		player->diry = -1;      // NEGATIVE (moving up decreases y)
+		player->planex = 0.66;   // Perpendicular: points right
+		player->planey = 0;
 	}
-	else if (c == 'S')  // South = DOWN on screen = positive Y direction
+	else if (c == 'S')  // South = DOWN on screen = positive y direction
 	{
-		player->dirX = 0;
-		player->dirY = 1;        // POSITIVE (moving down increases Y)
-		player->planeX = -0.66;  // Perpendicular: points left
-		player->planeY = 0;
+		player->dirx = 0;
+		player->diry = 1;        // POSITIVE (moving down increases y)
+		player->planex = -0.66;  // Perpendicular: points left
+		player->planey = 0;
 	}
-	else if (c == 'W')  // West = LEFT on screen = negative X direction
+	else if (c == 'W')  // West = LEFT on screen = negative x direction
 	{
-		player->dirX = -1;       // NEGATIVE (moving left decreases X)
-		player->dirY = 0;
-		player->planeX = 0;
-		player->planeY = -0.66;  // Perpendicular: points up (negative Y)
+		player->dirx = -1;       // NEGATIVE (moving left decreases x)
+		player->diry = 0;
+		player->planex = 0;
+		player->planey = -0.66;  // Perpendicular: points up (negative y)
 	}
-	else if (c == 'E')  // East = RIGHT on screen = positive X direction
+	else if (c == 'E')  // East = RIGHT on screen = positive x direction
 	{
-		player->dirX = 1;        // POSITIVE (moving right increases X)
-		player->dirY = 0;
-		player->planeX = 0;
-		player->planeY = 0.66;   // Perpendicular: points down (positive Y)
+		player->dirx = 1;        // POSITIVE (moving right increases x)
+		player->diry = 0;
+		player->planex = 0;
+		player->planey = 0.66;   // Perpendicular: points down (positive y)
 	}
 	(*info)->player = player;
 }

@@ -1,4 +1,4 @@
-#include "../lib/mlx_linux/mlx.h"
+#include <mlx.h>
 #include "../includes/macros.h"
 #include "../includes/types.h"
 
@@ -37,49 +37,49 @@ void	move_player(t_prog *prog)
 	player = info->player;
 	if (prog->keys[XK_w])
 	{
-		if (info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != '1' && info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != 'D')
-			player->posX += player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != 'D')
-			player->posY += player->dirY * moveSpeed;
+		if (info->map[(int)(player->posy)][(int)(player->posx + player->dirx * moveSpeed)] != '1' && info->map[(int)(player->posy)][(int)(player->posx + player->dirx * moveSpeed)] != 'D')
+			player->posx += player->dirx * moveSpeed;
+		if (info->map[(int)(player->posy + player->diry * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy + player->diry * moveSpeed)][(int)player->posx] != 'D')
+			player->posy += player->diry * moveSpeed;
 	}
 	if (prog->keys[XK_s])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != 'D')
-			player->posX -= player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != 'D')
-			player->posY -= player->dirY * moveSpeed;
+		if (info->map[(int)player->posy][(int)(player->posx - player->dirx * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx - player->dirx * moveSpeed)] != 'D')
+			player->posx -= player->dirx * moveSpeed;
+		if (info->map[(int)(player->posy - player->diry * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy - player->diry * moveSpeed)][(int)player->posx] != 'D')
+			player->posy -= player->diry * moveSpeed;
 	}
 	if (prog->keys[XK_d])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != 'D')
-			player->posX -= player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != 'D')
-			player->posY += player->dirX * moveSpeed;
+		if (info->map[(int)player->posy][(int)(player->posx - player->diry * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx - player->diry * moveSpeed)] != 'D')
+			player->posx -= player->diry * moveSpeed;
+		if (info->map[(int)(player->posy + player->dirx * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy + player->dirx * moveSpeed)][(int)player->posx] != 'D')
+			player->posy += player->dirx * moveSpeed;
 	}
 	if (prog->keys[XK_a])
 	{
-		if (info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != '1' && info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != 'D')
-			player->posX += player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != '1' && info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != 'D')
-			player->posY -= player->dirX * moveSpeed;
+		if (info->map[(int)player->posy][(int)(player->posx + player->diry * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx + player->diry * moveSpeed)] != 'D')
+			player->posx += player->diry * moveSpeed;
+		if (info->map[(int)(player->posy - player->dirx * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy - player->dirx * moveSpeed)][(int)player->posx] != 'D')
+			player->posy -= player->dirx * moveSpeed;
 	}
 	if (prog->keys[XK_Right])
 	{
-		double oldDirX = player->dirX;
-		player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
-		player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
-		double oldPlaneX = player->planeX;
-		player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
-		player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+		double oldDirx = player->dirx;
+		player->dirx = player->dirx * cos(rotSpeed) - player->diry * sin(rotSpeed);
+		player->diry = oldDirx * sin(rotSpeed) + player->diry * cos(rotSpeed);
+		double oldPlanex = player->planex;
+		player->planex = player->planex * cos(rotSpeed) - player->planey * sin(rotSpeed);
+		player->planey = oldPlanex * sin(rotSpeed) + player->planey * cos(rotSpeed);
 	}
 	if (prog->keys[XK_Left])
 	{
-		double oldDirX = player->dirX;
-		player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-		player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
-		double oldPlaneX = player->planeX;
-		player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
-		player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
+		double oldDirx = player->dirx;
+		player->dirx = player->dirx * cos(-rotSpeed) - player->diry * sin(-rotSpeed);
+		player->diry = oldDirx * sin(-rotSpeed) + player->diry * cos(-rotSpeed);
+		double oldPlanex = player->planex;
+		player->planex = player->planex * cos(-rotSpeed) - player->planey * sin(-rotSpeed);
+		player->planey = oldPlanex * sin(-rotSpeed) + player->planey * cos(-rotSpeed);
 	}
 }
 
@@ -99,8 +99,8 @@ int	handle_key_press(int key_code, t_prog *prog)
 	}
 	if (key_code == KEY_E)
 	{
-		int y = prog->player->posY + prog->player->dirY * 1.5;
-		int x = prog->player->posX + prog->player->dirX * 1.5;
+		int y = prog->player->posy + prog->player->diry * 1.5;
+		int x = prog->player->posx + prog->player->dirx * 1.5;
 		if (prog->info->map[y][x] == 'D')
 			prog->info->map[y][x] = 'd';
 		else if (prog->info->map[y][x] == 'd')
