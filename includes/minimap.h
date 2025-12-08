@@ -1,7 +1,20 @@
-#ifndef MINIMAP_UTILS_H
-# define MINIMAP_UTILS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:07:35 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/08 17:07:53 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "types.h"
+#ifndef MINIMAP_H
+# define MINIMAP_H
+
+# include "types.h"
+
 int	miniMap(t_prog *prog);
 
 #endif

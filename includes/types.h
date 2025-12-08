@@ -6,59 +6,60 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/03 16:54:15 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/08 17:17:57 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
-#define TYPES_H
+# define TYPES_H
 
-#include "./enums.h"
-#include "./macros.h"
-#include "./include.h"
+# include "./enums.h"
+# include "./macros.h"
+# include "./include.h"
 
 /**
  * Map info structures
  */
 typedef struct s_map
 {
-	bool player;
-	bool so;
-	bool no;
-	bool ea;
-	bool we;
-	bool f;
-	bool c;
-	int i;
-	int map_index;
+	bool	player;
+	bool	so;
+	bool	no;
+	bool	ea;
+	bool	we;
+	bool	f;
+	bool	c;
+	int		i;
+	int		map_index;
 }				t_map;
 
 typedef struct s_element
 {
-	char *content;
-	t_type type;
-	struct s_element *next;
+	char				*content;
+	t_type				type;
+	struct s_element	*next;
 }				t_element;
 
 typedef struct s_map_info
 {
 	t_element	*element;
-	int 		floor[COLORS_SIZE];
-	int 		ceiling[COLORS_SIZE];
-	char 		**map;
+	int			floor[COLORS_SIZE];
+	int			ceiling[COLORS_SIZE];
+	char		**map;
 }				t_map_info;
 
-typedef struct	s_player
+typedef struct s_player
 {
-	double posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
 }	t_player;
 
-typedef struct s_tex{
+typedef struct s_tex
+{
 	void	*img;
 	char	*data;
 	int		width;
@@ -67,7 +68,7 @@ typedef struct s_tex{
 	int		llen;
 	int		endian;
 	char	*path;
-}t_tex;
+}	t_tex;
 
 typedef struct s_anim
 {
@@ -116,37 +117,35 @@ typedef struct s_mlx
 	void		*player_image;
 }	t_mlx;
 
-
-typedef struct	s_assets
+typedef struct s_assets
 {
-	double			cameraX;
-	double			rayDirX;
-	double			rayDirY;
-	int				mapX;
-	int				mapY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			perpWallDist;
-	int				stepX;
-	int				stepY;
+	double			camerax;
+	double			ray_dirx;
+	double			ray_diry;
+	int				mapx;
+	int				mapy;
+	double			side_distx;
+	double			side_disty;
+	double			delta_distx;
+	double			delta_disty;
+	double			perp_wall_dist;
+	int				stepx;
+	int				stepy;
 	int				hit;
 	int				side;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
-	double			wallX;
-	int				texIdx;
-	int				teX;
-	int				teY;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			wall_x;
+	int				tex_idx;
+	int				tex;
+	int				tey;
 	double			step;
-	double			texPos;
+	double			tex_pos;
 	unsigned int	color;
 	unsigned int	floor;
 	unsigned int	ceiling;
 }	t_assets;
-
 
 /**
  * Full Program strcture, holding data for
@@ -166,6 +165,11 @@ typedef struct s_prog
 	bool		keys[65536];
 }	t_prog;
 
-
+typedef struct s_line
+{
+	int	draw_start;
+	int	draw_end;
+	int	color;
+}	t_line;
 
 #endif
