@@ -1,4 +1,4 @@
-#include "../lib/mlx_linux/mlx.h"
+#include <mlx.h>
 #include "../includes/macros.h"
 #include "../includes/types.h"
 

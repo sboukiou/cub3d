@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:44:25 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/08 16:44:30 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:45:51 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "types.h"
 
-bool	isProgValid(t_prog *prog);
+bool	is_prog_valid(t_prog *prog);
 
 #endif

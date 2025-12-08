@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:51 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/08 17:01:26 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:39:37 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ static void	placeTextures(t_prog *prog, int currentColumn)
 	info = prog->info;
 	assets = prog->assets;
 	mlx = prog->mlx;
-	t_tex *tex = &info->texs[assets->texIdx];
-	assets->teX = (int)(assets->wallX * (double)(tex->width));
-	assets->step = 1.0 * tex->height / (double)assets->lineHeight;
-	assets->texPos = (double)(assets->drawStart - (double)WIN_HEIGHT / 2 + (double)assets->lineHeight / 2) * assets->step;
-	for (int y = assets->drawStart; y < assets->drawEnd; ++y)
+	t_tex *tex = &info->texs[assets->tex_idx];
+	assets->tex = (int)(assets->wall_x * (double)(tex->width));
+	assets->step = 1.0 * tex->height / (double)assets->line_height;
+	assets->tex_pos = (double)(assets->draw_start - (double)WIN_HEIGHT / 2 + (double)assets->line_height / 2) * assets->step;
+	for (int y = assets->draw_start; y < assets->draw_end; ++y)
 	{
-		assets->teY = (int)assets->texPos;
-		if (assets->teY < 0)
-			assets->teY = 0;
-		if (assets->teY >= tex->height)
-			assets->teY = tex->height - 1;
-		assets->texPos += assets->step;
-		assets->color = textures_get_pixel(tex, assets->teX, assets->teY);
+		assets->tey = (int)assets->tex_pos;
+		if (assets->tey < 0)
+			assets->tey = 0;
+		if (assets->tey >= tex->height)
+			assets->tey = tex->height - 1;
+		assets->tex_pos += assets->step;
+		assets->color = textures_get_pixel(tex, assets->tex, assets->tey);
 		if (assets->side == 0)
 			assets->color = ((assets->color >> 1) & 0X7F7F7F);
 		put_pixel(mlx, currentColumn, y , assets->color);
@@ -63,12 +63,12 @@ static void	drawFloorCeiling(t_prog *prog, int currentColumn)
 	assets->ceiling = rgb_merge(info->ceiling_colors[0],
 			info->ceiling_colors[1], info->ceiling_colors[2]);
 	line.color = assets->ceiling;
-	line.drawStart = 0;
-	line.drawEnd = assets->drawStart;
+	line.draw_start = 0;
+	line.draw_end = assets->draw_start;
 	draw_vert_line(mlx, currentColumn, line);
 	line.color = assets->floor;
-	line.drawStart = assets->drawEnd;
-	line.drawEnd = WIN_WIDTH - 1;
+	line.draw_start = assets->draw_end;
+	line.draw_end = WIN_WIDTH - 1;
 	draw_vert_line(mlx, currentColumn, line);
 }
 

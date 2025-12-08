@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   animation.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:44:39 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/08 17:44:40 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/types.h"
 #include "../includes/macros.h"
 #include "../includes/draw.h"
 #include "../includes/textures.h"
-#include "../lib/mlx_linux/mlx.h"
+#include <mlx.h>
 
 int	load_stand_animation(t_prog *prog)
 {

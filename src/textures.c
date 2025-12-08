@@ -1,6 +1,6 @@
 #include "../includes/types.h"
 #include "../includes/macros.h"
-#include "../lib/mlx_linux/mlx.h"
+#include <mlx.h>
 
 static int	load_single_texture(t_info *info, t_mlx *mlx, t_tex *tex, int texture_type)
 {

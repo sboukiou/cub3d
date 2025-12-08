@@ -1,6 +1,6 @@
 #include "../includes/events.h"
 #include "../includes/types.h"
-#include "../lib/mlx_linux/mlx.h"
+#include <mlx.h>
 #include "../includes/checkers.h"
 #include "../includes/draw.h"
 
@@ -8,7 +8,7 @@ int	game_layout(t_prog *prog)
 {
 	t_mlx	*mlx;
 	t_info	*info;
-	if (isProgValid(prog) == false)
+	if (is_prog_valid(prog) == false)
 		return (FAILURE);
 	mlx = prog->mlx;
 	info = prog->info;
