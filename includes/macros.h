@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/08 17:06:26 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/09 11:14:52 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define ERR_TEX_INVALID "Invalid texture(s)"
 # define ERR_COLOR_MISSING "Missing color(s)"
 # define ERR_MAP_MISSING "Missing map"
+# define ERR_INV_0_POS "the letter '0' must be surrounded by '1' or Player Position"
 # define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
 # define ERR_MAP_LAST "Map is not the last element in file"
