@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef MACROS_H
 # define MACROS_H
 
@@ -25,17 +24,14 @@
 # define FALSE 0
 # define FAIL -1
 # define ESCAPE 65307
-/*Defining Window demensions*/
 # define WIN_HEIGHT 576
 # define WIN_WIDTH 1080
-/*Defining Macros for events*/
 # define KEY_PRESS_EVENT 2
 # define BTN_PRESS_EVENT 4
 # define DESTROY_NOTIFY_EVENT 17
 # define PI 3.14159
 # define ROT_SPEED 0.05
 # define BLOCK_SIZE 22
-/*Error Messages Macor-Definitions*/
 # define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
 # define ERR_FILE_NOT_CUB "Not a .cub file"
 # define ERR_FILE_NOT_XPM "Not an .xpm file"
@@ -52,7 +48,7 @@
 # define ERR_COLOR_MISSING "Missing color(s)"
 # define ERR_MAP_MISSING "Missing map"
 # define ERR_LOAD_ANIM "Could not load animation frame"
-# define ERR_INV_0_POS "the letter '0' must be surrounded by '1' or Player Position"
+# define ERR_INV_0_POS "the letter '0' must be surrounded by '1' or Player"
 # define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
 # define ERR_MAP_LAST "Map is not the last element in file"
@@ -62,31 +58,17 @@
 # define ERR_MLX_START "Could not start mlx"
 # define ERR_MLX_WIN "Could not create mlx window"
 # define ERR_MLX_IMG "Could not create mlx image"
-# define LT_NORTH  0
-# define LT_SOUTH  1
-# define LT_WEST   2
-# define LT_EAST   3
-# define LT_DOOR   4
-# define LT_COUNT  5
-
-#define TEX_COUNT 5
-#define STAND 0
-#define ATTACK 1
-#define RUN 2
-#define STAND_FRAMES 1
-#define ATTACK_FRAMES 20
-#define RUN_FRAMES 15
-#define ANIM_DELAY 4
-
-# define UNUSED(X) (void)(X);
-# define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
-	exit(EXIT_FAILURE);
-
+# define LT_NORTH 0
+# define LT_SOUTH 1
+# define LT_WEST 2
+# define LT_EAST 3
+# define LT_DOOR 4
+# define LT_COUNT 5
 # define TEX_COUNT 5
-# define STAND_FRAMES 1
 # define STAND 0
 # define ATTACK 1
 # define RUN 2
+# define STAND_FRAMES 1
 # define ATTACK_FRAMES 20
 # define RUN_FRAMES 15
 # define ANIM_DELAY 4

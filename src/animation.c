@@ -16,14 +16,6 @@
 #include "../includes/textures.h"
 #include <mlx.h>
 
-static void	draw_pixel_scaled(t_mlx *mlx, int x, int y, unsigned int color)
-{
-	if (color == 0xFF000000)
-		return ;
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-		put_pixel(mlx, x, y, color);
-}
-
 static char	*build_path(char *path, int i, char *xpm)
 {
 	char	*num_str;
@@ -96,16 +88,14 @@ void	render_animation(t_prog *prog, int x, int y, int flag)
 	frame = &anim->frames[anim->current_frame];
 	dest_x = (WIN_WIDTH - frame->width) / 2;
 	dest_y = WIN_HEIGHT - frame->height;
-	while (y < frame->height)
+	while (++y < frame->height)
 	{
-		x = 0;
-		while (x < frame->width)
+		x = -1;
+		while (++x < frame->width)
 		{
 			color = textures_get_pixel(frame, x, y);
 			draw_pixel_scaled(prog->mlx, dest_x + x, dest_y + y, color);
-			x++;
 		}
-		y++;
 	}
 	update_animation(anim);
 }

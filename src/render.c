@@ -93,14 +93,14 @@ int render(t_prog *prog)
 			|| prog->keys[XK_s] || prog->keys[XK_d]);
 	if (prog->is_attacking)
 	{
-		render_animation(prog, 0, 0, ATTACK);
+		render_animation(prog, 0, -1, ATTACK);
 		if (prog->attack_anim.current_frame == 0 && prog->attack_anim.delay_counter == 0)
 			prog->is_attacking = false;
 	}
 	else if (prog->is_running)
-		render_animation(prog, 0, 0, RUN);
+		render_animation(prog, 0, -1, RUN);
 	else
-		render_animation(prog, 0, 0, STAND);
+		render_animation(prog, 0, -1, STAND);
 	/*cast_ray(prog);*/
 	miniMap(prog);
 	return (0);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/macros.h"
+#include "../includes/animation.h"
 #include "../includes/types.h"
 
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
@@ -54,4 +55,12 @@ bool	mlx_draw_square(t_mlx *mlx, int x, int y, int size)
 			/*if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)*/
 			put_pixel(mlx, j, i, 0XFFFFF0);
 	return (true);
+}
+
+void	draw_pixel_scaled(t_mlx *mlx, int x, int y, unsigned int color)
+{
+	if (color == 0xFF000000)
+		return ;
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+		put_pixel(mlx, x, y, color);
 }
