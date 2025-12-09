@@ -6,11 +6,12 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:55:01 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/16 15:21:10 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:25:20 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse_map.h"
+#include "../../includes/macros.h"
 
 int	first_line(char *line, int flag)
 {
@@ -40,7 +41,7 @@ int	check_position(char c, t_map *map)
 		if (!map->player)
 			map->player = true;
 		else
-			return (ft_putstr_fd("ERROR\nmultiple position of player\n", 2),
+			return (printf("ERROR\n%s\n", ERR_NUM_PLAYER),
 				FAILURE);
 	}
 	return (SUCCESS);
@@ -52,8 +53,7 @@ int	last_letter(char *line, int i)
 	while (line[i] == ' ')
 		i--;
 	if (line[i] != '1')
-		return (ft_putstr_fd("ERROR\nthe last letter must be a wall : '1'\n",
-				2), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_MAP_NO_WALLS), FAILURE);
 	return (SUCCESS);
 }
 
@@ -78,7 +78,7 @@ int	valid_element(char **map, t_map *map_info, int *i, t_element **element)
 	if (all_element(*map_info) == FAILURE)
 		return (printf("ERROR\nsome element are missing\n"), FAILURE);
 	if (!map[*i])
-		return (printf("ERROR\nthere is no map\n"), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_MAP_MISSING), FAILURE);
 	return (SUCCESS);
 }
 
@@ -98,6 +98,6 @@ int	pars_lines(char **map, t_map *map_info, int *i)
 		flag++;
 	}
 	if (flag < 3)
-		return (printf("ERROR\nmap size not valide\n"), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_MAP_TOO_SMALL), FAILURE);
 	return (SUCCESS);
 }

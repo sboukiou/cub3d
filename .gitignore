@@ -1,3 +1,6 @@
 files
 .vscode
 bin/cub3D
+build/*.a
+build/*.o
+lib/mlx_linux/

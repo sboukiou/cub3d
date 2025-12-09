@@ -6,24 +6,11 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 12:53:50 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/16 14:14:04 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:27:52 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/textures.h"
-
-void	fill_map_structure(t_map *map)
-{
-	map->player = false;
-	map->so = false;
-	map->f = false;
-	map->c = false;
-	map->ea = false;
-	map->we = false;
-	map->no = false;
-	map->i = 0;
-	map->map_index = 0;
-}
 
 int	check_color_path(char *str, char **path)
 {

@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 11:47:56 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/03 16:54:56 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:27:55 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,17 @@ char	**fill_map_arr(char **map, int j)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+void	fill_map_structure(t_map *map)
+{
+	map->player = false;
+	map->so = false;
+	map->f = false;
+	map->c = false;
+	map->ea = false;
+	map->we = false;
+	map->no = false;
+	map->i = 0;
+	map->map_index = 0;
 }
