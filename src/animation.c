@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:44:39 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/08 17:44:40 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/09 12:11:08 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,128 +16,29 @@
 #include "../includes/textures.h"
 #include <mlx.h>
 
-int	load_stand_animation(t_prog *prog)
+static void	draw_pixel_scaled(t_mlx *mlx, int x, int y, unsigned int color)
 {
-	t_mlx	*mlx;
-	int		w;
-	int		h;
-
-	mlx = prog->mlx;
-	prog->stand_anim.frame_count = STAND_FRAMES;
-	prog->stand_anim.current_frame = 0;
-	prog->stand_anim.delay_counter = 0;
-	prog->stand_anim.frames = malloc(sizeof(t_tex) * STAND_FRAMES);
-	if (!prog->stand_anim.frames)
-		return (FAILURE);
-	
-	// Load the standing pose texture
-	prog->stand_anim.frames[0].img = mlx_xpm_file_to_image(mlx->display,
-		"textures/stand/pose.xpm", &w, &h);
-	if (!prog->stand_anim.frames[0].img)
-	{
-		printf("Error: Could not load stand animation frame\n");
-		return (FAILURE);
-	}
-	prog->stand_anim.frames[0].data = mlx_get_data_addr(
-		prog->stand_anim.frames[0].img,
-		&prog->stand_anim.frames[0].bpp,
-		&prog->stand_anim.frames[0].llen,
-		&prog->stand_anim.frames[0].endian);
-	prog->stand_anim.frames[0].width = w;
-	prog->stand_anim.frames[0].height = h;
-	return (SUCCESS);
+	if (color == 0xFF000000)
+		return ;
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+		put_pixel(mlx, x, y, color);
 }
 
-char *build_path(char *path, int i, char *xpm)
+static char	*build_path(char *path, int i, char *xpm)
 {
-	char *num_str;
-	char *temp;
-	char *full_path;
+	char	*num_str;
+	char	*temp;
+	char	*full_path;
 
 	num_str = ft_itoa(i + 1);
 	temp = ft_strjoin(path, num_str);
 	full_path = ft_strjoin(temp, xpm);
 	free(num_str);
 	free(temp);
-	return full_path;
-}
-int	load_attack_animation(t_prog *prog)
-{
-	t_mlx	*mlx;
-	int		w;
-	int		h;
-	int		i;
-
-	mlx = prog->mlx;
-	prog->attack_anim.frame_count = ATTACK_FRAMES;
-	prog->attack_anim.delay_counter = 0;
-	prog->attack_anim.frames = malloc(sizeof(t_tex) * ATTACK_FRAMES);
-	if (!prog->attack_anim.frames)
-		return (FAILURE);
-	
-	i = 0;
-	while (i < ATTACK_FRAMES)
-	{
-		prog->attack_anim.current_frame = i;
-		prog->attack_anim.frames[i].img = mlx_xpm_file_to_image(mlx->display,
-				build_path("textures/attack/", i, ".xpm"), &w, &h);
-		if (!prog->attack_anim.frames[i].img)
-		{
-			printf("Error: Could not load attack animation frame %d\n", i + 1);
-			return (FAILURE);
-		}
-		prog->attack_anim.frames[i].data = mlx_get_data_addr(
-				prog->attack_anim.frames[i].img,
-				&prog->attack_anim.frames[i].bpp,
-				&prog->attack_anim.frames[i].llen,
-				&prog->attack_anim.frames[i].endian);
-		prog->attack_anim.frames[i].width = w;
-		prog->attack_anim.frames[i].height = h;
-		i++;
-	}
-	return (SUCCESS);
+	return (full_path);
 }
 
-int	load_run_animation(t_prog *prog)
-{
-	t_mlx	*mlx;
-	int		w;
-	int		h;
-	int		i;
-	char	*path;
-
-	mlx = prog->mlx;
-	prog->run_anim.frame_count = RUN_FRAMES;
-	prog->run_anim.current_frame = 0;
-	prog->run_anim.delay_counter = 0;
-	prog->run_anim.frames = malloc(sizeof(t_tex) * RUN_FRAMES);
-	if (!prog->run_anim.frames)
-		return (FAILURE);
-	i = 0;
-	while (i < RUN_FRAMES)
-	{
-		path = build_path("textures/run/", i, ".xpm");
-		prog->run_anim.frames[i].img = mlx_xpm_file_to_image(mlx->display,
-				path, &w, &h);
-		free(path);
-		if (!prog->run_anim.frames[i].img)
-		{
-			printf("Error: Could not load run animation frame %d\n", i + 1);
-			return (FAILURE);
-		}
-		prog->run_anim.frames[i].data = mlx_get_data_addr(
-				prog->run_anim.frames[i].img,
-				&prog->run_anim.frames[i].bpp,
-				&prog->run_anim.frames[i].llen,
-				&prog->run_anim.frames[i].endian);
-		prog->run_anim.frames[i].width = w;
-		prog->run_anim.frames[i].height = h;
-		i++;
-	}
-	return (SUCCESS);
-}
-
-void	update_animation(t_anim *anim)
+static void	update_animation(t_anim *anim)
 {
 	anim->delay_counter++;
 	if (anim->delay_counter >= ANIM_DELAY)
@@ -149,21 +50,42 @@ void	update_animation(t_anim *anim)
 	}
 }
 
-static void	draw_pixel_scaled(t_mlx *mlx, int x, int y, unsigned int color)
+int	load_animation(t_prog *prog, t_anim *anim, int frame_count, char *path)
 {
-	if (color == 0xFF000000 || (color & 0xFF000000))
-		return ;
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-		put_pixel(mlx, x, y, color);
+	int		w;
+	int		h;
+	int		i;
+
+	anim->frame_count = frame_count;
+	anim->current_frame = 0;
+	anim->delay_counter = 0;
+	anim->frames = malloc(sizeof(t_tex) * frame_count);
+	if (!anim->frames)
+		return (FAILURE);
+	i = 0;
+	while (i < frame_count)
+	{
+		anim->frames[i].img = mlx_xpm_file_to_image(prog->mlx->display,
+				build_path(path, i, ".xpm"), &w, &h);
+		if (!anim->frames[i].img)
+			return (FAILURE, printf("Error\n%s %d\n", ERR_LOAD_ANIM, i + 1));
+		anim->frames[i].data = mlx_get_data_addr(
+				anim->frames[i].img, &anim->frames[i].bpp,
+				&anim->frames[i].llen, &anim->frames[i].endian);
+		anim->frames[i].width = w;
+		anim->frames[i].height = h;
+		i++;
+	}
+	return (SUCCESS);
 }
 
 void	render_animation(t_prog *prog, int x, int y, int flag)
 {
-	t_anim		*anim;
-	t_tex		*frame;
-	int			dest_x;
-	int			dest_y;
-	unsigned int color;
+	t_anim			*anim;
+	t_tex			*frame;
+	int				dest_x;
+	int				dest_y;
+	unsigned int	color;
 
 	if (flag == ATTACK)
 		anim = &prog->attack_anim;

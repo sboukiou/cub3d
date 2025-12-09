@@ -6,9 +6,10 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/08 17:33:49 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/09 11:52:52 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cub.h"
 #include "../includes/parse_map.h"
@@ -106,8 +107,8 @@ int	main(int ac, char **av)
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
 
-	if (load_textures(prog.info,prog.mlx) == FAILURE || load_stand_animation(&prog) == FAILURE 
-			|| load_attack_animation(&prog) == FAILURE || load_run_animation(&prog) == FAILURE)
+	if (load_textures(prog.info,prog.mlx) == FAILURE || load_animation(&prog, &prog.stand_anim, STAND_FRAMES, "textures/stand/") == FAILURE 
+			|| load_animation(&prog, &prog.attack_anim, ATTACK_FRAMES, "textures/attack/") == FAILURE || load_animation(&prog, &prog.run_anim, RUN_FRAMES, "textures/run/") == FAILURE)
 		return (FAILURE);
 	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);

@@ -6,9 +6,10 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 11:14:52 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 12:18:35 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MACROS_H
 # define MACROS_H
@@ -50,6 +51,7 @@
 # define ERR_TEX_INVALID "Invalid texture(s)"
 # define ERR_COLOR_MISSING "Missing color(s)"
 # define ERR_MAP_MISSING "Missing map"
+# define ERR_LOAD_ANIM "Could not load animation frame"
 # define ERR_INV_0_POS "the letter '0' must be surrounded by '1' or Player Position"
 # define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
@@ -66,6 +68,20 @@
 # define LT_EAST   3
 # define LT_DOOR   4
 # define LT_COUNT  5
+
+#define TEX_COUNT 5
+#define STAND 0
+#define ATTACK 1
+#define RUN 2
+#define STAND_FRAMES 1
+#define ATTACK_FRAMES 20
+#define RUN_FRAMES 15
+#define ANIM_DELAY 4
+
+# define UNUSED(X) (void)(X);
+# define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
+	exit(EXIT_FAILURE);
+
 # define TEX_COUNT 5
 # define STAND_FRAMES 1
 # define STAND 0
@@ -74,4 +90,5 @@
 # define ATTACK_FRAMES 20
 # define RUN_FRAMES 15
 # define ANIM_DELAY 4
+
 #endif
