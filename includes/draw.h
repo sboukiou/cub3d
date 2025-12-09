@@ -1,14 +1,26 @@
-#ifndef MLX_DRAW_H
-# define MLX_DRAW_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 16:45:50 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/08 17:02:05 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "./types.h"
+#ifndef DRAW_H
+# define DRAW_H
 
-int mlx_draw_minimap(t_mlx *mlx, t_info *info);
+# include "./types.h"
+
+int		mlx_draw_minimap(t_mlx *mlx, t_info *info);
 bool	mlx_draw_field(t_mlx *mlx, t_info *info);
-bool	mlx_draw_square(t_mlx *mlx, int x, int y, int color, int size);
-int	draw_line(t_mlx *mlx, t_info *info, int x, int y, double dx, double dy, int color);
+bool	mlx_draw_square(t_mlx *mlx, int x, int y, int size);
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
-int	draw_vert_line(t_mlx *mlx, int x, int drawStart, int drawEnd, int color);
-int render(t_prog *prog);
+int		draw_vert_line(t_mlx *mlx, int x, t_line line);
+int		render(t_prog *prog);
 void	cast_ray(t_prog *prog);
+
 #endif

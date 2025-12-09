@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef ENUMS_H
-#define ENUMS_H
+# define ENUMS_H
 
-#include "./macros.h"
-#include "./include.h"
+# include "./macros.h"
+# include "./include.h"
 
 typedef enum e_type
 {
@@ -29,6 +29,5 @@ typedef enum e_type
 	P_EA,
 	P_WE,
 }				t_type;
-
 
 #endif

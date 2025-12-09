@@ -6,16 +6,17 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/04 18:44:40 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:51:57 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef MACROS_H
-#define MACROS_H
+# define MACROS_H
 
 # define COLORS_SIZE 3
 # define SUCCESS 0
-#define FAILURE 1
+# define FAILURE 1
 # define MAP_SIZE 1024
 # define MINIMAP_SIZE_SCALE 10
 # define TRUE 1
@@ -34,10 +35,8 @@
 # define PI 3.14159
 # define ROT_SPEED 0.05
 # define BLOCK_SIZE 22
-
 /*Error Messages Macor-Definitions*/
 # define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
-
 # define ERR_FILE_NOT_CUB "Not a .cub file"
 # define ERR_FILE_NOT_XPM "Not an .xpm file"
 # define ERR_FILE_IS_DIR "Is a directory"
@@ -61,7 +60,6 @@
 # define ERR_MLX_START "Could not start mlx"
 # define ERR_MLX_WIN "Could not create mlx window"
 # define ERR_MLX_IMG "Could not create mlx image"
-
 # define LT_NORTH  0
 # define LT_SOUTH  1
 # define LT_WEST   2
@@ -81,5 +79,14 @@
 # define UNUSED(X) (void)(X);
 # define PANIC(X) dprintf(STDERR_FILENO, "Err: [%s]\n", X),\
 	exit(EXIT_FAILURE);
+
+# define TEX_COUNT 5
+# define STAND_FRAMES 1
+# define STAND 0
+# define ATTACK 1
+# define RUN 2
+# define ATTACK_FRAMES 20
+# define RUN_FRAMES 15
+# define ANIM_DELAY 4
 
 #endif
