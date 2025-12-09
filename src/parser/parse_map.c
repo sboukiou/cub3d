@@ -6,11 +6,12 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/03 16:54:44 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:09:16 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse_map.h"
+#include "../../includes/macros.h"
 
 int	pars_line(char *line, int flag, t_map *map, char **arr)
 {
@@ -61,14 +62,14 @@ int	is_valid_map(char **map, t_map_info **info, t_map *map_info)
 	while (map[i] && is_empty(map[i], 1) == SUCCESS)
 		i++;
 	if (map[i])
-		return (ft_putstr_fd("ERROR\nThe end of map must be a composed of '1' and ' '\n", 2), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_MAP_NO_WALLS), FAILURE);
 	if (!map_info->player)
-		return (ft_putstr_fd("ERROR\nplayer position is necessary\n", 2), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_PLAYER_DIR), FAILURE);
 	*info = creat_node_info(element);
 	return (SUCCESS);
 }
 
-void	get_player_position(char **map, double *player_x, double *player_y, char *c)
+void	get_player_position(char **map, double *x, double *y, char *c)
 {
 	int	i;
 	int	j;
@@ -82,8 +83,8 @@ void	get_player_position(char **map, double *player_x, double *player_y, char *c
 		{
 			if (ft_strchr("NESW", map[i][j]))
 			{
-				*player_x = j;
-				*player_y = i;
+				*x = j;
+				*y = i;
 				*c = map[i][j];
 				return ;
 			}
@@ -113,7 +114,7 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 
 	fill_map_structure(&map_info);
 	if (file_name(av[1]) == false)
-		return (printf("ERROR\ninvalide name\n"), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_FILE_NOT_CUB), FAILURE);
 	if (fill_map(&map, av[1]) == -1)
 		return (FAILURE);
 	if (is_valid_map(map, info, &map_info) == FAILURE)

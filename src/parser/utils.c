@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 11:42:43 by hmouis            #+#    #+#             */
-/*   Updated: 2025/09/09 12:11:26 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 10:59:15 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,4 @@ void	fill_struct_info(t_map_info *info, t_info **final_info)
 	while (++i < 3)
 		(*final_info)->floor_colors[i] = info->floor[i];
 	(*final_info)->map = fill_final_map(info->map);
-	/*get_player_position((*final_info)->map, &(*final_info)->player_x,*/
-	/*	&(*final_info)->player_y);*/
 }

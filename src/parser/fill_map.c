@@ -6,11 +6,12 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:36:22 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/16 15:08:15 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:18:19 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse_map.h"
+#include "../../includes/macros.h"
 
 bool	file_name(char *str)
 {
@@ -83,24 +84,12 @@ int	fill_map(char ***map, char *file_name)
 int	pars_0(char *line, char **arr, int flag, int i)
 {
 	if ((size_t)i >= ft_strlen(arr[flag - 1]))
-	{
-		printf("ERROR\nthe letter '0' must be surrounded by '1', ");
-		printf("'0' and 'plyaer position' in line %d\n", flag + 1);
-		return (FAILURE);
-	}
+		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
 	if ((size_t)i >= ft_strlen(arr[flag + 1]))
-	{
-		printf("ERROR\nthe letter '0' must be surrounded by '1', ");
-		printf("'0' and 'plyaer position' in line %d\n", flag + 1);
-		return (FAILURE);
-	}
+		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
 	if (line[i - 1] == ' ' || line[i + 1] == ' ' || arr[flag - 1][i] == ' '
 		|| arr[flag + 1][i] == ' ')
-	{
-		printf("ERROR\nthe letter '0' must be surrounded by '1', ");
-		printf("'0' and 'plyaer position' in line %d\n", flag);
-		return (FAILURE);
-	}
+		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
 	return (SUCCESS);
 }
 
@@ -111,7 +100,6 @@ int	pars_empty_line(int *i, char *line)
 	while (line[*i] == ' ')
 		(*i)++;
 	if (line[*i] != '1')
-		return (ft_putstr_fd("ERROR\nthe first letter must be a wall : '1'\n",
-				2), FAILURE);
+		return (printf("ERROR\n%s\n", ERR_MAP_NO_WALLS), FAILURE);
 	return (SUCCESS);
 }
