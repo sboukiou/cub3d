@@ -6,11 +6,10 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 00:23:08 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/11 00:23:11 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 00:23:43 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
 #include "../includes/parse_map.h"
 #include "../includes/init.h"
 #include "../includes/game.h"

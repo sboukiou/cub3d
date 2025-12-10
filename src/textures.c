@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 23:43:17 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 23:44:33 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 00:45:38 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 #include "../includes/macros.h"
 #include <mlx.h>
 
+static int	tex_type_error(int texture_type)
+{
+	printf("Error: Could not load texture file for type %d\n",
+		texture_type);
+	return (FAILURE);
+}
+
 static int	load_single_texture(t_info *info,
 		t_mlx *mlx, t_tex *tex, int texture_type)
 {
 	int	w;
 	int	h;
 
-	if (info == NULL)
-		return (FAILURE);
 	if (texture_type == LT_NORTH)
 		tex->img = mlx_xpm_file_to_image(mlx->display,
 				info->north_textures_file, &w, &h);
@@ -38,11 +43,7 @@ static int	load_single_texture(t_info *info,
 		tex->img = mlx_xpm_file_to_image(mlx->display,
 				info->door_textures_file, &w, &h);
 	if (tex->img == NULL)
-	{
-		printf("Error: Could not load texture file for type %d\n",
-			texture_type);
-		return (FAILURE);
-	}
+		return (tex_type_error(texture_type));
 	tex->data = mlx_get_data_addr(tex->img,
 			&tex->bpp, &tex->llen, &tex->endian);
 	tex->width = w;
@@ -72,6 +73,24 @@ int	load_textures(t_info *info, t_mlx *mlx)
 	return (SUCCESS);
 }
 
+static unsigned int	get_color(int color, char *pixel_address, int bytes)
+{
+	int	i;
+
+	if (bytes == 4)
+	{
+		color = *(unsigned int *)pixel_address;
+		return (color);
+	}
+	i = 0;
+	while (i < bytes)
+	{
+		color |= (unsigned char)pixel_address[i] << (8 * i);
+		i += 1;
+	}
+	return (color);
+}
+
 unsigned int	textures_get_pixel(t_tex *tex, int tx, int ty)
 {
 	unsigned int	color;
@@ -92,16 +111,5 @@ unsigned int	textures_get_pixel(t_tex *tex, int tx, int ty)
 	bytes = tex->bpp / 8;
 	pixel_address = tex->data + ty * tex->llen + tx * bytes;
 	color = 0;
-	if (bytes == 4)
-	{
-		color = *(unsigned int *)pixel_address;
-		return (color);
-	}
-	i = 0;
-	while (i < bytes)
-	{
-		color |= (unsigned char)pixel_address[i] << (8 * i);
-		i += 1;
-	}
-	return (color);
+	return (get_color(color, pixel_address, bytes));
 }
