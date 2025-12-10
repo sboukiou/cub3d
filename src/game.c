@@ -38,6 +38,7 @@ bool	mlx_simulate_game(t_prog *prog)
 	mlx_hook(mlx->window, 2, 1L<<0, handle_key_press, prog);
 	mlx_hook(mlx->window, 3, 1L<<1, handle_key_release, prog);
 	mlx_loop_hook(mlx->display, game_layout, prog);
+	mlx_hook(prog->mlx->window, 6, 1L<<6, mouse_move, prog);
 	/*Looping the game window*/
 	mlx_loop(prog->mlx->display);
 	return (true);
