@@ -44,7 +44,6 @@ clean:
 	$(RM) $(BUILD_DIR)/*.o
 
 fclean: clean
-	$(RM) $(BUILD_DIR)/*.a
 	$(RM) $(BIN_DIR)
 
 re: fclean all

@@ -22,5 +22,6 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color);
 int		draw_vert_line(t_mlx *mlx, int x, t_line line);
 int		render(t_prog *prog);
 void	cast_ray(t_prog *prog);
+void	draw_pixel_scaled(t_mlx *mlx, int x, int y, unsigned int color);
 
 #endif

@@ -23,6 +23,18 @@ void	destroy_program(t_prog *prog)
 	free(mlx->display);
 	exit(0);
 }
+void	rotate_player(t_player *player, double angle)
+{
+	double	oldDirX;
+	double	oldPlaneX;
+
+	oldDirX = player->dirx;
+	player->dirx = player->dirx * cos(angle) - player->diry * sin(angle);
+	player->diry = oldDirX * sin(angle) + player->diry * cos(angle);
+	oldPlaneX = player->planex;
+	player->planex = player->planex * cos(angle) - player->planey * sin(angle);
+	player->planey = oldPlaneX * sin(angle) + player->planey * cos(angle);
+}
 
 void	move_player(t_prog *prog)
 {
@@ -64,23 +76,9 @@ void	move_player(t_prog *prog)
 			player->posy -= player->dirx * moveSpeed;
 	}
 	if (prog->keys[XK_Right])
-	{
-		double oldDirx = player->dirx;
-		player->dirx = player->dirx * cos(rotSpeed) - player->diry * sin(rotSpeed);
-		player->diry = oldDirx * sin(rotSpeed) + player->diry * cos(rotSpeed);
-		double oldPlanex = player->planex;
-		player->planex = player->planex * cos(rotSpeed) - player->planey * sin(rotSpeed);
-		player->planey = oldPlanex * sin(rotSpeed) + player->planey * cos(rotSpeed);
-	}
+		rotate_player(player, rotSpeed);
 	if (prog->keys[XK_Left])
-	{
-		double oldDirx = player->dirx;
-		player->dirx = player->dirx * cos(-rotSpeed) - player->diry * sin(-rotSpeed);
-		player->diry = oldDirx * sin(-rotSpeed) + player->diry * cos(-rotSpeed);
-		double oldPlanex = player->planex;
-		player->planex = player->planex * cos(-rotSpeed) - player->planey * sin(-rotSpeed);
-		player->planey = oldPlanex * sin(-rotSpeed) + player->planey * cos(-rotSpeed);
-	}
+		rotate_player(player, -rotSpeed);
 }
 
 int	handle_key_press(int key_code, t_prog *prog)
@@ -115,6 +113,18 @@ int	handle_key_release(int key_code, t_prog *prog)
 		return (FAILURE);
 	if (key_code >= 0 && key_code < 65536)
 		prog->keys[key_code] = false;
+	return (0);
+}
+
+int mouse_move(int x, int y, t_prog *prog)
+{
+	int delta_x;
+
+	delta_x = x - WIN_WIDTH / 2;
+	if (delta_x == 0)
+		return (0);
+	rotate_player(prog->player, delta_x * 0.0002);
+	mlx_mouse_move(prog->mlx->display, prog->mlx->window, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }
 
