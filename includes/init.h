@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:04:04 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 23:24:56 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:55:09 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "./types.h"
 
 int		mlx_init_display(t_mlx *mlx);
-/*void	init(t_info **info, t_player *player);*/
+void	init(t_info **info, t_player *player);
 
 #endif /* INIT_H */

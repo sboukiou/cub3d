@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 23:31:53 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 23:37:52 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:43:12 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	calculate_ray_postion(t_prog *prog, int currentColumn)
 
 	info = prog->info;
 	assets = prog->assets;
-      assets->camerax = 2 * currentColumn / (double)WIN_WIDTH - 1; //x-coordinate in camera space
+	assets->camerax = 2 * currentColumn / (double)WIN_WIDTH - 1;
 	assets->ray_dirx = info->player->dirx
 		+ info->player->planex * assets->camerax;
 	assets->ray_diry = info->player->diry
