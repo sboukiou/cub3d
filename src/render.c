@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:51 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 23:19:14 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:42:11 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,25 @@
 #include "../includes/animation.h"
 #include "../includes/minimap.h"
 
-
-static void	placeTextures(t_prog *prog, int currentColumn)
+static void	place_textures(t_prog *prog, int currentColumn)
 {
 	t_assets	*assets;
 	t_info		*info;
 	t_mlx		*mlx;
+	t_tex		*tex;
+	int			y;
 
 	info = prog->info;
 	assets = prog->assets;
 	mlx = prog->mlx;
-	t_tex *tex = &info->texs[assets->tex_idx];
+	tex = &info->texs[assets->tex_idx];
 	assets->tex = (int)(assets->wall_x * (double)(tex->width));
 	assets->step = 1.0 * tex->height / (double)assets->line_height;
-	assets->tex_pos = (double)(assets->draw_start - (double)WIN_HEIGHT / 2 + (double)assets->line_height / 2) * assets->step;
-	for (int y = assets->draw_start; y < assets->draw_end; ++y)
+	assets->tex_pos = (double)(assets->draw_start
+			- (double)WIN_HEIGHT / 2 + (double)assets->line_height / 2)
+		* assets->step;
+	y = assets->draw_start;
+	while (y < assets->draw_end)
 	{
 		assets->tey = (int)assets->tex_pos;
 		if (assets->tey < 0)
@@ -44,11 +48,12 @@ static void	placeTextures(t_prog *prog, int currentColumn)
 		assets->color = textures_get_pixel(tex, assets->tex, assets->tey);
 		if (assets->side == 0)
 			assets->color = ((assets->color >> 1) & 0X7F7F7F);
-		put_pixel(mlx, currentColumn, y , assets->color);
+		put_pixel(mlx, currentColumn, y, assets->color);
+		y += 1;
 	}
 }
 
-static void	drawFloorCeiling(t_prog *prog, int currentColumn)
+static void	draw_floor_ceiling(t_prog *prog, int currentColumn)
 {
 	t_assets	*assets;
 	t_info		*info;
@@ -72,36 +77,39 @@ static void	drawFloorCeiling(t_prog *prog, int currentColumn)
 	draw_vert_line(mlx, currentColumn, line);
 }
 
-int render(t_prog *prog)
+int	render(t_prog *prog)
 {
 	t_mlx		*mlx;
-	t_info	*info;
+	t_info		*info;
+	int			x;
 
 	mlx = prog->mlx;
 	info = prog->info;
-	for (int x = 0; x < WIN_WIDTH; x += 1)
+	x = 0;
+	while (x < WIN_WIDTH)
 	{
 		ft_bzero(prog->assets, sizeof(*prog->assets));
-		calculateRayPostion(prog, x);
-		settingSteps(prog);
-		performeDDA(prog);
-		calculateVertLine(prog);
-		placeTextures(prog, x);
-		drawFloorCeiling(prog, x);
+		calculate_ray_postion(prog, x);
+		setting_steps(prog);
+		performe_dda(prog);
+		calculate_vert_line(prog);
+		place_textures(prog, x);
+		draw_floor_ceiling(prog, x);
+		x += 1;
 	}
-	prog->is_running = (prog->keys[XK_w] || prog->keys[XK_a] 
+	prog->is_running = (prog->keys[XK_w] || prog->keys[XK_a]
 			|| prog->keys[XK_s] || prog->keys[XK_d]);
 	if (prog->is_attacking)
 	{
 		render_animation(prog, 0, -1, ATTACK);
-		if (prog->attack_anim.current_frame == 0 && prog->attack_anim.delay_counter == 0)
+		if (prog->attack_anim.current_frame == 0
+			&& prog->attack_anim.delay_counter == 0)
 			prog->is_attacking = false;
 	}
 	else if (prog->is_running)
 		render_animation(prog, 0, -1, RUN);
 	else
 		render_animation(prog, 0, -1, STAND);
-	/*cast_ray(prog);*/
 	mini_map(prog);
 	return (0);
 }
