@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/10 23:24:37 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:31:12 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,33 @@ void	init(t_info **info, t_player *player)
 	c = 0;
 	(*info)->door_textures_file = "textures/door.xpm";
 	get_player_position((*info)->map, &player->posx, &player->posy, &c);
-	if (c == 'N')  // North = UP on screen = negative Y direction
+	if (c == 'N')
 	{
 		player->dirx = 0;
-		player->diry = -1;      // NEGATIVE (moving up decreases y)
-		player->planex = 0.66;   // Perpendicular: points right
+		player->diry = -1;
+		player->planex = 0.66;
 		player->planey = 0;
 	}
-	else if (c == 'S')  // South = DOWN on screen = positive y direction
+	else if (c == 'S')
 	{
 		player->dirx = 0;
-		player->diry = 1;        // POSITIVE (moving down increases y)
-		player->planex = -0.66;  // Perpendicular: points left
+		player->diry = 1;
+		player->planex = -0.66;
 		player->planey = 0;
 	}
-	else if (c == 'W')  // West = LEFT on screen = negative x direction
+	else if (c == 'W')
 	{
-		player->dirx = -1;       // NEGATIVE (moving left decreases x)
+		player->dirx = -1;
 		player->diry = 0;
 		player->planex = 0;
-		player->planey = -0.66;  // Perpendicular: points up (negative y)
+		player->planey = -0.66;
 	}
-	else if (c == 'E')  // East = RIGHT on screen = positive x direction
+	else if (c == 'E')
 	{
-		player->dirx = 1;        // POSITIVE (moving right increases x)
+		player->dirx = 1;
 		player->diry = 0;
 		player->planex = 0;
-		player->planey = 0.66;   // Perpendicular: points down (positive y)
+		player->planey = 0.66;
 	}
 	(*info)->player = player;
 }
@@ -85,15 +85,11 @@ int	main(int ac, char **av)
 	info = NULL;
 	if (ac != 2)
 		return (printf("ERROR\nmissing file\n"), FAILURE);
-
-	/*Parsing the map info*/
 	if (parse_map(av, &parse, &info) == FAILURE)
 	{
 		printf("Failed to parse the map!\n");
 		return (FAILURE);
 	}
-
-	/*Initializing the display, window and image attributes*/
 	print_controllers();
 	init(&info, player);
 	prog.mlx = &mlx;
@@ -105,12 +101,14 @@ int	main(int ac, char **av)
 	ft_bzero(prog.keys, sizeof(prog.keys));
 	mlx_init_display(&mlx);
 	printf("[Display is initialized successfully !]\n");
-
-	if (load_textures(prog.info,prog.mlx) == FAILURE || load_animation(&prog, &prog.stand_anim, STAND_FRAMES, "textures/stand/") == FAILURE 
-			|| load_animation(&prog, &prog.attack_anim, ATTACK_FRAMES, "textures/attack/") == FAILURE || load_animation(&prog, &prog.run_anim, RUN_FRAMES, "textures/run/") == FAILURE)
+	if (load_textures(prog.info, prog.mlx) == FAILURE
+		|| load_animation(&prog, &prog.stand_anim,
+			STAND_FRAMES, "textures/stand/") == FAILURE
+		|| load_animation(&prog, &prog.attack_anim,
+			ATTACK_FRAMES, "textures/attack/") == FAILURE
+		|| load_animation(&prog, &prog.run_anim,
+			RUN_FRAMES, "textures/run/") == FAILURE)
 		return (FAILURE);
-	/*Starting the game simulation*/
 	mlx_simulate_game(&prog);
-	
 	return (SUCCESS);
 }
