@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 17:04:04 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 23:24:56 by sboukiou         ###   ########.fr       */
+/*   Created: 2025/12/10 20:38:11 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/10 20:38:13 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include <mlx.h>
+#include "../includes/types.h"
+#include "../includes/events.h"
 
-# include "./types.h"
+int	mouse_move(int x, int y, t_prog *prog)
+{
+	int	delta_x;
 
-int		mlx_init_display(t_mlx *mlx);
-/*void	init(t_info **info, t_player *player);*/
-
-#endif /* INIT_H */
+	delta_x = x - WIN_WIDTH / 2;
+	if (delta_x == 0)
+		return (0);
+	rotate_player(prog->player, delta_x * 0.0002);
+	mlx_mouse_move(prog->mlx->display,
+		prog->mlx->window, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	return (0);
+}

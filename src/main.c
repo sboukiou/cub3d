@@ -6,10 +6,9 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:21:46 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 11:52:52 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/10 23:24:37 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/cub.h"
 #include "../includes/parse_map.h"
@@ -34,9 +33,9 @@ static void	print_controllers(void)
 	printf("\n");
 }
 
-void init(t_info **info, t_player *player)
+void	init(t_info **info, t_player *player)
 {
-	char c;
+	char	c;
 
 	c = 0;
 	(*info)->door_textures_file = "textures/door.xpm";

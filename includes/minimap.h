@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:07:35 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/08 17:07:53 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:19:07 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "types.h"
 
-int	miniMap(t_prog *prog);
+int	mini_map(t_prog *prog);
 
 #endif

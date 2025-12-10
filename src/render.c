@@ -6,7 +6,7 @@
 /*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:51 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/08 17:39:37 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/10 23:19:14 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int render(t_prog *prog)
 	else
 		render_animation(prog, 0, -1, STAND);
 	/*cast_ray(prog);*/
-	miniMap(prog);
+	mini_map(prog);
 	return (0);
 }
