@@ -40,20 +40,29 @@ int	draw_vert_line(t_mlx *mlx, int x, t_line line)
 		if (count >= WIN_HEIGHT)
 			return (SUCCESS);
 		put_pixel(mlx, x, count, line.color);
- 		count += 1;
+		count += 1;
 	}
 	return (SUCCESS);
 }
 
 bool	mlx_draw_square(t_mlx *mlx, int x, int y, int size)
 {
+	int	idx;
+	int	jdx;
+
 	if (mlx == NULL)
 		return (false);
-
-	for (int i = y; i < y + size; i++)
-		for (int j = x; j < x + size; j++)
-			/*if ( i == y || j == x + size - 1 || j == x || i == y + size - 1)*/
-			put_pixel(mlx, j, i, 0XFFFFF0);
+	idx = y;
+	while (idx < y + size)
+	{
+		jdx = x;
+		while (jdx < x + size)
+		{
+			put_pixel(mlx, jdx, idx, 0XFFFFF0);
+			jdx += 1;
+		}
+		idx += 1;
+	}
 	return (true);
 }
 

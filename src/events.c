@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/10 20:10:44 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/10 20:23:10 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mlx.h>
 #include "../includes/macros.h"
 #include "../includes/types.h"
+#include "../includes/events.h"
 
 void	destroy_program(t_prog *prog)
 {
@@ -23,66 +36,50 @@ void	destroy_program(t_prog *prog)
 	free(mlx->display);
 	exit(0);
 }
+
 void	rotate_player(t_player *player, double angle)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	oldDirX = player->dirx;
+	old_dir_x = player->dirx;
 	player->dirx = player->dirx * cos(angle) - player->diry * sin(angle);
-	player->diry = oldDirX * sin(angle) + player->diry * cos(angle);
-	oldPlaneX = player->planex;
+	player->diry = old_dir_x * sin(angle) + player->diry * cos(angle);
+	old_plane_x = player->planex;
 	player->planex = player->planex * cos(angle) - player->planey * sin(angle);
-	player->planey = oldPlaneX * sin(angle) + player->planey * cos(angle);
+	player->planey = old_plane_x * sin(angle) + player->planey * cos(angle);
 }
 
 void	move_player(t_prog *prog)
 {
 	t_info		*info;
 	t_player	*player;
-	double		moveSpeed;
-	double		rotSpeed;
+	double		move_speed;
+	double		rot_speed;
 
-	moveSpeed = 0.02;
-	rotSpeed = 0.03;
+	move_speed = 0.02;
+	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (prog->keys[XK_w])
-	{
-		if (info->map[(int)(player->posy)][(int)(player->posx + player->dirx * moveSpeed)] != '1' && info->map[(int)(player->posy)][(int)(player->posx + player->dirx * moveSpeed)] != 'D')
-			player->posx += player->dirx * moveSpeed;
-		if (info->map[(int)(player->posy + player->diry * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy + player->diry * moveSpeed)][(int)player->posx] != 'D')
-			player->posy += player->diry * moveSpeed;
-	}
+		handle_key_w(prog);
 	if (prog->keys[XK_s])
-	{
-		if (info->map[(int)player->posy][(int)(player->posx - player->dirx * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx - player->dirx * moveSpeed)] != 'D')
-			player->posx -= player->dirx * moveSpeed;
-		if (info->map[(int)(player->posy - player->diry * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy - player->diry * moveSpeed)][(int)player->posx] != 'D')
-			player->posy -= player->diry * moveSpeed;
-	}
+		handle_key_s(prog);
 	if (prog->keys[XK_d])
-	{
-		if (info->map[(int)player->posy][(int)(player->posx - player->diry * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx - player->diry * moveSpeed)] != 'D')
-			player->posx -= player->diry * moveSpeed;
-		if (info->map[(int)(player->posy + player->dirx * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy + player->dirx * moveSpeed)][(int)player->posx] != 'D')
-			player->posy += player->dirx * moveSpeed;
-	}
+		handle_key_d(prog);
 	if (prog->keys[XK_a])
-	{
-		if (info->map[(int)player->posy][(int)(player->posx + player->diry * moveSpeed)] != '1' && info->map[(int)player->posy][(int)(player->posx + player->diry * moveSpeed)] != 'D')
-			player->posx += player->diry * moveSpeed;
-		if (info->map[(int)(player->posy - player->dirx * moveSpeed)][(int)player->posx] != '1' && info->map[(int)(player->posy - player->dirx * moveSpeed)][(int)player->posx] != 'D')
-			player->posy -= player->dirx * moveSpeed;
-	}
+		handle_key_a(prog);
 	if (prog->keys[XK_Right])
-		rotate_player(player, rotSpeed);
+		rotate_player(player, rot_speed);
 	if (prog->keys[XK_Left])
-		rotate_player(player, -rotSpeed);
+		rotate_player(player, -rot_speed);
 }
 
 int	handle_key_press(int key_code, t_prog *prog)
 {
+	int	y;
+	int	x;
+
 	if (prog == NULL)
 		return (FAILURE);
 	if (key_code == ESCAPE)
@@ -97,34 +94,13 @@ int	handle_key_press(int key_code, t_prog *prog)
 	}
 	if (key_code == KEY_E)
 	{
-		int y = prog->player->posy + prog->player->diry * 1.5;
-		int x = prog->player->posx + prog->player->dirx * 1.5;
+		y = prog->player->posy + prog->player->diry * 1.5;
+		x = prog->player->posx + prog->player->dirx * 1.5;
 		if (prog->info->map[y][x] == 'D')
 			prog->info->map[y][x] = 'd';
 		else if (prog->info->map[y][x] == 'd')
 			prog->info->map[y][x] = 'D';
 	}
-	return (0);
-}
-
-int	handle_key_release(int key_code, t_prog *prog)
-{
-	if (prog == NULL)
-		return (FAILURE);
-	if (key_code >= 0 && key_code < 65536)
-		prog->keys[key_code] = false;
-	return (0);
-}
-
-int mouse_move(int x, int y, t_prog *prog)
-{
-	int delta_x;
-
-	delta_x = x - WIN_WIDTH / 2;
-	if (delta_x == 0)
-		return (0);
-	rotate_player(prog->player, delta_x * 0.0002);
-	mlx_mouse_move(prog->mlx->display, prog->mlx->window, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }
 
