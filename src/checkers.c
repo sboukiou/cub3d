@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:45:02 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/11 00:22:35 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 08:31:01 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 	print_controllers();
 	init(&(*prog)->info, player);
 	(*prog)->player = player;
+	(*prog)->no_mouse = 0;
 	(*prog)->info->player = player;
 	(*prog)->mlx = malloc(sizeof(t_mlx));
 	(*prog)->assets = malloc(sizeof(t_assets));

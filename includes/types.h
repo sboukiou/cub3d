@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:51:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/08 17:17:57 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 08:29:29 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct s_prog
 	t_anim		run_anim;
 	bool		is_attacking;
 	bool		is_running;
+	bool		no_mouse;
 	bool		keys[65536];
 }	t_prog;
 

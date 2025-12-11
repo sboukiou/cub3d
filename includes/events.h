@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:02:27 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 20:22:56 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 08:25:36 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	move_player(t_prog *prog);
 void	destroy_program(t_prog *prog);
 int		ft_exit(t_mlx *mlx);
 int		mouse_move(int x, int y, t_prog *prog);
+int     mouse_hide(int bottun, int x, int y, t_prog *prog);
 void	rotate_player(t_player *player, double angle);
 void	handle_key_w(t_prog *prog);
 void	handle_key_a(t_prog *prog);

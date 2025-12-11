@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:30:58 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 20:31:53 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/11 08:32:04 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ bool	mlx_simulate_game(t_prog *prog)
 	game_layout(prog);
 	mlx_hook(mlx->window, 2, 1L << 0, handle_key_press, prog);
 	mlx_hook(mlx->window, 3, 1L << 1, handle_key_release, prog);
+	mlx_mouse_hook(mlx->window, mouse_hide, prog);
 	mlx_loop_hook(mlx->display, game_layout, prog);
 	mlx_hook(prog->mlx->window, 6, 1L << 6, mouse_move, prog);
+	mlx_mouse_hide(prog->mlx->display, prog->mlx->window);
 	mlx_loop(prog->mlx->display);
 	return (true);
 }
