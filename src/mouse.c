@@ -25,7 +25,7 @@ int	mouse_hide(int bottun, int x, int y, t_prog *prog)
 	{
 		prog->no_mouse = 1;
 		mlx_mouse_show(prog->mlx->display, prog->mlx->window);
-	}	
+	}
 	return (0);
 }
 
