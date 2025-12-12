@@ -29,10 +29,8 @@ void	handle_key_w(t_prog *prog)
 	t_info		*info;
 	t_player	*player;
 	double		move_speed;
-	double		rot_speed;
 
 	move_speed = 0.02;
-	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (info->map[(int)(player->posy)][(int)(player->posx
@@ -52,10 +50,8 @@ void	handle_key_s(t_prog *prog)
 	t_info		*info;
 	t_player	*player;
 	double		move_speed;
-	double		rot_speed;
 
 	move_speed = 0.02;
-	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (info->map[(int)player->posy][(int)(player->posx
@@ -75,10 +71,8 @@ void	handle_key_d(t_prog *prog)
 	t_info		*info;
 	t_player	*player;
 	double		move_speed;
-	double		rot_speed;
 
 	move_speed = 0.02;
-	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (info->map[(int)player->posy][(int)(player->posx
@@ -98,10 +92,8 @@ void	handle_key_a(t_prog *prog)
 	t_info		*info;
 	t_player	*player;
 	double		move_speed;
-	double		rot_speed;
 
 	move_speed = 0.02;
-	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (info->map[(int)player->posy][(int)(player->posx

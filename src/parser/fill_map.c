@@ -84,12 +84,12 @@ int	fill_map(char ***map, char *file_name)
 int	pars_0(char *line, char **arr, int flag, int i)
 {
 	if ((size_t)i >= ft_strlen(arr[flag - 1]))
-		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
+		return (printf("ERROR\n%s\n", ERR_INV_0_POS), FAILURE);
 	if ((size_t)i >= ft_strlen(arr[flag + 1]))
-		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
+		return (printf("ERROR\n%s\n", ERR_INV_0_POS), FAILURE);
 	if (line[i - 1] == ' ' || line[i + 1] == ' ' || arr[flag - 1][i] == ' '
 		|| arr[flag + 1][i] == ' ')
-		return (FAILURE, printf("ERROR\n%s\n", ERR_INV_0_POS));
+		return (printf("ERROR\n%s\n", ERR_INV_0_POS), FAILURE);
 	return (SUCCESS);
 }
 

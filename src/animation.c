@@ -60,7 +60,7 @@ int	load_animation(t_prog *prog, t_anim *anim, int frame_count, char *path)
 		anim->frames[i].img = mlx_xpm_file_to_image(prog->mlx->display,
 				build_path(path, i, ".xpm"), &w, &h);
 		if (!anim->frames[i].img)
-			return (FAILURE, printf("Error\n%s %d\n", ERR_LOAD_ANIM, i + 1));
+			return (printf("Error\n%s %d\n", ERR_LOAD_ANIM, i + 1), FAILURE);
 		anim->frames[i].data = mlx_get_data_addr(
 				anim->frames[i].img, &anim->frames[i].bpp,
 				&anim->frames[i].llen, &anim->frames[i].endian);

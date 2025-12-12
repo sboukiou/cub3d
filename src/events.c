@@ -54,10 +54,8 @@ void	move_player(t_prog *prog)
 {
 	t_info		*info;
 	t_player	*player;
-	double		move_speed;
 	double		rot_speed;
 
-	move_speed = 0.02;
 	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
