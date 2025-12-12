@@ -14,7 +14,7 @@
 #include "../includes/types.h"
 #include "../includes/events.h"
 
-int	mouse_move(int x, int y, t_prog *prog)
+int	mouse_move(int x, t_prog *prog)
 {
 	int	delta_x;
 

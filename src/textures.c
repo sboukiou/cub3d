@@ -96,7 +96,6 @@ unsigned int	textures_get_pixel(t_tex *tex, int tx, int ty)
 	unsigned int	color;
 	char			*pixel_address;
 	int				bytes;
-	int				i;
 
 	if (tex == NULL || tex->data == NULL)
 		return (0X000000);

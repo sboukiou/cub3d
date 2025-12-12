@@ -4,7 +4,7 @@
 
 CC=cc
 RM=rm -rf
-CFLAGS=-Ilib/mlx_linux -c
+CFLAGS=-Wall -Werror -Wextra -Ilib/mlx_linux -c
 LFLAGS=-L./build -lmlx -lft -lX11 -lXext -lm -lz
 NAME=bin/cub3D
 TEST_OUT_NAME=bin/test
