@@ -19,12 +19,10 @@
 int	game_layout(t_prog *prog)
 {
 	t_mlx	*mlx;
-	t_info	*info;
 
 	if (is_prog_valid(prog) == false)
 		return (FAILURE);
 	mlx = prog->mlx;
-	info = prog->info;
 	move_player(prog);
 	if (mlx->draw_image.img != NULL)
 		mlx_destroy_image(mlx->display, mlx->draw_image.img);
@@ -43,12 +41,10 @@ int	game_layout(t_prog *prog)
 bool	mlx_simulate_game(t_prog *prog)
 {
 	t_mlx	*mlx;
-	t_info	*info;
 
 	if (prog == NULL)
 		return (false);
 	mlx = prog->mlx;
-	info = prog->info;
 	game_layout(prog);
 	mlx_hook(mlx->window, 2, 1L << 0, handle_key_press, prog);
 	mlx_hook(mlx->window, 3, 1L << 1, handle_key_release, prog);

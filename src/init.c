@@ -37,19 +37,3 @@ int	mlx_init_display(t_mlx *mlx)
 	mlx->floor_image = NULL;
 	return (SUCCESS);
 }
-
-static void	set_player_north(t_player *player, char c)
-{
-	player->dirx = 0;
-	player->diry = -1;
-	player->planex = 0.66;
-	player->planey = 0;
-}
-
-void	set_player_south(t_player *player, char c)
-{
-	player->dirx = 0;
-	player->diry = 1;
-	player->planex = -0.66;
-	player->planey = 0;
-}

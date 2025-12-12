@@ -16,6 +16,8 @@
 
 int	mouse_hide(int bottun, int x, int y, t_prog *prog)
 {
+	(void)x;
+	(void)y;
 	if (bottun == 1)
 	{
 		prog->no_mouse = 0;
@@ -33,6 +35,7 @@ int	mouse_move(int x, int y, t_prog *prog)
 {
 	int	delta_x;
 
+	(void)y;
 	if (prog->no_mouse)
 		return (0);
 	delta_x = x - WIN_WIDTH / 2;
