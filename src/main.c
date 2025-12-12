@@ -49,7 +49,8 @@ int	main(int ac, char **av)
 	if (init_prog_data(&prog, ac, av))
 		return (FAILURE);
 	ft_bzero(prog->keys, sizeof(prog->keys));
-	mlx_init_display(prog->mlx);
+	if (mlx_init_display(prog->mlx))
+		return (FAILURE);
 	printf("[Display is initialized successfully !]\n");
 	if (load_textures(prog->info, prog->mlx) == FAILURE
 		|| load_animation(prog, &prog->stand_anim,
