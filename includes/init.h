@@ -1,11 +1,21 @@
-#ifndef MLX_CRAETE_H
-# define MLX_CRAETE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:04:04 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/10 23:55:09 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "./types.h"
+#ifndef INIT_H
+# define INIT_H
 
-void	mlx_create_small_playground(void *mlx, int map_width, int map_height);
-int mlx_init_display(t_mlx *mlx);
-void	buffered_mlx_pixel_put(t_mlx_img *img, int x, int y, int color);
-void draw_player(int pos_x, int pos_y, t_mlx_img *img, t_info *info);
-void draw_wall(int pos_x, int pos_y, t_mlx_img *img, int color, t_info *info);
-#endif /* MLX_CRAETE_H */
+# include "./types.h"
+
+int		mlx_init_display(t_mlx *mlx);
+void	init(t_info **info, t_player *player);
+
+#endif /* INIT_H */

@@ -1,120 +1,128 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/10 23:31:53 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/11 00:39:15 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
 #include <stdbool.h>
 #include <strings.h>
 #include "../includes/types.h"
 #include "../includes/maths.h"
 
-void	calculateRayPostion(t_prog *prog, int currentColumn)
+void	set_ray_dirx(t_info *info, t_assets *assets)
 {
-	t_assets	*assets;
-	t_info		*info;
-
-	info = prog->info;
-	assets = prog->assets;
-      //calculate ray position and direction
-      assets->cameraX = 2 * currentColumn / (double)WIN_WIDTH - 1; //x-coordinate in camera space
-      assets->rayDirX = info->player->dirX + info->player->planeX * assets->cameraX;
-      assets->rayDirY = info->player->dirY + info->player->planeY * assets->cameraX;
-      //which box of the map we're in
-      assets->mapX = (int)(info->player->posX);
-      assets->mapY = (int)(info->player->posY);
-
-
-	  /*Length of the ray part for each move (x, x + 1) or (y, y + 1)*/
-      assets->deltaDistX = (assets->rayDirX == 0) ? 1e30 : fabs(1 / assets->rayDirX);
-      assets->deltaDistY = (assets->rayDirY == 0) ? 1e30 : fabs(1 / assets->rayDirY);
-
-      //what direction to step in x or y-direction (either +1 or -1)
-
-      //calculate step and initial sideDist
-}
-
-void	settingSteps(t_prog *prog)
-{
-	t_assets	*assets;
-	t_info		*info;
-
-	info = prog->info;
-	assets = prog->assets;
-	if(assets->rayDirX < 0)
+	if (assets->ray_dirx < 0)
 	{
-		assets->stepX = -1;
-		assets->sideDistX = (info->player->posX - assets->mapX) * assets->deltaDistX;
+		assets->stepx = -1;
+		assets->side_distx = (info->player->posx - assets->mapx)
+			* assets->delta_distx;
 	}
 	else
 	{
-		assets->stepX = 1;
-		assets->sideDistX = (assets->mapX + 1.0 - info->player->posX) * assets->deltaDistX;
-	}
-	if(assets->rayDirY < 0)
-	{
-		assets->stepY = -1;
-		assets->sideDistY = (info->player->posY - assets->mapY) * assets->deltaDistY;
-	}
-	else
-	{
-		assets->stepY = 1;
-		assets->sideDistY = (assets->mapY + 1.0 - info->player->posY) * assets->deltaDistY;
+		assets->stepx = 1;
+		assets->side_distx = (assets->mapx + 1.0 - info->player->posx)
+			* assets->delta_distx;
 	}
 }
 
-void	performeDDA(t_prog *prog)
+void	setting_steps(t_prog *prog)
 {
 	t_assets	*assets;
 	t_info		*info;
 
 	info = prog->info;
 	assets = prog->assets;
-	while(assets->hit == 0)
+	set_ray_dirx(info, assets);
+	if (assets->ray_diry < 0)
 	{
-		if(assets->sideDistX < assets->sideDistY)
+		assets->stepy = -1;
+		assets->side_disty = (info->player->posy - assets->mapy)
+			* assets->delta_disty;
+	}
+	else
+	{
+		assets->stepy = 1;
+		assets->side_disty = (assets->mapy + 1.0 - info->player->posy)
+			* assets->delta_disty;
+	}
+}
+
+void	performe_dda(t_prog *prog)
+{
+	while (prog->assets->hit == 0)
+	{
+		if (prog->assets->side_distx < prog->assets->side_disty)
 		{
-			assets->sideDistX += assets->deltaDistX;
-			assets->mapX += assets->stepX;
-			assets->side = 0;
+			prog->assets->side_distx += prog->assets->delta_distx;
+			prog->assets->mapx += prog->assets->stepx;
+			prog->assets->side = 0;
 		}
 		else
 		{
-			assets->sideDistY += assets->deltaDistY;
-			assets->mapY += assets->stepY;
-			assets->side = 1;
+			prog->assets->side_disty += prog->assets->delta_disty;
+			prog->assets->mapy += prog->assets->stepy;
+			prog->assets->side = 1;
 		}
-		if(info->map[assets->mapY][assets->mapX] == '1')
-			assets->hit = 1;
-		if(info->map[assets->mapY][assets->mapX] == 'D')
-			assets->hit = 2;
+		if (prog->info->map[prog->assets->mapy][prog->assets->mapx] == '1')
+			prog->assets->hit = 1;
+		if (prog->info->map[prog->assets->mapy][prog->assets->mapx] == 'D')
+			prog->assets->hit = 2;
 	}
-	if(assets->side == 0)
-		assets->perpWallDist = (assets->sideDistX - assets->deltaDistX);
+	if (prog->assets->side == 0)
+		prog->assets->perp_wall_dist = (prog->assets->side_distx
+				- prog->assets->delta_distx);
 	else
-		assets->perpWallDist = (assets->sideDistY - assets->deltaDistY);
+		prog->assets->perp_wall_dist = (prog->assets->side_disty
+				- prog->assets->delta_disty);
 }
 
-void	calculateVertLine(t_prog *prog)
+static void	vert_line_util(t_assets *assets, t_info *info)
+{
+	assets->line_height = (int)(WIN_HEIGHT / assets->perp_wall_dist);
+	assets->draw_start = -assets->line_height / 2 + WIN_HEIGHT / 2;
+	assets->draw_end = assets->line_height / 2 + WIN_HEIGHT / 2;
+	if (assets->draw_start < 0)
+		assets->draw_start = 0;
+	if (assets->draw_end >= WIN_HEIGHT)
+		assets->draw_end = WIN_HEIGHT - 1;
+	if (assets->side == 0)
+		assets->wall_x = info->player->posy
+			+ assets->perp_wall_dist * assets->ray_diry;
+	else
+		assets->wall_x = info->player->posx
+			+ assets->perp_wall_dist * assets->ray_dirx;
+	assets->wall_x -= floor(assets->wall_x);
+}
+
+void	calculate_vert_line(t_prog *prog)
 {
 	t_assets	*assets;
 	t_info		*info;
 
 	info = prog->info;
 	assets = prog->assets;
-	assets->lineHeight = (int)(WIN_HEIGHT / assets->perpWallDist);
-	assets->drawStart = -assets->lineHeight / 2 + WIN_HEIGHT / 2;
-	assets->drawEnd = assets->lineHeight / 2 + WIN_HEIGHT / 2;
-	if(assets->drawStart < 0)
-		assets->drawStart = 0;
-	if(assets->drawEnd >= WIN_HEIGHT)
-		assets->drawEnd = WIN_HEIGHT - 1;
-
-	//choose wall color
+	vert_line_util(assets, info);
 	if (assets->side == 0)
-		assets->wallX = info->player->posY + assets->perpWallDist * assets->rayDirY;
+	{
+		if (assets->ray_dirx > 0)
+			assets->tex_idx = LT_WEST;
+		else
+			assets->tex_idx = LT_EAST;
+	}
 	else
-		assets->wallX = info->player->posX + assets->perpWallDist * assets->rayDirX;
-	assets->wallX -= floor(assets->wallX);
-	if (assets->side == 0)
-		assets->texIdx = (assets->rayDirX > 0) ? LT_EAST: LT_WEST;
-	else
-		assets->texIdx = (assets->rayDirY > 0) ? LT_SOUTH: LT_NORTH;
+	{
+		if (assets->ray_diry > 0)
+			assets->tex_idx = LT_NORTH;
+		else
+			assets->tex_idx = LT_SOUTH;
+	}
 	if (assets->hit == 2)
-		assets->texIdx = LT_DOOR;
+		assets->tex_idx = LT_DOOR;
 }

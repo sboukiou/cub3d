@@ -1,12 +1,30 @@
-#ifndef MLX_EVENTS
-# define MLX_EVENTS
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:02:27 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/10 20:22:56 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "./types.h"
+#ifndef EVENTS_H
+# define EVENTS_H
+
+# include "./types.h"
 
 int		handle_key_press(int key_code, t_prog *prog);
 int		handle_key_release(int key_code, t_prog *prog);
 void	move_player(t_prog *prog);
 void	destroy_program(t_prog *prog);
 int		ft_exit(t_mlx *mlx);
+int		mouse_move(int x, t_prog *prog);
+void	rotate_player(t_player *player, double angle);
+void	handle_key_w(t_prog *prog);
+void	handle_key_a(t_prog *prog);
+void	handle_key_s(t_prog *prog);
+void	handle_key_d(t_prog *prog);
 
 #endif

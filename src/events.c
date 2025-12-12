@@ -1,6 +1,19 @@
-#include "../lib/mlx_linux/mlx.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/10 20:10:44 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/10 20:23:10 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <mlx.h>
 #include "../includes/macros.h"
 #include "../includes/types.h"
+#include "../includes/events.h"
 
 void	destroy_program(t_prog *prog)
 {
@@ -24,88 +37,70 @@ void	destroy_program(t_prog *prog)
 	exit(0);
 }
 
+void	rotate_player(t_player *player, double angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = player->dirx;
+	player->dirx = player->dirx * cos(angle) - player->diry * sin(angle);
+	player->diry = old_dir_x * sin(angle) + player->diry * cos(angle);
+	old_plane_x = player->planex;
+	player->planex = player->planex * cos(angle) - player->planey * sin(angle);
+	player->planey = old_plane_x * sin(angle) + player->planey * cos(angle);
+}
+
 void	move_player(t_prog *prog)
 {
 	t_info		*info;
 	t_player	*player;
-	double		moveSpeed;
-	double		rotSpeed;
+	double		move_speed;
+	double		rot_speed;
 
-	moveSpeed = 0.02;
-	rotSpeed = 0.01;
+	move_speed = 0.02;
+	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
 	if (prog->keys[XK_w])
-	{
-		if (info->map[(int)(player->posY)][(int)(player->posX + player->dirX * moveSpeed)] != '1')
-			player->posX += player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirY * moveSpeed)][(int)player->posX] != '1')
-			player->posY += player->dirY * moveSpeed;
-	}
+		handle_key_w(prog);
 	if (prog->keys[XK_s])
-	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirX * moveSpeed)] != '1')
-			player->posX -= player->dirX * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirY * moveSpeed)][(int)player->posX] != '1')
-			player->posY -= player->dirY * moveSpeed;
-	}
+		handle_key_s(prog);
 	if (prog->keys[XK_d])
-	{
-		if (info->map[(int)player->posY][(int)(player->posX - player->dirY * moveSpeed)] != '1')
-			player->posX -= player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY + player->dirX * moveSpeed)][(int)player->posX] != '1')
-			player->posY += player->dirX * moveSpeed;
-	}
+		handle_key_d(prog);
 	if (prog->keys[XK_a])
-	{
-		if (info->map[(int)player->posY][(int)(player->posX + player->dirY * moveSpeed)] != '1')
-			player->posX += player->dirY * moveSpeed;
-		if (info->map[(int)(player->posY - player->dirX * moveSpeed)][(int)player->posX] != '1')
-			player->posY -= player->dirX * moveSpeed;
-	}
+		handle_key_a(prog);
 	if (prog->keys[XK_Right])
-	{
-		double oldDirX = player->dirX;
-		player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
-		player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
-		double oldPlaneX = player->planeX;
-		player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
-		player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
-	}
+		rotate_player(player, rot_speed);
 	if (prog->keys[XK_Left])
-	{
-		double oldDirX = player->dirX;
-		player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-		player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
-		double oldPlaneX = player->planeX;
-		player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
-		player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
-	}
+		rotate_player(player, -rot_speed);
 }
 
 int	handle_key_press(int key_code, t_prog *prog)
 {
+	int	y;
+	int	x;
+
 	if (prog == NULL)
 		return (FAILURE);
 	if (key_code == ESCAPE)
 		destroy_program(prog);
 	if (key_code >= 0 && key_code < 65536)
 		prog->keys[key_code] = true;
-	if (key_code == KEY_E && !prog->is_attacking)
+	if (key_code == KEY_F && !prog->is_attacking)
 	{
 		prog->is_attacking = true;
 		prog->attack_anim.current_frame = 0;
 		prog->attack_anim.delay_counter = 0;
 	}
-	return (0);
-}
-
-int	handle_key_release(int key_code, t_prog *prog)
-{
-	if (prog == NULL)
-		return (FAILURE);
-	if (key_code >= 0 && key_code < 65536)
-		prog->keys[key_code] = false;
+	if (key_code == KEY_E)
+	{
+		y = prog->player->posy + prog->player->diry * 1.5;
+		x = prog->player->posx + prog->player->dirx * 1.5;
+		if (prog->info->map[y][x] == 'D')
+			prog->info->map[y][x] = 'd';
+		else if (prog->info->map[y][x] == 'd')
+			prog->info->map[y][x] = 'D';
+	}
 	return (0);
 }
 

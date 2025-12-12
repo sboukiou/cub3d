@@ -1,6 +1,21 @@
-#include "../includes/types.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/08 17:45:02 by sboukiou          #+#    #+#             */
+/*   Updated: 2025/12/11 00:22:35 by sboukiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-bool	isProgValid(t_prog *prog)
+#include "../includes/types.h"
+#include "../includes/colors.h"
+#include "../includes/cub.h"
+#include "../includes/init.h"
+
+bool	is_prog_valid(t_prog *prog)
 {
 	if (prog == NULL)
 		return (false);
@@ -11,3 +26,64 @@ bool	isProgValid(t_prog *prog)
 	return (true);
 }
 
+void	print_controllers(void)
+{
+	printf(CYAN "\n");
+	printf("░█▀▀░█░█░█▀▄░▀▀█░█▀▄░░░█▀▀░█▀█░█▀█░▀█▀░█▀▄░█▀█░█░░░█▀▀\n");
+	printf("░█░░░█░█░█▀▄░░▀▄░█░█░░░█░░░█░█░█░█░░█░░█▀▄░█░█░█░░░▀▀█\n");
+	printf("░▀▀▀░▀▀▀░▀▀░░▀▀░░▀▀░░░░▀▀▀░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀▀▀\n");
+	printf(RESET "\n");
+	printf(CYAN "\tW" RESET ": move forward\t");
+	printf(CYAN "\tS" RESET ": move backward\n");
+	printf(CYAN "\tA" RESET ": strafe left\t");
+	printf(CYAN "\tD" RESET ": strafe right\n");
+	printf(CYAN "\t<" RESET ": rotate left\t");
+	printf(CYAN "\t>" RESET ": rotate right\n");
+	printf("\n");
+}
+
+void	handle_player_direction(t_player *player, char c)
+{
+	if (c == 'N')
+	{
+		player->dirx = 0;
+		player->diry = -1;
+		player->planex = 0.66;
+		player->planey = 0;
+	}
+	else if (c == 'S')
+	{
+		player->dirx = 0;
+		player->diry = 1;
+		player->planex = -0.66;
+		player->planey = 0;
+	}
+}
+
+int	init_prog_data(t_prog **prog, int ac, char **av)
+{
+	t_map_info	*parse;
+	t_player	*player;
+
+	*prog = malloc(sizeof(t_prog));
+	player = malloc(sizeof(t_player));
+	parse = NULL;
+	(*prog)->info = NULL;
+	if (ac != 2)
+		return (printf("ERROR\nmissing file\n"), FAILURE);
+	if (parse_map(av, &parse, &(*prog)->info) == FAILURE)
+	{
+		printf("Failed to parse the map!\n");
+		return (FAILURE);
+	}
+	print_controllers();
+	init(&(*prog)->info, player);
+	(*prog)->player = player;
+	(*prog)->info->player = player;
+	(*prog)->mlx = malloc(sizeof(t_mlx));
+	(*prog)->assets = malloc(sizeof(t_assets));
+	(*prog)->is_attacking = false;
+	(*prog)->is_running = false;
+	(*prog)->player = player;
+	return (SUCCESS);
+}
