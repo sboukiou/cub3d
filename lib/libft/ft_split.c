@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@1337.ma>                +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:16:43 by sboukiou          #+#    #+#             */
-/*   Updated: 2024/10/27 21:40:54 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:03:17 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,11 @@ static char	*ft_create_string(const char *str, char c)
 	size = 0;
 	while (str[size] && str[size] != c)
 		size++;
-	buffer = ft_calloc(size + 1, sizeof(char));
+	buffer = ft_calloc(size + 1, sizeof(char), 1);
 	if (!buffer)
 		return (NULL);
 	ft_strlcpy(buffer, str, size + 1);
 	return (buffer);
-}
-
-static char	**free_all(char **list)
-{
-	int	index;
-
-	index = 0;
-	if (!list)
-		return (NULL);
-	while (list[index])
-	{
-		free(list[index]);
-		index++;
-	}
-	free(list);
-	return (NULL);
 }
 
 static char	**ft_allocate_list(const char *str, char c)
@@ -65,7 +49,7 @@ static char	**ft_allocate_list(const char *str, char c)
 		while (str[index] && str[index] != c)
 			index++;
 	}
-	list = ft_calloc(size + 1, sizeof(char *));
+	list = ft_calloc(size + 1, sizeof(char *), 1);
 	return (list);
 }
 
@@ -88,7 +72,7 @@ char	**ft_split(const char *str, char c)
 		{
 			list[size] = ft_create_string(str + index, c);
 			if (list[size] == NULL)
-				return (free_all(list));
+				return (NULL);
 			size++;
 		}
 		while (str[index] && str[index] != c)

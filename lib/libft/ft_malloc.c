@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 13:11:52 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/14 17:14:33 by hmouis           ###   ########.fr       */
+/*   Created: 2025/05/22 18:12:31 by hmouis            #+#    #+#             */
+/*   Updated: 2025/12/14 17:14:44 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size, int flag)
+void	*ft_malloc(size_t size, int flag)
 {
 	t_list			*node;
 	void			*ptr;
-	static t_list	*list_c;
+	static t_list	*list_m;
 
 	node = NULL;
 	ptr = NULL;
 	if (flag == 0)
 	{
-		ft_lstclear(&list_c, free);
+		ft_lstclear(&list_m, free);
 		return (NULL);
 	}
-	if (nmemb && ((nmemb * size) / nmemb) != size)
-		return (NULL);
-	ptr = malloc(nmemb * size);
+	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, nmemb * size);
 	node = ft_lstnew(ptr);
 	if (!node)
 		return (NULL);
-	ft_lstadd_front(&list_c, node);
+	ft_lstadd_front(&list_m, node);
 	return (ptr);
 }
