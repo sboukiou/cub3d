@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:44:39 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/09 12:11:08 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:13:16 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/macros.h"
 #include "../includes/draw.h"
 #include "../includes/textures.h"
+#include "../lib/libft/libft.h"
 #include <mlx.h>
 
 static char	*build_path(char *path, int i, char *xpm)
@@ -25,8 +26,6 @@ static char	*build_path(char *path, int i, char *xpm)
 	num_str = ft_itoa(i + 1);
 	temp = ft_strjoin(path, num_str);
 	full_path = ft_strjoin(temp, xpm);
-	free(num_str);
-	free(temp);
 	return (full_path);
 }
 
@@ -51,7 +50,7 @@ int	load_animation(t_prog *prog, t_anim *anim, int frame_count, char *path)
 	anim->frame_count = frame_count;
 	anim->current_frame = 0;
 	anim->delay_counter = 0;
-	anim->frames = malloc(sizeof(t_tex) * frame_count);
+	anim->frames = ft_malloc(sizeof(t_tex) * frame_count, 1);
 	if (!anim->frames)
 		return (FAILURE);
 	i = 0;
@@ -104,7 +103,7 @@ void	free_animation(t_anim *anim, void *display)
 {
 	int	i;
 
-	if (!anim->frames)
+	if (!anim || !anim->frames || !display)
 		return ;
 	i = 0;
 	while (i < anim->frame_count)
@@ -113,6 +112,5 @@ void	free_animation(t_anim *anim, void *display)
 			mlx_destroy_image(display, anim->frames[i].img);
 		i++;
 	}
-	free(anim->frames);
 	anim->frames = NULL;
 }

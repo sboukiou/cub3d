@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 11:47:56 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 11:27:55 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:10:15 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	pars_element(t_element *element, t_map_info **info)
 			if (fd < 0)
 				return (printf("ERROR\nthis texture isn't available '%s'\n",
 						element->content), FAILURE);
+			if (!file_name(element->content, ".xpm"))
+				return (FAILURE);
 			close(fd);
 		}
 		element = element->next;
@@ -61,7 +63,7 @@ char	**fill_map_arr(char **map, int j)
 	i = j;
 	while (map[i])
 		i++;
-	arr = malloc(sizeof(char *) * (i + 1));
+	arr = ft_malloc(sizeof(char *) * (i + 1), 1);
 	if (!arr)
 		return (NULL);
 	i = 0;
