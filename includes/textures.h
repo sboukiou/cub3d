@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 06:25:03 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/08 17:12:00 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:13:40 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define TEXTURES_H
 
 # include "./types.h"
-# include "../lib/libft/libft.h"
 # include "./utils.h"
 # include "./macros.h"
 # include "./include.h"

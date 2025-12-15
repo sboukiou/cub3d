@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@1337.ma>                +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:58:30 by sboukiou          #+#    #+#             */
-/*   Updated: 2024/11/06 16:58:32 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:42:24 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end_index--;
 	if (start_index > end_index)
 		return (NULL);
-	trimmed = ft_calloc(end_index - start_index + 1, sizeof(char));
+	trimmed = ft_calloc(end_index - start_index + 1, sizeof(char), 1);
 	if (!trimmed)
 		return (NULL);
 	ft_strlcpy(trimmed, s1 + start_index, end_index - start_index + 1);

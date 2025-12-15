@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 06:28:38 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/08 17:10:10 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 17:08:20 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 void	get_player_position(char **map, double *player_x,
 			double *player_y, char *c);
-bool	file_name(char *str);
+bool	file_name(char *path, char *str);
 void	fill_struct_info(t_map_info *info, t_info **final_info);
 int		count_lines(int *fd, char *file_name);
 int		fill_map(char ***map, char *file_name);

@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:45:02 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/11 08:31:01 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:06:44 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/colors.h"
 #include "../includes/cub.h"
 #include "../includes/init.h"
+#include "../lib/libft/libft.h"
 
 bool	is_prog_valid(t_prog *prog)
 {
@@ -65,8 +66,8 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 	t_map_info	*parse;
 	t_player	*player;
 
-	*prog = malloc(sizeof(t_prog));
-	player = malloc(sizeof(t_player));
+	*prog = ft_malloc(sizeof(t_prog), 1);
+	player = ft_malloc(sizeof(t_player), 1);
 	parse = NULL;
 	(*prog)->info = NULL;
 	if (ac != 2)
@@ -81,8 +82,8 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 	(*prog)->player = player;
 	(*prog)->no_mouse = 0;
 	(*prog)->info->player = player;
-	(*prog)->mlx = malloc(sizeof(t_mlx));
-	(*prog)->assets = malloc(sizeof(t_assets));
+	(*prog)->mlx = ft_malloc(sizeof(t_mlx), 1);
+	(*prog)->assets = ft_malloc(sizeof(t_assets), 1);
 	(*prog)->is_attacking = false;
 	(*prog)->is_running = false;
 	(*prog)->player = player;

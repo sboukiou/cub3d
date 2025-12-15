@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@1337.ma>                +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 14:39:08 by sboukiou          #+#    #+#             */
-/*   Updated: 2024/11/06 17:01:10 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:42:28 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > src_len - start)
 		len = src_len - start;
-	substring = ft_calloc(len + 1, sizeof(char));
+	substring = ft_calloc(len + 1, sizeof(char), 1);
 	if (!substring)
 		return (NULL);
 	ft_strlcpy(substring, s + start, len + 1);

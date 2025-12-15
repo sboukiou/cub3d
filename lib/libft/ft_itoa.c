@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@1337.ma>                +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:51:56 by sboukiou          #+#    #+#             */
-/*   Updated: 2024/10/27 21:54:57 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:41:57 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*creat_zero(void)
 {
 	char	*buff;
 
-	buff = ft_calloc(2, sizeof(char));
+	buff = ft_calloc(2, sizeof(char), 1);
 	if (!buff)
 		return (NULL);
 	buff[0] = '0';
@@ -74,7 +74,7 @@ char	*ft_itoa(int n)
 		nbr = -n;
 	else
 		nbr = n;
-	buff = ft_calloc(count_buff_size(n) + 1, sizeof(char));
+	buff = ft_calloc(count_buff_size(n) + 1, sizeof(char), 1);
 	if (!buff)
 		return (NULL);
 	i = 0;

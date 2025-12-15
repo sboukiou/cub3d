@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:03:23 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/01 18:30:45 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:05:47 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static char	*get_line(char *str, char *after_newline)
 {
 	char	*line;
 
-	line = malloc(sizeof(char) * (ft_strlen(str) - ft_strlen(after_newline)
-				+ 1));
+	line = ft_malloc(sizeof(char) * (ft_strlen(str) - ft_strlen(after_newline)
+				+ 1), 1);
 	if (!line)
 		return (NULL);
 	line = ft_strcpy_nl(line, str);
@@ -43,7 +43,7 @@ static char	*fill_str(char *str, int fd)
 	ssize_t	count;
 	char	*buf;
 
-	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buf = ft_malloc(sizeof(char) * BUFFER_SIZE + 1, 1);
 	if (!buf)
 		return (NULL);
 	buf[0] = '\0';
@@ -71,7 +71,7 @@ static char	*check_after_nl(char **str)
 
 	if (str)
 	{
-		line = malloc(sizeof(char) * (ft_strlen(*str) + 1));
+		line = ft_malloc(sizeof(char) * (ft_strlen(*str) + 1), 1);
 		if (!line)
 		{
 			*str = NULL;
