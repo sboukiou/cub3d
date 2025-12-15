@@ -6,17 +6,18 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 11:38:36 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/02 17:26:06 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:07:38 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/types.h"
+#include "../../lib/libft/libft.h"
 
 t_element	*creat_node(t_type type, char *content)
 {
 	t_element	*new_node;
 
-	new_node = malloc(sizeof(t_element));
+	new_node = ft_malloc(sizeof(t_element), 1);
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;
@@ -29,7 +30,7 @@ t_map_info	*creat_node_info(t_element *element)
 {
 	t_map_info	*new_node;
 
-	new_node = malloc(sizeof(t_map_info));
+	new_node = ft_malloc(sizeof(t_map_info), 1);
 	if (!new_node)
 		return (NULL);
 	new_node->element = element;

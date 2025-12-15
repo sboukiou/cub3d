@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:20:28 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 11:09:16 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:10:00 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 	t_map	map_info;
 
 	fill_map_structure(&map_info);
-	if (file_name(av[1]) == false)
+	if (file_name(av[1], ".cub") == false)
 		return (printf("ERROR\n%s\n", ERR_FILE_NOT_CUB), FAILURE);
 	if (fill_map(&map, av[1]) == -1)
 		return (FAILURE);
@@ -122,7 +122,7 @@ int	parse_map(char **av, t_map_info **info, t_info **final_info)
 	if (pars_element((*info)->element, info) == FAILURE)
 		return (FAILURE);
 	(*info)->map = fill_map_arr(map, map_info.map_index);
-	*final_info = malloc(sizeof(t_info));
+	*final_info = ft_malloc(sizeof(t_info), 1);
 	fill_struct_info(*info, final_info);
 	(*final_info)->map_height = 0;
 	while ((*final_info)->map[(*final_info)->map_height])

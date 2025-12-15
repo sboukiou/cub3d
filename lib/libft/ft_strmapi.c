@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmampi.c                                      :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@1337.ma>                +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:18:49 by sboukiou          #+#    #+#             */
-/*   Updated: 2024/10/30 18:28:55 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:42:20 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !f)
 		return (NULL);
-	new_string = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	new_string = ft_calloc(ft_strlen(s) + 1, sizeof(char), 1);
 	if (!new_string)
 		return (NULL);
 	index = 0;

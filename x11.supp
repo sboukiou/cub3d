@@ -1,0 +1,20 @@
+{
+   X11_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libX11.so*
+}
+
+{
+   Xcursor_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libXcursor.so*
+}
+
+{
+   MLX_leaks
+   Memcheck:Leak
+   ...
+   fun:*mlx*
+}

@@ -6,25 +6,25 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:36:22 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 11:18:19 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:09:32 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse_map.h"
 #include "../../includes/macros.h"
 
-bool	file_name(char *str)
+bool	file_name(char *path, char *str)
 {
 	char	*name;
 
-	if (str == NULL)
+	if (path == NULL)
 		return (false);
-	name = ft_strchr(str, '.');
+	name = ft_strchr(path, '.');
 	if (name == NULL)
 		return (false);
 	while (name && ft_strchr(name + 1, '.'))
 		name = ft_strchr(name + 1, '.');
-	if (ft_strcmp(name, ".cub"))
+	if (ft_strcmp(name, str))
 		return (false);
 	return (true);
 }
@@ -70,7 +70,7 @@ int	fill_map(char ***map, char *file_name)
 	map_len = count_lines(&fd, file_name);
 	if (map_len < 0)
 		return (-1);
-	*map = malloc(sizeof(char *) * (map_len + 1));
+	*map = ft_malloc(sizeof(char *) * (map_len + 1), 1);
 	while (i < map_len)
 	{
 		(*map)[words] = strcpy_nl(get_next_line(fd));

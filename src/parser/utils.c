@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 11:42:43 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/09 10:59:15 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:08:13 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**fill_final_map(char **map)
 	i = 0;
 	while (map[i])
 		i++;
-	new_map = malloc(sizeof(char *) * (i + 1));
+	new_map = ft_malloc(sizeof(char *) * (i + 1), 1);
 	if (new_map == NULL)
 		return (NULL);
 	i = 0;

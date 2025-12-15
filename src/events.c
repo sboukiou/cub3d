@@ -3,38 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sboukiou <sboukiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:10:44 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/10 20:23:10 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/14 16:48:27 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "../includes/macros.h"
 #include "../includes/types.h"
+#include "../lib/libft/libft.h"
 #include "../includes/events.h"
+#include "../includes/animation.h"
 
 void	destroy_program(t_prog *prog)
 {
 	t_mlx	*mlx;
 	t_info	*info;
+	int		i;
 
+	i = -1;
 	info = prog->info;
 	mlx = prog->mlx;
-	if (mlx->draw_image.img)
+	free_animation(&prog->run_anim, prog->mlx->display);
+	free_animation(&prog->stand_anim, prog->mlx->display);
+	free_animation(&prog->attack_anim, prog->mlx->display);
+	if (mlx && mlx->display && mlx->draw_image.img)
 		mlx_destroy_image(mlx->display, mlx->draw_image.img);
-	if (mlx->player_image)
+	if (mlx && mlx->display && mlx->player_image)
 		mlx_destroy_image(mlx->display, mlx->player_image);
-	if (mlx->floor_image)
+	if (mlx && mlx->display && mlx->floor_image)
 		mlx_destroy_image(mlx->display, mlx->floor_image);
-	if (mlx->wall_image)
+	if (mlx && mlx->display && mlx->wall_image)
 		mlx_destroy_image(mlx->display, mlx->wall_image);
-	mlx_destroy_window(mlx->display, mlx->window);
-	mlx_destroy_display(mlx->display);
-	free(info->map);
-	free(mlx->display);
-	exit(0);
+	while (prog && prog->info && ++i < TEX_COUNT)
+		if (prog->info->texs[i].img)
+			mlx_destroy_image(mlx->display, prog->info->texs[i].img);
+	ft_exit(prog->mlx);
 }
 
 void	rotate_player(t_player *player, double angle)
@@ -104,10 +110,14 @@ int	handle_key_press(int key_code, t_prog *prog)
 
 int	ft_exit(t_mlx *mlx)
 {
-	printf("Called ft_exit\n");
-	mlx_destroy_image(mlx->display, mlx->draw_image.img);
-	mlx_destroy_window(mlx->display, mlx->window);
-	mlx_destroy_display(mlx->display);
-	free(mlx->display);
+	if (mlx && mlx->window)
+		mlx_destroy_window(mlx->display, mlx->window);
+	if (mlx && mlx->display)
+	{
+		mlx_destroy_display(mlx->display);
+		free(mlx->display);
+	}
+	ft_calloc(0, 0, 0);
+	ft_malloc(0, 0);
 	exit(0);
 }

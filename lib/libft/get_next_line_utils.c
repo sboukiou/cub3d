@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:03:39 by hmouis            #+#    #+#             */
-/*   Updated: 2025/08/01 18:30:32 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:05:27 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	new = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	new = ft_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1), 1);
 	if (!new)
 		return (NULL);
 	i = ft_strlen(s1);

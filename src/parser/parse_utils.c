@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:36 by hmouis            #+#    #+#             */
-/*   Updated: 2025/11/16 15:09:27 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:08:03 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	char_join(char **path, char c)
 	char	*new_str;
 
 	i = 0;
-	new_str = malloc(sizeof(char) * (ft_strlen(*path) + 2));
+	new_str = ft_malloc(sizeof(char) * (ft_strlen(*path) + 2), 1);
 	while (path && *path && (*path)[i])
 	{
 		new_str[i] = (*path)[i];
@@ -56,7 +56,7 @@ char	*strcpy_nl(char *str)
 	new = NULL;
 	while (str[i] && str[i] != '\n')
 		i++;
-	new = malloc(sizeof(char) * (i + 1));
+	new = ft_malloc(sizeof(char) * (i + 1), 1);
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
