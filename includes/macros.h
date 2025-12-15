@@ -6,12 +6,16 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:02:40 by hmouis            #+#    #+#             */
-/*   Updated: 2025/12/10 20:19:56 by sboukiou         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:24:50 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACROS_H
 # define MACROS_H
+
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE 1
+# endif
 
 # define COLORS_SIZE 3
 # define SUCCESS 0
