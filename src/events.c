@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 20:10:44 by sboukiou          #+#    #+#             */
-/*   Updated: 2025/12/14 16:48:27 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/12/15 14:13:24 by sboukiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
 void	destroy_program(t_prog *prog)
 {
 	t_mlx	*mlx;
-	t_info	*info;
 	int		i;
 
 	i = -1;
-	info = prog->info;
 	mlx = prog->mlx;
 	free_animation(&prog->run_anim, prog->mlx->display);
 	free_animation(&prog->stand_anim, prog->mlx->display);
