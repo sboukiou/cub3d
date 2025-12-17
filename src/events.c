@@ -63,10 +63,10 @@ void	move_player(t_prog *prog)
 	player = info->player;
 	if (player->posx == (int)player->posx || player->posy == (int)player->posy)
 	{
-		if (info->map[(int)player->posx])
+		if (info->map[(int)player->posy][(int)player->posx])
 			player->posx += 0.3;
 		if (info->map[(int)player->posy])
-			player->posy += 0.3;
+			player->posy += 0.03;
 		return ;
 	}
 	if (prog->keys[XK_w])

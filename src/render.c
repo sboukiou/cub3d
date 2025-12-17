@@ -99,18 +99,8 @@ void	calculate_ray_postion(t_prog *prog, int currentColumn)
 static void	ray_cast(t_prog *p)
 {
 	int	x;
-	int	px;
-	int	py;
 
 	x = 0;
-	if (DEBUG_MODE)
-	{
-		px = p->info->player->posx;
-		py = p->info->player->posy;
-		printf("PX=[%d] | PY=[%d]\n", px, py);
-		printf("MapX=[%d] | MapY=[%d]\n", p->assets->mapx, p->assets->mapy);
-		printf("----------------------\n");
-	}
 	while (x < WIN_WIDTH)
 	{
 		ft_bzero(p->assets, sizeof(*p->assets));

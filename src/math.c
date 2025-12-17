@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdbool.h>
 
 int	calculate_distance(int px, int py, int dx, int dy)
 {
@@ -39,4 +40,13 @@ unsigned int	rgb_merge(int r, int g, int b)
 	if (b > 255)
 		b = 255;
 	return (((unsigned int)r << 16) | ((unsigned int)g << 8) | (unsigned int)b);
+}
+
+bool	in_range(float num, int val)
+{
+	if (num > val && val + 0.01 > num)
+		return (true);
+	if (num < val && val - 0.01 < num)
+		return (true);
+	return (false);
 }

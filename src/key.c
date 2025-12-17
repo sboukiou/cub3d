@@ -33,6 +33,8 @@ void	handle_key_w(t_prog *prog)
 	move_speed = 0.02;
 	info = prog->info;
 	player = info->player;
+	if (DEBUG_MODE)
+		printf("BEFORE: pDX=[%f] pDY=[%f]\n", player->posx, player->posy);
 	if (info->map[(int)(player->posy)][(int)(player->posx
 				+ player->dirx * move_speed)] != '1'
 			&& info->map[(int)(player->posy)][(int)(player->posx
@@ -43,6 +45,8 @@ void	handle_key_w(t_prog *prog)
 			&& info->map[(int)(player->posy + player->diry *
 				move_speed)][(int)player->posx] != 'D')
 		player->posy += player->diry * move_speed;
+	if (DEBUG_MODE)
+		printf("AFTER: pDX=[%f] pDY=[%f]\n", player->posx, player->posy);
 }
 
 void	handle_key_s(t_prog *prog)

@@ -21,5 +21,6 @@ void			calculate_vert_line(t_prog *prog);
 void			performe_dda(t_prog *prog);
 void			setting_steps(t_prog *prog);
 void			calculate_ray_postion(t_prog *prog, int currentColumn);
+bool			in_range(float num, int val);
 
 #endif
