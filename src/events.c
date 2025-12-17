@@ -58,11 +58,17 @@ void	move_player(t_prog *prog)
 {
 	t_info		*info;
 	t_player	*player;
-	double		rot_speed;
 
-	rot_speed = 0.03;
 	info = prog->info;
 	player = info->player;
+	if (player->posx == (int)player->posx || player->posy == (int)player->posy)
+	{
+		if (info->map[(int)player->posx])
+			player->posx += 0.3;
+		if (info->map[(int)player->posy])
+			player->posy += 0.3;
+		return ;
+	}
 	if (prog->keys[XK_w])
 		handle_key_w(prog);
 	if (prog->keys[XK_s])
@@ -72,9 +78,9 @@ void	move_player(t_prog *prog)
 	if (prog->keys[XK_a])
 		handle_key_a(prog);
 	if (prog->keys[XK_Right])
-		rotate_player(player, rot_speed);
+		rotate_player(player, ROT_SPEED);
 	if (prog->keys[XK_Left])
-		rotate_player(player, -rot_speed);
+		rotate_player(player, -ROT_SPEED);
 }
 
 int	handle_key_press(int key_code, t_prog *prog)
