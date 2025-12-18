@@ -34,7 +34,7 @@
 # define BTN_PRESS_EVENT 4
 # define DESTROY_NOTIFY_EVENT 17
 # define PI 3.14159
-# define ROT_SPEED 0.05
+# define ROT_SPEED 0.04
 # define BLOCK_SIZE 22
 # define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
 # define ERR_FILE_NOT_CUB "Not a .cub file"

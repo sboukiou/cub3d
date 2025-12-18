@@ -112,16 +112,16 @@ void	calculate_vert_line(t_prog *prog)
 	if (assets->side == 0)
 	{
 		if (assets->ray_dirx > 0)
-			assets->tex_idx = LT_WEST;
-		else
 			assets->tex_idx = LT_EAST;
+		else
+			assets->tex_idx = LT_WEST;
 	}
 	else
 	{
 		if (assets->ray_diry > 0)
-			assets->tex_idx = LT_NORTH;
-		else
 			assets->tex_idx = LT_SOUTH;
+		else
+			assets->tex_idx = LT_NORTH;
 	}
 	if (assets->hit == 2)
 		assets->tex_idx = LT_DOOR;
