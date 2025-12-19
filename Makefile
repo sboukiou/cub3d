@@ -43,6 +43,8 @@ clean:
 fclean: clean
 	$(RM) $(BIN_DIR)
 
+bonus: all
+
 re: fclean all
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean re bonus
