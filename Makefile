@@ -12,6 +12,8 @@ BIN_DIR=bin
 MK=mkdir -p
 LIBFT=lib/libft/libft.a
 
+all: $(NAME)
+
 $(BIN_DIR):
 	$(MK) $@
 
@@ -25,7 +27,6 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	@$(MK) $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
 
 $(LIBFT):
 	$(MK) $(BUILD_DIR)
