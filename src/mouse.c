@@ -46,3 +46,9 @@ int	mouse_move(int x, int y, t_prog *prog)
 		prog->mlx->window, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }
+
+int close_window(t_prog *prog)
+{
+	destroy_program(prog);
+	return (0);
+}
