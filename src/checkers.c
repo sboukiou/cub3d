@@ -68,7 +68,7 @@ void	handle_player_direction(t_player *player, char c)
 	}
 }
 
-int	init_prog_data(t_prog **prog, int ac, char **av)
+int	init_prog_data(t_prog **prog, char **av)
 {
 	t_map_info	*parse;
 	t_player	*player;
@@ -78,14 +78,14 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 	parse = NULL;
 	(*prog)->info = NULL;
 	if (parse_map(av, &parse, &(*prog)->info) == FAILURE)
-	{
-		printf("Failed to parse the map!\n");
 		return (FAILURE);
-	}
 	print_controllers();
 	if (init(&(*prog)->info, player) == FAILURE)
 		return (FAILURE);
 	(*prog)->player = player;
+	(*prog)->attack_anim.frames = NULL;
+	(*prog)->run_anim.frames = NULL;
+	(*prog)->stand_anim.frames = NULL;
 	(*prog)->no_mouse = 0;
 	(*prog)->info->player = player;
 	(*prog)->mlx = ft_malloc(sizeof(t_mlx), 1);

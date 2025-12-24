@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (printf("ERROR\nmissing file\n"), FAILURE);
-	if (init_prog_data(&prog, ac, av) == FAILURE)
+	if (init_prog_data(&prog, av) == FAILURE)
 		return (ft_exit(NULL), FAILURE);
 	ft_bzero(prog->keys, sizeof(prog->keys));
 	if (mlx_init_display(prog->mlx))
