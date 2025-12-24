@@ -21,7 +21,7 @@
 int	init(t_info **info, t_player *player)
 {
 	char	c;
-	int fd;
+	int		fd;
 
 	fd = open("textures/door.xpm", O_RDONLY);
 	if (fd < 0)
@@ -30,15 +30,8 @@ int	init(t_info **info, t_player *player)
 	c = 0;
 	(*info)->door_textures_file = "textures/door.xpm";
 	get_player_position((*info)->map, &player->posx, &player->posy, &c);
-	if (c == 'N' || c == 'S')
+	if (c == 'N' || c == 'S' || c == 'W')
 		handle_player_direction(player, c);
-	else if (c == 'W')
-	{
-		player->dirx = -1;
-		player->diry = 0;
-		player->planex = 0;
-		player->planey = -0.66;
-	}
 	else if (c == 'E')
 	{
 		player->dirx = 1;
@@ -54,6 +47,8 @@ int	main(int ac, char **av)
 {
 	t_prog		*prog;
 
+	if (ac != 2)
+		return (printf("ERROR\nmissing file\n"), FAILURE);
 	if (init_prog_data(&prog, ac, av) == FAILURE)
 		return (ft_exit(NULL), FAILURE);
 	ft_bzero(prog->keys, sizeof(prog->keys));

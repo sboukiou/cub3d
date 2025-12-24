@@ -59,6 +59,13 @@ void	handle_player_direction(t_player *player, char c)
 		player->planex = -0.66;
 		player->planey = 0;
 	}
+	else if (c == 'W')
+	{
+		player->dirx = -1;
+		player->diry = 0;
+		player->planex = 0;
+		player->planey = -0.66;
+	}
 }
 
 int	init_prog_data(t_prog **prog, int ac, char **av)
@@ -70,8 +77,6 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 	player = ft_malloc(sizeof(t_player), 1);
 	parse = NULL;
 	(*prog)->info = NULL;
-	if (ac != 2)
-		return (printf("ERROR\nmissing file\n"), FAILURE);
 	if (parse_map(av, &parse, &(*prog)->info) == FAILURE)
 	{
 		printf("Failed to parse the map!\n");
