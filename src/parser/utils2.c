@@ -13,6 +13,19 @@
 #include "../../includes/parse_map.h"
 #include "../../includes/utils.h"
 
+int	empty_line(char *str, int *j)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i])
+		return (FAILURE);
+	(*j)++;
+	return (SUCCESS);
+}
+
 int	check_color(t_map_info **info, t_element *element)
 {
 	if (element->type == C_CEILING)

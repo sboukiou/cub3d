@@ -21,6 +21,7 @@
 # include "./textures.h"
 # include "./include.h"
 
+int		empty_line(char *str, int *i);
 void	get_player_position(char **map, double *player_x,
 			double *player_y, char *c);
 bool	file_name(char *path, char *str);

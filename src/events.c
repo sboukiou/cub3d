@@ -36,8 +36,11 @@ void	destroy_program(t_prog *prog)
 	if (mlx && mlx->display && mlx->wall_image)
 		mlx_destroy_image(mlx->display, mlx->wall_image);
 	while (prog && prog->info && ++i < TEX_COUNT)
-		if (prog->info->texs[i].img)
-			mlx_destroy_image(mlx->display, prog->info->texs[i].img);
+	{
+		if (!prog->info->texs[i].img)
+			break ;
+		mlx_destroy_image(mlx->display, prog->info->texs[i].img);
+	}
 	ft_exit(prog->mlx);
 }
 

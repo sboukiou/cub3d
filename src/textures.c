@@ -16,7 +16,7 @@
 
 static int	tex_type_error(int texture_type)
 {
-	printf("Error: Could not load texture file for type %d\n",
+	printf("Error\n Could not load texture file for type %d\n",
 		texture_type);
 	return (FAILURE);
 }

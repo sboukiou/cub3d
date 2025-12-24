@@ -18,6 +18,6 @@
 bool	is_prog_valid(t_prog *prog);
 void	print_controllers(void);
 void	handle_player_direction(t_player *player, char c);
-int		init_prog_data(t_prog **prog, int ac, char **av);
+int		init_prog_data(t_prog **prog, char **av);
 
 #endif

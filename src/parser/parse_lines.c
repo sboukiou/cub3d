@@ -64,6 +64,8 @@ int	valid_element(char **map, t_map *map_info, int *i, t_element **element)
 	flag = 0;
 	while (map[*i])
 	{
+		if (empty_line(map[*i], i) == SUCCESS)
+			continue ;
 		if (track_textures(map[*i], &flag, map_info, element) == SUCCESS
 			&& flag != 2)
 		{
