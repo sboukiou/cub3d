@@ -108,8 +108,9 @@ void	free_animation(t_anim *anim, void *display)
 	i = 0;
 	while (i < anim->frame_count)
 	{
-		if (anim->frames[i].img)
-			mlx_destroy_image(display, anim->frames[i].img);
+		if (!anim->frames[i].img)
+			break ;
+		mlx_destroy_image(display, anim->frames[i].img);
 		i++;
 	}
 	anim->frames = NULL;

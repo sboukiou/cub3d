@@ -16,6 +16,6 @@
 # include "./types.h"
 
 int		mlx_init_display(t_mlx *mlx);
-void	init(t_info **info, t_player *player);
+int		init(t_info **info, t_player *player);
 
 #endif /* INIT_H */

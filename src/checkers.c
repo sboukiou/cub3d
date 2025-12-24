@@ -78,7 +78,8 @@ int	init_prog_data(t_prog **prog, int ac, char **av)
 		return (FAILURE);
 	}
 	print_controllers();
-	init(&(*prog)->info, player);
+	if (init(&(*prog)->info, player) == FAILURE)
+		return (FAILURE);
 	(*prog)->player = player;
 	(*prog)->no_mouse = 0;
 	(*prog)->info->player = player;

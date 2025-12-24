@@ -18,10 +18,15 @@
 #include "../includes/animation.h"
 #include "../lib/libft/libft.h"
 
-void	init(t_info **info, t_player *player)
+int	init(t_info **info, t_player *player)
 {
 	char	c;
+	int fd;
 
+	fd = open("textures/door.xpm", O_RDONLY);
+	if (fd < 0)
+		return (printf("ERROR\n Failed to open door texture file\n"), FAILURE);
+	close(fd);
 	c = 0;
 	(*info)->door_textures_file = "textures/door.xpm";
 	get_player_position((*info)->map, &player->posx, &player->posy, &c);
@@ -42,6 +47,7 @@ void	init(t_info **info, t_player *player)
 		player->planey = 0.66;
 	}
 	(*info)->player = player;
+	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
