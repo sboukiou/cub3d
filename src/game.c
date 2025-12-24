@@ -48,6 +48,7 @@ bool	mlx_simulate_game(t_prog *prog)
 	game_layout(prog);
 	rotate_player(prog->info->player, ROT_SPEED / 10);
 	mlx_hook(mlx->window, 2, 1L << 0, handle_key_press, prog);
+	mlx_hook(mlx->window, 17, 1L << 0, close_window, prog);
 	mlx_hook(mlx->window, 3, 1L << 1, handle_key_release, prog);
 	mlx_mouse_hook(mlx->window, mouse_hide, prog);
 	mlx_loop_hook(mlx->display, game_layout, prog);
